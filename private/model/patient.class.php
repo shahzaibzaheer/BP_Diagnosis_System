@@ -1,4 +1,8 @@
 <?php
+    // TODO: impletemnt function user already existed or not
+    // TODO: impletemnt function email already existed or not
+ ?>
+<?php
 
 class Patient {
 
@@ -16,8 +20,9 @@ class Patient {
     private $city;
     private $date_of_birth;
     private $createdOn;
-    static private $db;
 
+    static private $db;
+    private $errors;
 
 
     function __construct($args)
@@ -178,6 +183,9 @@ class Patient {
     return $this->createdOn;
   }
 
+  public function getErrors(){
+    return $this->errors;
+  }
 
 
 
@@ -196,13 +204,14 @@ class Patient {
         $errorsArray = $this->validate();
         if(isContainErrors($errorsArray))
         {
-          return $errorsArray;
+          return false;
         }else {
           // build query string & save data.
           // exit("Now All the data is valid, it's time to Save Data to the database");
           $queryString  =  "INSERT INTO ".PatientTable::TABLE_NAME;
-          $queryString .=  " (".
+          $queryString .=  " (";
           $queryString .=  PatientTable::COLUMN_USERNAME.",";
+          $queryString .=  PatientTable::COLUMN_NAME.",";
           $queryString .=  PatientTable::COLUMN_EMAIL.",";
           $queryString .=  PatientTable::COLUMN_GENDER.",";
           $queryString .=  PatientTable::COLUMN_HASHED_PASSWORD.",";
@@ -210,9 +219,10 @@ class Patient {
           $queryString .=  PatientTable::COLUMN_ADDRESS.",";
           $queryString .=  PatientTable::COLUMN_CITY.",";
           $queryString .=  PatientTable::COLUMN_DATE_OF_BITRH;
-          $queryString .=  ." ) VALUES (";
+          $queryString .=  " ) VALUES (";
 
           $queryString .=  ":".PatientTable::COLUMN_USERNAME.",";
+          $queryString .=  ":".PatientTable::COLUMN_NAME.",";
           $queryString .=  ":".PatientTable::COLUMN_EMAIL.",";
           $queryString .=  ":".PatientTable::COLUMN_GENDER.",";
           $queryString .=  ":".PatientTable::COLUMN_HASHED_PASSWORD.",";
@@ -220,7 +230,24 @@ class Patient {
           $queryString .=  ":".PatientTable::COLUMN_ADDRESS.",";
           $queryString .=  ":".PatientTable::COLUMN_CITY.",";
           $queryString .=  ":".PatientTable::COLUMN_DATE_OF_BITRH.")";
-          exit($queryString);
+
+          try{
+            $stmt = Patient::$db->prepare($queryString);
+            $stmt->execute([
+              PatientTable::COLUMN_USERNAME => $this->getUserName(),
+              PatientTable::COLUMN_NAME => $this->getName(),
+              PatientTable::COLUMN_EMAIL => $this->getEmail(),
+              PatientTable::COLUMN_GENDER => $this->getGender(),
+              PatientTable::COLUMN_HASHED_PASSWORD => $this->getHashedPassword(),
+              PatientTable::COLUMN_PHONE => $this->getPhoneNumber(),
+              PatientTable::COLUMN_ADDRESS => $this->getAddress(),
+              PatientTable::COLUMN_CITY => $this->getCity(),
+              PatientTable::COLUMN_DATE_OF_BITRH => $this->getDOB()
+            ]);
+            return true;
+          }catch(Exception $e){
+            exit($e->getMessage());
+          }
 
         }
 
@@ -294,6 +321,7 @@ class Patient {
      if(!hasPresence($this->getCity())){$errors[PatientTable::COLUMN_CITY]= 'City can\'t be blank';}
      if(!hasPresence($this->getDOB())){$errors[PatientTable::COLUMN_DATE_OF_BITRH]= 'Date of birth can\'t be blank';}
 
+     $this->errors = $errors;
      return $errors;
    }
 
