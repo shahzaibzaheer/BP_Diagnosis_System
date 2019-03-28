@@ -2,7 +2,9 @@
 
 class Prescription
 {
-
+  public const STATUS_NOT_ANSWERED = 'NOT Answered';
+  public const STATUS_ANSWERED = 'Answered';
+  public const STATUS_CANCELED = 'Canceled';
 
   private $otherInfo; //String
   private $exerciseDetail; //String
@@ -48,6 +50,38 @@ class Prescription
   }
 
 
+  static public function findPrescriptionsByPatientId($patientId){
+    $queryString  = "SELECT * FROM ".PrescriptionTable::TABLE_NAME." ";
+    $queryString .= "WHERE ".PrescriptionTable::COLUMN_PATIENT_ID." = ?";
+    $stmt = Prescription::$db->prepare($queryString);
+    $stmt->execute([$patientId]);
+    // return the array of prescriptions object not associative arrays.
+    $prescriptions = [];
+    while($prescriptionAssoc = $stmt->fetch(PDO::FETCH_ASSOC)){
+      $prescriptionObj = new self($prescriptionAssoc);
+      $prescriptions[] = $prescriptionObj;
+    }
+    if(!empty($prescriptions)){
+      return $prescriptions;
+    }else{
+      return false;
+    }
+  }
+  static public function findPrescriptionById($id){
+    $queryString  = "SELECT * FROM ".PrescriptionTable::TABLE_NAME." ";
+    $queryString .= "WHERE ".PrescriptionTable::COLUMN_PRESCRIPTION_ID." = ?";
+    $stmt = Prescription::$db->prepare($queryString);
+    $stmt->execute([$id]);
+    $prescription = $stmt->fetch(PDO::FETCH_ASSOC);
+    if($prescription){
+      // return patient object, not associative array
+      return new Prescription($prescription);
+    }
+    else {
+      // echo "Patient Not found";
+      return false;
+    }
+  }
 
 
 
@@ -62,12 +96,12 @@ class Prescription
         $this->setPrescriptionId($args[PrescriptionTable::COLUMN_PRESCRIPTION_ID] ?? '');
         $this->setDoctorId($args[PrescriptionTable::COLUMN_DOCTOR_ID] ?? '');
         $this->setPatientId($args[PrescriptionTable::COLUMN_PATIENT_ID] ?? '');
-        $this->setStatus($args[PrescriptionTable::COLUMN_STATUS] ?? '');
+        $this->setStatus($args[PrescriptionTable::COLUMN_STATUS] ?? Prescription::STATUS_NOT_ANSWERED);
         $this->setSubject($args[PrescriptionTable::COLUMN_SUBJECT] ?? '');
         $this->setBpLow($args[PrescriptionTable::COLUMN_BP_LOW] ?? '');
         $this->setBpHigh($args[PrescriptionTable::COLUMN_BP_HIGH] ?? '');
-        $this->setHeadache($args[PrescriptionTable::COLUMN_HEADACHE] ?? '');
-        $this->setDizziness($args[PrescriptionTable::COLUMN_DIZZINESS] ?? '');
+        $this->setHeadache($args[PrescriptionTable::COLUMN_HEADACHE] ?? false);
+        $this->setDizziness($args[PrescriptionTable::COLUMN_DIZZINESS] ?? false);
         $this->setVisualChanges($args[PrescriptionTable::COLUMN_VISUAL_CHANGES] ?? '');
         $this->setMedication($args[PrescriptionTable::COLUMN_MEDICATION] ?? '');
         $this->setFoodDetail($args[PrescriptionTable::COLUMN_FOOD_DETAIL] ?? '');
@@ -79,110 +113,110 @@ class Prescription
 
 
     public function getPrescriptionId() {
-         return $this->prescriptionId
+         return $this->prescriptionId;
     }
     public function setPrescriptionId($prescriptionId) {
-         $this->prescriptionId = $prescriptionId
+         $this->prescriptionId = $prescriptionId;
     }
 
 
     public function getDoctorId() {
-         return $this->doctorId
+         return $this->doctorId;
     }
     public function setDoctorId($doctorId) {
-         $this->doctorId = $doctorId
+         $this->doctorId = $doctorId;
     }
 
 
     public function getPatientId() {
-         return $this->patientId
+         return $this->patientId;
     }
     public function setPatientId($patientId) {
-         $this->patientId = $patientId
+         $this->patientId = $patientId;
     }
 
 
     public function getStatus() {
-         return $this->status
+         return $this->status;
     }
     public function setStatus($status) {
-         $this->status = $status
+         $this->status = $status;
     }
 
     public function getSubject() {
-         return $this->subject
+         return $this->subject;
     }
     public function setSubject($subject) {
-         $this->subject = $subject
+         $this->subject = $subject;
     }
 
 
     public function getBpLow() {
-         return $this->bpLow
+         return $this->bpLow;
     }
     public function setBpLow($bpLow) {
-         $this->bpLow = $bpLow
+         $this->bpLow = $bpLow;
     }
 
 
     public function getBpHigh() {
-         return $this->bpHigh
+         return $this->bpHigh;
     }
     public function setBpHigh($bpHigh) {
-         $this->bpHigh = $bpHigh
+         $this->bpHigh = $bpHigh;
     }
 
 
     public function getHeadache() {
-         return $this->headache
+         return $this->headache ? "Yes":"No";
     }
     public function setHeadache($headache) {
-         $this->headache = $headache
+         $this->headache = $headache;
     }
 
 
     public function getDizziness() {
-         return $this->dizziness
+         return $this->dizziness ? "Yes":"No";
     }
     public function setDizziness($dizziness) {
-         $this->dizziness = $dizziness
+         $this->dizziness = $dizziness;
     }
 
 
     public function getVisualChanges() {
-         return $this->visualChanges
+         return $this->visualChanges;
     }
     public function setVisualChanges($visualChanges) {
-         $this->visualChanges = $visualChanges
+         $this->visualChanges = $visualChanges;
     }
 
 
     public function getMedication() {
-         return $this->medication
+         return $this->medication;
     }
     public function setMedication($medication) {
-         $this->medication = $medication
+         $this->medication = $medication;
     }
 
 
     public function getFoodDetail() {
-         return $this->foodDetail
+         return $this->foodDetail;
     }
     public function setFoodDetail($foodDetail) {
-         $this->foodDetail = $foodDetail
+         $this->foodDetail = $foodDetail;
     }
 
 
     public function getExerciseDetail() {
-         return $this->exerciseDetail
+         return $this->exerciseDetail;
     }
     public function setExerciseDetail($exerciseDetail) {
-         $this->exerciseDetail = $exerciseDetail
+         $this->exerciseDetail = $exerciseDetail;
     }
 
 
     public function getOtherInfo() {
-         return $this->otherInfo
+         return $this->otherInfo;
     }
     public function setOtherInfo($otherInfo) {
          $this->otherInfo = $otherInfo;
@@ -192,6 +226,9 @@ class Prescription
     }
     public function setCreatedOn($createdOn) {
          $this->createdOn = $createdOn;
+    }
+    public function getErrors(){
+      return $this->errors;
     }
 
 
@@ -256,20 +293,12 @@ private function create(){
         }catch(Exception $e){
           exit($e->getMessage());
         }
-
       }
 
   }
 
 
-
-
-
-
-
-
-}
-private function validate(){
+  private function validate(){
    $errors = [];
 
    if(!hasPresence($this->getSubject())){
@@ -295,7 +324,13 @@ private function validate(){
 
    $this->errors = $errors;
    return $errors;
- }
+  }
+
+
+
+
+
+}
 
 
 

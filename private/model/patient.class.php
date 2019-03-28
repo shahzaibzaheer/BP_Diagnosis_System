@@ -6,7 +6,6 @@
 
 class Patient {
 
-
     private $id;
     private $name;
     private $userName;
@@ -87,12 +86,12 @@ class Patient {
     $stmt = Patient::$db->prepare($queryString);
     $stmt->execute([$id]);
     $patient = $stmt->fetch(PDO::FETCH_ASSOC);
-    if(isset($patient)){
+    if($patient){
       // return patient object, not associative array
-      return new self($patient);
+      return new Patient($patient);
     }
     else {
-      // echo "Patient Not found"
+      // echo "Patient Not found";
       return false;
     }
   }

@@ -9,7 +9,9 @@ function require_patient_login(){
       redirectTo(urlFor('patient/login.php'));
   }
 }
-
+function loggedInPatientId(){
+  return $_SESSION[SessionContract::SESSION_PATIENT_ID];
+}
 function isPatientLoggedIn(){
   return isset($_SESSION[SessionContract::SESSION_PATIENT_ID]);
 }

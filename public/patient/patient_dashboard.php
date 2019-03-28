@@ -12,6 +12,7 @@
   <body>
       <h1>Patient Dashboard</h1>
       <a href="<?php echo urlFor("patient/doLogout.php"); ?>">Logout</a> <br>
-      <a href="<?php echo urlFor("patient/ask_for_prescription.php"); ?>">Ask For Prescription</a>
+      <a href="<?php echo urlFor("patient/ask_for_prescription.php"); ?>">Ask For Prescription</a><br>
+      <a href="<?php echo urlFor("patient/my_prescriptions.php"); ?>">My Prescription</a>
   </body>
 </html>
