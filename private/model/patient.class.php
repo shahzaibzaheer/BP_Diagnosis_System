@@ -25,8 +25,22 @@ class Patient {
     private $errors;
 
 
-    function __construct($args)
-    {
+    function __construct($args){
+      $this->setId($args[PatientTable::COLUMN_ID] ?? '');
+      $this->setName($args[PatientTable::COLUMN_NAME] ?? '');
+      $this->setUserName($args[PatientTable::COLUMN_USERNAME] ?? '');
+      $this->setEmail($args[PatientTable::COLUMN_EMAIL] ?? '');
+      $this->setGender($args[PatientTable::COLUMN_GENDER] ?? 1);
+      $this->setHashedPassword($args[PatientTable::COLUMN_HASHED_PASSWORD] ?? '');
+      $this->setPhoneNumber($args[PatientTable::COLUMN_PHONE] ?? '');
+      $this->setAddress($args[PatientTable::COLUMN_ADDRESS] ?? '');
+      $this->setCity($args[PatientTable::COLUMN_CITY] ?? '');
+      $this->setDOB($args[PatientTable::COLUMN_DATE_OF_BITRH] ?? '');
+      $this->setCreatedOn($args[PatientTable::COLUMN_CREATED_ON] ?? '');
+      $this->setPassword($args['password'] ?? '');
+      $this->setConfirmPassword($args['confirmPassword'] ?? '');
+    }
+    private function bind_patient_data($args){
       $this->setId($args[PatientTable::COLUMN_ID] ?? '');
       $this->setName($args[PatientTable::COLUMN_NAME] ?? '');
       $this->setUserName($args[PatientTable::COLUMN_USERNAME] ?? '');
@@ -45,7 +59,6 @@ class Patient {
 
 
 
-
   /*** Database Related
   *************************************/
 
@@ -58,8 +71,6 @@ class Patient {
     }
   }
 
-
-
   public function save(){
     if(!hasPresence($this->getId()))
     {
@@ -70,6 +81,59 @@ class Patient {
       exit("update the Patient data");
     }
   }
+  static public function find_patient_by_id($id){
+    $queryString  = "SELECT * FROM ".PatientTable::TABLE_NAME." ";
+    $queryString .= "WHERE ".PatientTable::COLUMN_ID." = ?";
+    $stmt = Patient::$db->prepare($queryString);
+    $stmt->execute([$id]);
+    $patient = $stmt->fetch(PDO::FETCH_ASSOC);
+    if(isset($patient)){
+      // return patient object, not associative array
+      return new self($patient);
+    }
+    else {
+      // echo "Patient Not found"
+      return false;
+    }
+  }
+  static public function find_patient_by_username($username){
+    $queryString  = "SELECT * FROM ".PatientTable::TABLE_NAME." ";
+    $queryString .= "WHERE ".PatientTable::COLUMN_USERNAME." = ?";
+    $stmt = Patient::$db->prepare($queryString);
+    $stmt->execute([$username]);
+    $patient = $stmt->fetch(PDO::FETCH_ASSOC);
+    if(isset($patient)){
+        return $patient;
+    }
+    else {
+      // echo "Patient Not found"
+      return false;
+    }
+  }
+  static public function find_patient_by_email($email){
+    $queryString  = "SELECT * FROM ".PatientTable::TABLE_NAME." ";
+    $queryString .= "WHERE ".PatientTable::COLUMN_EMAIL." = ?";
+    $stmt = Patient::$db->prepare($queryString);
+    $stmt->execute([$email]);
+    $patient = $stmt->fetch(PDO::FETCH_ASSOC);
+    if(isset($patient)){
+        return $patient;
+    }
+    else {
+      // echo "Patient Not found"
+      return false;
+    }
+  }
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -192,11 +256,29 @@ class Patient {
   /******* Helper Functions
   ************************************/
   public function isUsernameAlreadyExists($userName){
-      return false; //false means username not exist
+    $patient = Patient::find_patient_by_username($userName);
+
+    if($patient === false){
+      // patient not exists
+      return false;
+    }
+    else {
+      return true;
+    }
   }
   public function isEmailAlreadyExists($email){
-      return false; //false means email not exist
+    $patient = Patient::find_patient_by_email($email);
+
+    if($patient === false){
+      // patient not exists
+      return false;
+    }
+    else {
+      return true;
+    }
   }
+
+
 
   private function create(){
         // first validate the data, if validation successfull then save data and return true
@@ -272,7 +354,7 @@ class Patient {
 
 
      if(!isValidEmailFormat($this->getEmail())){$errors[PatientTable::COLUMN_EMAIL]="Please enter a valid Email address";}
-     elseif($this->isEmailAlreadyExists($this->getEmail())){$errors[PatientTable::COLUMN_EMAIL]="Email is already existed, use new or <a href= '".urlFor('login.php')."'>Login Here</a>";}
+     elseif($this->isEmailAlreadyExists($this->getEmail())){$errors[PatientTable::COLUMN_EMAIL]="Email is already existed, use new or Login</a>";}
 
 
 
@@ -325,5 +407,50 @@ class Patient {
      return $errors;
    }
 
+  public function login(){
+     $errors = $this->validateLoginCredentials();
+     if(!isContainErrors($errors))
+     {
+       // jb success full login ho jao to all pateirn informaiton ko fetch kr k patient ka object bana lo
+       return true; // login successfull
+     }
+     else {
+       $this->errors = $errors;
+       return false;
+     }
+   }
+
+  public function validateLoginCredentials(){
+    $errors = [];
+    if(!isValidEmailFormat($this->getEmail()))
+    {
+      $errors[PatientTable::COLUMN_EMAIL]="Please enter a valid Email address";
+    }
+    if(!hasPresence($this->getPassword())) {
+      $errors['password'] = "Password cannot be blank.";
+    }
+    if(!isset($errors[PatientTable::COLUMN_EMAIL]) && !isset($errors['password']))
+    {
+      // check email & password
+      if(!$this->isEmailAlreadyExists($this->getEmail()))
+      {
+        $errors['invalidCredantials'] = 'Email or Password is incorrect!';
+      }else{
+        // email exits, validate password
+        $patient = Patient::find_patient_by_email($this->getEmail());
+        if($patient)
+        {
+            $isSuccess = password_verify($this->getPassword(), $patient[PatientTable::COLUMN_HASHED_PASSWORD]);
+            if(!$isSuccess){
+                $errors['invalidCredantials'] = 'Email or Password is incorrect!';
+            }else {
+              // patient login successfull , bind patient data
+              $this->bind_patient_data($patient);
+            }
+        }
+      }
+    }
+    return $errors;
+  }
 }
 ?>

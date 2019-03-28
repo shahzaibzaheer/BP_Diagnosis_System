@@ -31,5 +31,22 @@
     public const   COLUMN_DATE_OF_BITRH = "dob";
     public const   COLUMN_CREATED_ON = "created_on";
   }
-
+  class PrescriptionTable{
+    public const   TABLE_NAME = "prescription_table";
+    public const   COLUMN_PRESCRIPTION_ID = "prescription_id";
+    public const   COLUMN_DOCTOR_ID = "doctor_id";
+    public const   COLUMN_PATIENT_ID = "patient_id";
+    public const   COLUMN_STATUS = "status";
+    public const   COLUMN_SUBJECT = "subject"; // 1 male , 0 female
+    public const   COLUMN_BP_LOW = "bp_low";
+    public const   COLUMN_BP_HIGH = "bp_high";
+    public const   COLUMN_HEADACHE = "headache";
+    public const   COLUMN_DIZZINESS = "dizziness";
+    public const   COLUMN_VISUAL_CHANGES = "visual_changes";
+    public const   COLUMN_MEDICATION = "medication";
+    public const   COLUMN_FOOD_DETAIL = "food_detail";
+    public const   COLUMN_EXERCISE_DETAIL = "exercise_detail";
+    public const   COLUMN_OTHER_INFO = "other_info";
+    public const   COLUMN_CREATED_ON = "created_on";
+  }
 ?>

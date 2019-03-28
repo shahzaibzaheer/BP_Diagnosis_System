@@ -1,28 +1,20 @@
 <?php  require_once('../../private/initialize.php');
 
-    $args = [
-      PatientTable::COLUMN_NAME => 'abc',
-      PatientTable::COLUMN_USERNAME => 'aadasdfadsfsd',
-      PatientTable::COLUMN_EMAIL => 'shahzadaib@gmail.com',
-      PatientTable::COLUMN_PHONE => 'a03056302013',
-      PatientTable::COLUMN_ADDRESS => 'Lorem Ipsum lorem ipsum, lorem ',
-      PatientTable::COLUMN_CITY => 'Wazirabad',
-      PatientTable::COLUMN_DATE_OF_BITRH => time(),
-      "password" => 'Pakistan143143143',
-      "confirmPassword" => 'Pakistan143143143'
-    ];
+  $patient = new Patient([]);  // for preventing error , when get request
 
-    $patient = new Patient($args);
-    // print_r($patient->save());
+  if(isPostRequest()){
+    // print_array($_POST);
+    $patient = new Patient($_POST);
     if($patient->save()){
       //login successfull
-      exit("Registration successfull");
+      redirectTo(urlFor('patient/login.php'));
     }else {
       // login failed, get errors array
       $errors = $patient->getErrors();
-      print_r($errors);
-
+      print_array($errors);
     }
+  }
+
 
 
 
@@ -35,6 +27,46 @@
     <title>Registration</title>
   </head>
   <body>
+    <form class="" action="<?php echo $_SERVER['SCRIPT_NAME']; ?>" method="post">
+      <div >
+        <label for="">Name: </label>
+        <input type="text" name="<?php echo PatientTable::COLUMN_NAME ?>" value="<?php echo $patient->getName(); ?>" >
+      </div>
+      <div>
+        <label for="">Username: </label>
+        <input type="text" name="<?php echo PatientTable::COLUMN_USERNAME ?>" value="<?php echo $patient->getUserName(); ?>" >
+      </div>
+      <div class="">
+        <label for="">Email: </label>
+        <input type="email" name="<?php echo PatientTable::COLUMN_EMAIL ?>" value="<?php echo $patient->getEmail(); ?>" >
+      </div>
+      <div>
+        <label for="">Phone: </label>
+        <input type="text" name="<?php echo PatientTable::COLUMN_PHONE ?>" value="<?php echo $patient->getPhoneNumber(); ?>" >
+      </div>
+      <div class="">
+        <label for="">City: </label>
+        <input type="text" name="<?php echo PatientTable::COLUMN_CITY ?>" value="<?php echo $patient->getCity(); ?>" >
+      </div>
+      <div class="">
+        <label for="">Address: </label>
+        <input type="text" name="<?php echo PatientTable::COLUMN_ADDRESS ?>" value="<?php echo $patient->getAddress(); ?>" >
+      </div>
+      <div class="">
+        <label for="">Date of birth: </label>
+        <input type="date" name="<?php echo PatientTable::COLUMN_DATE_OF_BITRH ?>" value="<?php echo $patient->getDOB(); ?>" >
+      </div>
+      <div class="">
+        <label for="">Password: </label>
+        <input type="password" name="password" value="" >
+      </div>
+      <div class="">
+        <label for="">Confirm Password: </label>
+        <input type="password" name="confirmPassword" value="" >
+      </div>
+      <input type="submit" name="submit" value="Register">
+
+    </form>
 
   </body>
 </html>

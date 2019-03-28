@@ -1,4 +1,60 @@
 <?php
+session_start();
+
+/*** authorization related
+*****************************/
+function require_patient_login(){
+  if(!isset($_SESSION[SessionContract::SESSION_PATIENT_ID])){
+      // redirect patient for login
+      redirectTo(urlFor('patient/login.php'));
+  }
+}
+
+function isPatientLoggedIn(){
+  return isset($_SESSION[SessionContract::SESSION_PATIENT_ID]);
+}
+function performLogout(){
+  if(isset($_SESSION[SessionContract::SESSION_PATIENT_ID])){
+    unset($_SESSION[SessionContract::SESSION_PATIENT_ID]);
+  }elseif(isset($_SESSION[SessionContract::SESSION_DOCTOR_ID])){
+    unset($_SESSION[SessionContract::SESSION_DOCTOR_ID]);
+  }elseif(isset($_SESSION[SessionContract::SESSION_ADMIN_ID])){
+    unset($_SESSION[SessionContract::SESSION_ADMIN_ID]);
+  }
+  else{
+    exit("Some error happen while performing logout");
+  }
+}
+
+
+// function isUserLoggedIn(){
+//   session_start();
+//   return isset($_SESSION[SessionContract::PATIETN_ID]) ||
+//          isset($_SESSION[SessionContract::DOCTOR_ID]) ||
+//          isset($_SESSION[SessionContract::ADMIN_ID]) ;
+// }
+
+
+/**********//////////
+
+
+
+
+
+
+
+
+
+
+
+
+
+  function print_array($array){
+    echo "<pre>";
+    print_r($array);
+    echo "</pre>";
+    // exit;
+  }
 
   function urlFor($script_path) {
       // add the leading '/' if not present
