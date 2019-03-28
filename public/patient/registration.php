@@ -1,4 +1,7 @@
 <?php  require_once('../../private/initialize.php');
+if(isPatientLoggedIn()){
+  redirectTo(urlFor('patient/patient_dashboard.php'));
+}
 
   $patient = new Patient([]);  // for preventing error , when get request
 

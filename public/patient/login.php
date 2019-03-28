@@ -1,5 +1,8 @@
 <?php  require_once('../../private/initialize.php');
     // session_start();
+    if(isPatientLoggedIn()){
+      redirectTo(urlFor('patient/patient_dashboard.php'));
+    }
 
   if(isPostRequest()){
     $patient = new Patient($_POST);

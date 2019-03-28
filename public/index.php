@@ -18,6 +18,7 @@
     </style>
   </head>
   <body>
+    <h1>Home</h1>
         <a href="<?php echo urlFor('patient/login.php') ?>">Patient Login</a>
         <a href="<?php echo urlFor('patient/registration.php') ?>">Patient Registration</a>
   </body>
