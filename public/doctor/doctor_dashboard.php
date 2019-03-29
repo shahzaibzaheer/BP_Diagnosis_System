@@ -8,8 +8,9 @@
   </head>
   <body>
     <h1>Doctor Dashboard</h1>
-    <a href="<?php echo urlFor("doctor/prescription_requests.php"); ?>">Prescription Requests</a>
-    <a href="<?php echo urlFor("doctor/doctor_answered_prescriptions.php"); ?>">My Answered Prescriptions</a>
+    <a href="<?php echo urlFor("doctor/prescription_requests.php"); ?>">Prescription Requests</a><br>
+    <a href="<?php echo urlFor("doctor/doctor_answered_prescriptions.php"); ?>">My Answered Prescriptions</a><br>
+    <a href="<?php echo urlFor("doctor/doLogout.php"); ?>">Logout</a><br>
 
   </body>
 </html>

@@ -4,7 +4,7 @@
     $prescriptionId = $_GET['prescription_id'] ?? null;
     if(isPostRequest()){
           // print_array($_POST);
-          $replayMessage = $_POST['replayMessage'] ?? '';
+          $replayMessage = $_POST[' replayMessage'] ?? '';
           $replay = new Replay();
           $replay->setReplayMessage($replayMessage);
           $replay->setDoctorReplay(false);
