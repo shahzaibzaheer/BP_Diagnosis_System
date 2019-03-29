@@ -15,6 +15,9 @@ function loggedInPatientId(){
 function isPatientLoggedIn(){
   return isset($_SESSION[SessionContract::SESSION_PATIENT_ID]);
 }
+function isDoctorLoggedIn(){
+  return isset($_SESSION[SessionContract::SESSION_DOCTOR_ID]);
+}
 function performLogout(){
   if(isset($_SESSION[SessionContract::SESSION_PATIENT_ID])){
     unset($_SESSION[SessionContract::SESSION_PATIENT_ID]);

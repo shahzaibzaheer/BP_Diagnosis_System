@@ -20,6 +20,8 @@
   <body>
     <h1>Home</h1>
         <a href="<?php echo urlFor('patient/login.php') ?>">Patient Login</a>
-        <a href="<?php echo urlFor('patient/registration.php') ?>">Patient Registration</a>
+        <a href="<?php echo urlFor('patient/registration.php') ?>">Patient Registration</a> <br><br><br>
+        <a href="<?php echo urlFor('patient/login.php') ?>">Doctor Login</a>
+        <a href="<?php echo urlFor('doctor/registration.php') ?>">Doctor Registration</a>
   </body>
 </html>

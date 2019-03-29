@@ -168,7 +168,7 @@ class Prescription
 
 
     public function getHeadache() {
-         return $this->headache ? "Yes":"No";
+         return $this->headache ;
     }
     public function setHeadache($headache) {
          $this->headache = $headache;
@@ -176,7 +176,7 @@ class Prescription
 
 
     public function getDizziness() {
-         return $this->dizziness ? "Yes":"No";
+         return $this->dizziness ;
     }
     public function setDizziness($dizziness) {
          $this->dizziness = $dizziness;

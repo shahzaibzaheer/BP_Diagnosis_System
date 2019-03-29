@@ -17,11 +17,13 @@
     require_once('SESSION_CONTRACT.php');
     require_once('functions.php');
     require_once('model/patient.class.php');
+    require_once('model/doctor.class.php');
     require_once('model/prescription.class.php');
 
     $db = dbConnect();
     Patient::setDatabase($db);
     Prescription::setDatabase($db);
+    Doctor::setDatabase($db);
 
 
 

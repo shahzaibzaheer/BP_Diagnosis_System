@@ -31,6 +31,24 @@
     public const   COLUMN_DATE_OF_BITRH = "dob";
     public const   COLUMN_CREATED_ON = "created_on";
   }
+  class DoctorTable{
+    public const   TABLE_NAME = "doctors";
+    public const   COLUMN_ID = "id";
+    public const   COLUMN_USERNAME = "username";
+    public const   COLUMN_NAME = "name";
+    public const   COLUMN_EMAIL = "email";
+    public const   COLUMN_GENDER = "gender"; // 1 male , 0 female
+    public const   COLUMN_HASHED_PASSWORD = "hashedPassword";
+    public const   COLUMN_PHONE = "phone";
+    public const   COLUMN_ADDRESS = "address";
+    public const   COLUMN_CITY = "city";
+    public const   COLUMN_DATE_OF_BITRH = "dob";
+    public const   COLUMN_ABOUT = "about";
+    public const   COLUMN_SPECIALIZATION = "specialization";
+    public const   COLUMN_QUALIFICATION = "qualification";
+    public const   COLUMN_FEES = "fees";
+    public const   COLUMN_CREATED_ON = "created_on";
+  }
   class PrescriptionTable{
     public const   TABLE_NAME = "prescription_table";
     public const   COLUMN_PRESCRIPTION_ID = "prescription_id";
