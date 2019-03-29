@@ -19,6 +19,7 @@
         // Now also save the doctor id in the prescrition.
         $prescription = Prescription::findPrescriptionById($prescriptionId);
         $prescription->setDoctorId(loggedInDoctorId());
+        $prescription->setStatus(Prescription::STATUS_ANSWERED);
         // exit("Doctor Id: ".loggedInDoctorId());
         if($prescription->save()){
           exit("doctor_id successfully updated");

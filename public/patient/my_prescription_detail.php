@@ -1,9 +1,28 @@
 <?php  require_once('../../private/initialize.php');
     require_patient_login();  // this page will access only when patient is logged in
 
+    $prescriptionId = $_GET['prescription_id'] ?? null;
+    if(isPostRequest()){
+          // print_array($_POST);
+          $replayMessage = $_POST['replayMessage'] ?? '';
+          $replay = new Replay();
+          $replay->setReplayMessage($replayMessage);
+          $replay->setDoctorReplay(false);
+          $replay->setPrescriptionId($prescriptionId);
+
+          if($replay->save()){
+            //replay saved successfull, refresh the page
+            // redirectTo(urlFor('doctor/login.php'));
+            exit("Patient replay successfully posted");
+
+          }else {
+            exit("error, while saving the replay into the database");
+          }
+        }
+
+
     // $prescription
     // this page will receive prescription id, that user want to see
-    $prescriptionId = $_GET['id'] ?? null;
     if(isset($prescriptionId)){
       $prescription = Prescription::findPrescriptionById($prescriptionId);
       if(!$prescription){
@@ -28,11 +47,10 @@
   <body>
     <h1>Prescription Detail</h1>
     <div class="detail">
-        <?php $patient = Patient::find_patient_by_id($prescription->getPatientId());  ?>
 
-        <p><b>Patient Name: </b><?php echo $patient->getName();  ?></p>
+        <p><b>Patient Name: </b><?php echo $prescription->getPatientName();  ?></p>
         <p><b>Prescription Id: </b> <?php echo $prescription->getPrescriptionId(); ?></p>
-        <p><b>Doctor Name: </b> ------------------------ </p>
+        <p><b>Doctor Name: </b>  <?php echo $prescription->getDoctorName(); ?> </p>
         <p><b>Prescription Status: </b> <?php echo $prescription->getPrescriptionId(); ?> </p>
         <p><b>Subject: </b> <?php echo $prescription->getSubject(); ?> </p>
         <p><b>LOW BP: </b> <?php echo $prescription->getBpLow(); ?> </p>
@@ -45,6 +63,26 @@
         <p><b>Exercise Detail: </b> <?php echo $prescription->getExerciseDetail(); ?> </p>
         <p><b>Other Info: </b> <?php echo $prescription->getOtherInfo(); ?> </p>
         <p><b>Posted at: </b> <?php echo $prescription->getCreatedOn(); ?> </p>
+
+        <!-- agr kisi doctor ny reply kiya hy, tb hi user ko replay wali functionality do -->
+        <?php
+          $replies = Replay::find_replies_by_prescription_id($prescription->getPrescriptionId());
+          if(!$replies){
+            echo "No doctor replay this post";
+          }else { ?>
+            <!-- First output all the replies -->
+              <?php
+                $replies = Replay::find_replies_by_prescription_id($prescription->getPrescriptionId());
+                print_array($replies);
+              ?>
+
+            <form action="<?php echo $_SERVER['SCRIPT_NAME']."?prescription_id=".$prescription->getPrescriptionId(); ?>" method="post">
+                <input type="text" name="replayMessage" value="" placeholder="Replay" required>
+                <input type="Submit" name="submit" value="submit">
+            </form>
+        <?php
+          }
+        ?>
     </div>
   </body>
 </html>

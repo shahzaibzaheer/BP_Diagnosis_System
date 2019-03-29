@@ -83,6 +83,23 @@ class Prescription
       return false;
     }
   }
+  static public function find_prescriptions_by_doctor_id($doctorId){
+    $queryString  = "SELECT * FROM ".PrescriptionTable::TABLE_NAME." ";
+    $queryString .= "WHERE ".PrescriptionTable::COLUMN_DOCTOR_ID." = ?";
+    $stmt = Prescription::$db->prepare($queryString);
+    $stmt->execute([$doctorId]);
+    // return the array of prescriptions object not associative arrays.
+    $prescriptions = [];
+    while($prescriptionAssoc = $stmt->fetch(PDO::FETCH_ASSOC)){
+      $prescriptionObj = new self($prescriptionAssoc);
+      $prescriptions[] = $prescriptionObj;
+    }
+    if(!empty($prescriptions)){
+      return $prescriptions;
+    }else{
+      return false;
+    }
+  }
   static public function findPrescriptionById($id){
     $queryString  = "SELECT * FROM ".PrescriptionTable::TABLE_NAME." ";
     $queryString .= "WHERE ".PrescriptionTable::COLUMN_PRESCRIPTION_ID." = ?";
