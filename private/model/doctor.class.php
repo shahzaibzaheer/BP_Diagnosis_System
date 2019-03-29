@@ -129,6 +129,19 @@ class Doctor
         }
         return false;
     }
+    static public function find_doctor_by_email_assoc($email){
+      // SELECT * FROM `doctors` WHERE `email` = 'doctor@gmail.com'
+        $queryString = "SELECT * FROM ".DoctorTable::TABLE_NAME;
+        $queryString .= " WHERE ".DoctorTable::COLUMN_EMAIL." = ?";
+        $stmt = Doctor::$db->prepare($queryString);
+        $stmt->execute([$email]);
+        // print_array($stmt);
+        $doctor = $stmt->fetch(PDO::FETCH_ASSOC);
+        if($doctor){
+          return $doctor;
+        }
+        return false;
+    }
 
 
 
@@ -454,19 +467,20 @@ class Doctor
           // $errors['invalidCredantials'] = 'Email or Passworrd is incorrect!';
         }else{
           // email exits, validate password
-          $doctor = Doctor::find_doctor_by_email($this->getEmail());
+          $doctor = Doctor::find_doctor_by_email_assoc($this->getEmail());
           if($doctor)
           {
               // echo "Hashed: ". $doctor->getHashedPassword() ."<br />";
               // echo "Password: ".$this->getPassword();
               // exit;
-              $isSuccess = password_verify($this->getPassword(), $doctor->getHashedPassword());
+              $isSuccess = password_verify($this->getPassword(), $doctor[DoctorTable::COLUMN_HASHED_PASSWORD]);
               // var_dump($isSuccess);
               if(!$isSuccess){
                   // $errors['invalidCredantials'] = 'Email or Password is incorrect!';
                   $errors['invalidCredantials'] = 'Password is incorrect!';
               }else {
                 // patient login successfull , bind patient data
+                $this->bind_doctor_data($doctor);
                 return true;
               }
           }

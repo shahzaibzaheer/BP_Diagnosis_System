@@ -1,7 +1,8 @@
 <?php  require_once('../../private/initialize.php');
+    // session_start();
     require_doctor_login();  // this page will access only when doctor is logged in
+    $prescriptionId = $_GET['prescription_id'] ?? null;
 
-  $prescriptionId = $_GET['prescription_id'] ?? null;
 
     if(isPostRequest()){
       // print_array($_POST);
@@ -11,10 +12,22 @@
       $replay->setReplayMessage($replayMessage);
       $replay->setDoctorReplay(true);
       $replay->setPrescriptionId($prescriptionId);
+
       if($replay->save()){
         //replay saved successfull, refresh the page
         // exit("Replay saved successfully ");
+        // Now also save the doctor id in the prescrition.
+        $prescription = Prescription::findPrescriptionById($prescriptionId);
+        $prescription->setDoctorId(loggedInDoctorId());
+        // exit("Doctor Id: ".loggedInDoctorId());
+        if($prescription->save()){
+          exit("doctor_id successfully updated");
+        }else {
+          print_array($prescription->getErrors());
+          exit;
+        }
         // redirectTo(urlFor('doctor/login.php'));
+
       }else {
         exit("error, while saving the replay into the database");
       }

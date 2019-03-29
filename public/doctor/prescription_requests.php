@@ -32,6 +32,7 @@
         </tr>
         <?php foreach ($prescriptons as $prescription): ?>
           <tr>
+            <?php if(!$prescription->getDoctorId()) {  ?> <!-- wohi posts output krni hy jis ka kisi doctor ny replay na kiya ho -->
             <td><?php echo $prescription->getPatientName(); ?></td>
             <td><?php echo $prescription->getPatientEmail(); ?></td>
             <td><?php echo $prescription->getSubject(); ?></td>
@@ -39,7 +40,7 @@
             <td> <a href="<?php echo urlFor("doctor/prescription_detail.php?prescription_id=").$prescription->getPrescriptionId(); ?>">View</a> </td>
             <td> <a href="<?php echo urlFor("doctor/prescription_detail.php?prescription_id=").$prescription->getPrescriptionId(); ?>">Replay</a> </td>
           </tr>
-        <?php endforeach; ?>
+        <?php }endforeach; ?>
         <!-- <tr>
           <td>salman</td>
           <td>salman@gmail.com</td>

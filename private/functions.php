@@ -18,6 +18,9 @@ function require_doctor_login(){
 function loggedInPatientId(){
   return $_SESSION[SessionContract::SESSION_PATIENT_ID];
 }
+function loggedInDoctorId(){
+  return $_SESSION[SessionContract::SESSION_DOCTOR_ID];
+}
 function isPatientLoggedIn(){
   return isset($_SESSION[SessionContract::SESSION_PATIENT_ID]);
 }

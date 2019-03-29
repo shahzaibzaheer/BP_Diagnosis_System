@@ -12,6 +12,8 @@
     if(isPostRequest()){
     $doctor = new Doctor($_POST);
     if($doctor->login()){
+      // print_array($doctor);
+      // exit;
       $_SESSION[SessionContract::SESSION_DOCTOR_ID] = $doctor->getId();
       redirectTo(urlFor('doctor/doctor_dashboard.php'));
     }

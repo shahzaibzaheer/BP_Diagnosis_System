@@ -46,7 +46,8 @@ class Prescription
       return $this->create();
     }else {
       // update the data
-      exit("update the Patient data");
+      // exit("update the Patient data");
+      return $this->update();
     }
   }
   static public function find_all_prescriptions(){
@@ -270,7 +271,7 @@ class Prescription
 
 /*****  Helper functions
 *******************************/
-private function create(){
+  private function create(){
       // first validate the data, if validation successfull then save data and return true
       // if validation fails, then return errors array
       $errorsArray = $this->validate();
@@ -361,6 +362,64 @@ private function create(){
    $this->errors = $errors;
    return $errors;
   }
+
+
+
+
+  private function update(){
+        // exit("update the data");
+        // first validate the data, if validation successfull then save data and return true
+        // if validation fails, then return errors array
+        $errorsArray = $this->validate();
+        if(isContainErrors($errorsArray))
+        {
+          return false;
+        }else {
+          // build query string & save data.
+          // exit("Now All the data is valid, it's time to Update Data to the database");
+          // UPDATE table_name SET column1 = value1, column2 = value2,... WHERE condition;
+
+          $queryString  =  "UPDATE ".PrescriptionTable::TABLE_NAME." SET ";
+          $queryString .=  PrescriptionTable::COLUMN_PATIENT_ID ." = :".PrescriptionTable::COLUMN_PATIENT_ID.",";
+          $queryString .=  PrescriptionTable::COLUMN_STATUS ." = :".PrescriptionTable::COLUMN_STATUS.",";
+          $queryString .=  PrescriptionTable::COLUMN_DOCTOR_ID ." = :".PrescriptionTable::COLUMN_DOCTOR_ID.",";
+          $queryString .=  PrescriptionTable::COLUMN_SUBJECT ." = :".PrescriptionTable::COLUMN_SUBJECT.",";
+          $queryString .=  PrescriptionTable::COLUMN_BP_LOW ." = :".PrescriptionTable::COLUMN_BP_LOW.",";
+          $queryString .=  PrescriptionTable::COLUMN_BP_HIGH ." = :".PrescriptionTable::COLUMN_BP_HIGH.",";
+          $queryString .=  PrescriptionTable::COLUMN_HEADACHE ." = :".PrescriptionTable::COLUMN_HEADACHE.",";
+          $queryString .=  PrescriptionTable::COLUMN_DIZZINESS ." = :".PrescriptionTable::COLUMN_DIZZINESS.",";
+          $queryString .=  PrescriptionTable::COLUMN_VISUAL_CHANGES ." = :".PrescriptionTable::COLUMN_VISUAL_CHANGES.",";
+          $queryString .=  PrescriptionTable::COLUMN_FOOD_DETAIL ." = :".PrescriptionTable::COLUMN_FOOD_DETAIL.",";
+          $queryString .=  PrescriptionTable::COLUMN_EXERCISE_DETAIL ." = :".PrescriptionTable::COLUMN_EXERCISE_DETAIL.",";
+          $queryString .=  PrescriptionTable::COLUMN_OTHER_INFO ." = :".PrescriptionTable::COLUMN_OTHER_INFO.",";
+          $queryString .=  PrescriptionTable::COLUMN_MEDICATION ." = :".PrescriptionTable::COLUMN_MEDICATION." ";
+          $queryString .= " WHERE ".PrescriptionTable::COLUMN_PRESCRIPTION_ID." = ".$this->getPrescriptionId();
+          // exit($queryString);
+
+          try{
+            $stmt = Prescription::$db->prepare($queryString);
+            $stmt->execute([
+              PrescriptionTable::COLUMN_PATIENT_ID => $this->getPatientId() ,
+              PrescriptionTable::COLUMN_DOCTOR_ID=> $this->getDoctorId() ,
+              PrescriptionTable::COLUMN_STATUS => $this->getStatus(),
+              PrescriptionTable::COLUMN_SUBJECT => $this->getSubject(),
+              PrescriptionTable::COLUMN_BP_LOW => $this->getBpLow(),
+              PrescriptionTable::COLUMN_BP_HIGH => $this->getBpHigh(),
+              PrescriptionTable::COLUMN_HEADACHE => $this->getHeadache(),
+              PrescriptionTable::COLUMN_DIZZINESS => $this->getDizziness(),
+              PrescriptionTable::COLUMN_VISUAL_CHANGES => $this->getVisualChanges(),
+              PrescriptionTable::COLUMN_FOOD_DETAIL => $this->getFoodDetail(),
+              PrescriptionTable::COLUMN_EXERCISE_DETAIL => $this->getExerciseDetail(),
+              PrescriptionTable::COLUMN_OTHER_INFO => $this->getOtherInfo(),
+              PrescriptionTable::COLUMN_MEDICATION => $this->getMedication()
+            ]);
+            return true;
+          }catch(Exception $e){
+            exit($e->getMessage());
+          }
+        }
+
+    }
 
 
 
