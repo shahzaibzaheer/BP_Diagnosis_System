@@ -1,9 +1,28 @@
 <?php  require_once('../../private/initialize.php');
     require_doctor_login();  // this page will access only when doctor is logged in
 
+  $prescriptionId = $_GET['prescription_id'] ?? null;
+
+    if(isPostRequest()){
+      // print_array($_POST);
+
+      $replayMessage = $_POST['replayMessage'] ?? '';
+      $replay = new Replay();
+      $replay->setReplayMessage($replayMessage);
+      $replay->setDoctorReplay(true);
+      $replay->setPrescriptionId($prescriptionId);
+      if($replay->save()){
+        //replay saved successfull, refresh the page
+        // exit("Replay saved successfully ");
+        // redirectTo(urlFor('doctor/login.php'));
+      }else {
+        exit("error, while saving the replay into the database");
+      }
+    }
+
     // print_array($_GET); exit;
     // this page will receive prescription id, that user want to see
-    $prescriptionId = $_GET['prescription_id'] ?? null;
+
     if(isset($prescriptionId)){
       $prescription = Prescription::findPrescriptionById($prescriptionId);
       if(!$prescription){
@@ -39,5 +58,21 @@
     <p><b>Exercise Detail: </b> <?php echo $prescription->getExerciseDetail(); ?> </p>
     <p><b>Other Info: </b> <?php echo $prescription->getOtherInfo(); ?> </p>
     <p><b>Posted at: </b> <?php echo $prescription->getCreatedOn(); ?> </p>
+
+    <!-- Output all the replyes -->
+    <?php
+        $replies = Replay::find_replies_by_prescription_id($prescriptionId);
+        print_array($replies);
+    ?>
+    <div class="doc_replay">
+
+    </div>
+
+
+    <br><br><br><br>
+    <form action="<?php echo $_SERVER['SCRIPT_NAME']."?prescription_id=".$prescription->getPrescriptionId(); ?>" method="post">
+        <input type="text" name="replayMessage" value="" placeholder="Replay" required>
+        <input type="Submit" name="submit" value="submit">
+    </form>
   </body>
 </html>

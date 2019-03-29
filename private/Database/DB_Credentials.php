@@ -67,4 +67,11 @@
     public const   COLUMN_OTHER_INFO = "other_info";
     public const   COLUMN_CREATED_ON = "created_on";
   }
+  class ReplayTable{
+    public const  TABLE_NAME = "replies";
+    public const COLUMN_PRESCRIPTION_ID ="prescription_id";
+    public const COLUMN_IS_DOCTOR_REPLAY ="is_doctor_reply";
+    public const COLUMN_REPLAY_MESSAGE ="replay_message";
+    public const COLUMN_TIMESTAMP ="timestamp";
+  }
 ?>

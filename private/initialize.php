@@ -19,11 +19,13 @@
     require_once('model/patient.class.php');
     require_once('model/doctor.class.php');
     require_once('model/prescription.class.php');
+    require_once('model/replay.class.php');
 
     $db = dbConnect();
     Patient::setDatabase($db);
     Prescription::setDatabase($db);
     Doctor::setDatabase($db);
+    Replay::setDatabase($db);
 
 
 
