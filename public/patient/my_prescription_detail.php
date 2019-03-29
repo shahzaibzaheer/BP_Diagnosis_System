@@ -2,7 +2,7 @@
     require_patient_login();  // this page will access only when patient is logged in
 
     // $prescription
-    // this page will receive prescription id, what user want to see
+    // this page will receive prescription id, that user want to see
     $prescriptionId = $_GET['id'] ?? null;
     if(isset($prescriptionId)){
       $prescription = Prescription::findPrescriptionById($prescriptionId);

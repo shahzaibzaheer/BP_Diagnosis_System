@@ -21,7 +21,8 @@ class Prescription
   private $doctorId; //int
   private $prescriptionId; //int
   private $createdOn; //timestamp
-
+  private $patient; // initialize, when patient id collected
+  private $doctor; // initialize, when doctor id collected
 
   static private $db;
   private $errors;
@@ -48,8 +49,22 @@ class Prescription
       exit("update the Patient data");
     }
   }
-
-
+  static public function find_all_prescriptions(){
+    $queryString  = "SELECT * FROM ".PrescriptionTable::TABLE_NAME;
+    $stmt = Prescription::$db->prepare($queryString);
+    $stmt->execute();
+    $prescriptions = [];
+    // we want to return prescription objects
+    while($prescriptionAssoc = $stmt->fetch(PDO::FETCH_ASSOC)){
+      $prescriptionObj = new self($prescriptionAssoc);
+      $prescriptions[] = $prescriptionObj;
+    }
+    if(!empty($prescriptions)){
+      return $prescriptions;
+    }else{
+      return false;
+    }
+  }
   static public function findPrescriptionsByPatientId($patientId){
     $queryString  = "SELECT * FROM ".PrescriptionTable::TABLE_NAME." ";
     $queryString .= "WHERE ".PrescriptionTable::COLUMN_PATIENT_ID." = ?";
@@ -83,6 +98,24 @@ class Prescription
     }
   }
 
+  public function getPatient(){
+    return $this->patient;
+  }
+  public function getPatientName(){
+    return $this->patient->getName();
+  }
+  public function getPatientEmail(){
+    return $this->patient->getEmail();
+  }
+  public function getDoctor(){
+    return $this->doctor;
+  }
+  public function getDoctorName(){
+    if(!$this->doctor){
+      return "No Doctor Linked with the post";
+    }
+    return $this->doctor->getName();
+  }
 
 
 
@@ -125,6 +158,8 @@ class Prescription
     }
     public function setDoctorId($doctorId) {
          $this->doctorId = $doctorId;
+         $this->doctor = Doctor::find_doctor_by_id($doctorId);
+         // if(!$this->doctor){ exit("doctor not linked");}
     }
 
 
@@ -133,6 +168,7 @@ class Prescription
     }
     public function setPatientId($patientId) {
          $this->patientId = $patientId;
+         $this->patient = Patient::find_patient_by_id($patientId);
     }
 
 
