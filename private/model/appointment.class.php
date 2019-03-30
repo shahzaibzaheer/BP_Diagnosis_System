@@ -6,12 +6,12 @@
  */
 class Appointment
 {
-  private const STATUS_NOT_CONFIRMED_BY_DOCTOR = 'NOT CONFIRMED BY DOCTOR';
-  private const STATUS_CONFIRMED_BY_DOCTOR = 'CONFIRMED BY DOCTOR';
-  private const STATUS_NOT_CONFIRMED_BY_PATIENT = 'NOT CONFIRMED BY PATIENT';
-  private const STATUS_CONFIRMED_BY_PATIENT = 'CONFIRMED BY PATIENT';
-  private const STATUS_CANCEL_BY_DOCTOR = 'CANCELED_BY_DOCTOR';
-  private const STATUS_CANCEL_BY_PATIENT = 'CANCELED_BY_PATIENT';
+  public const STATUS_NOT_CONFIRMED_BY_DOCTOR = 'NOT CONFIRMED BY DOCTOR';
+  public const STATUS_CONFIRMED_BY_DOCTOR = 'CONFIRMED BY DOCTOR';
+  public const STATUS_NOT_CONFIRMED_BY_PATIENT = 'NOT CONFIRMED BY PATIENT';
+  public const STATUS_CONFIRMED_BY_PATIENT = 'CONFIRMED BY PATIENT';
+  public const STATUS_CANCEL_BY_DOCTOR = 'CANCELED_BY_DOCTOR';
+  public const STATUS_CANCEL_BY_PATIENT = 'CANCELED_BY_PATIENT';
 
     private $id; //String
     private $patient_problem; //String
@@ -233,7 +233,7 @@ class Appointment
   private function create(){
     // if want, perform validation here
     // after validatio build query string & save data.
-        $queryString  =  "INSERT INTO ".AppointmentTables::TABLE_NAME;
+        $queryString  =  "INSERT INTO ".AppointmentTable::TABLE_NAME;
         $queryString .=  " (";
         $queryString .=  AppointmentTable::COLUMN_APPOINTMENT_ID.",";
         $queryString .=  AppointmentTable::COLUMN_PATIENT_PROBLEM.",";

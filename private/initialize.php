@@ -20,6 +20,7 @@
     require_once('model/doctor.class.php');
     require_once('model/prescription.class.php');
     require_once('model/replay.class.php');
+    require_once('model/appointment.class.php');
 
     $db = dbConnect();
     Patient::setDatabase($db);

@@ -142,7 +142,21 @@ class Doctor
         }
         return false;
     }
-
+    static public function find_all_doctors(){
+     $queryString  = "SELECT * FROM ".DoctorTable::TABLE_NAME;
+     $stmt = Doctor::$db->prepare($queryString);
+     $stmt->execute();
+     $doctors = [];
+     // we want to return prescription objects
+     while($doctorAssoc = $stmt->fetch(PDO::FETCH_ASSOC)){
+       $doctors[]= new self($doctorAssoc);
+     }
+     if(!empty($doctors)){
+       return $doctors;
+     }else{
+       return false;
+     }
+    }
 
 
 
