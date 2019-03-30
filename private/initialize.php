@@ -26,6 +26,7 @@
     Prescription::setDatabase($db);
     Doctor::setDatabase($db);
     Replay::setDatabase($db);
+    Appointment::setDatabase($db);
 
 
 

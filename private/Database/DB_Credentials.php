@@ -74,4 +74,15 @@
     public const COLUMN_REPLAY_MESSAGE ="replay_message";
     public const COLUMN_TIMESTAMP ="timestamp";
   }
+  class AppointmentTable{
+    public const  TABLE_NAME = "appointments";
+    public const COLUMN_APPOINTMENT_ID ="id";
+    public const COLUMN_PATIENT_PROBLEM ="patient_problem";
+    public const COLUMN_PATIENT_ID ="patient_id";
+    public const COLUMN_DOCTOR_ID ="doctor_id";
+    public const COLUMN_APPOINTMENT_DATE ="date";
+    public const COLUMN_APPOINTMENT_TIME ="time";
+    public const COLUMN_STATUS ="status";
+    public const COLUMN_CREATED_ON ="created_on";
+  }
 ?>
