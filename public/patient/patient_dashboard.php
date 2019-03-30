@@ -14,6 +14,7 @@
       <a href="<?php echo urlFor("patient/doLogout.php"); ?>">Logout</a> <br>
       <a href="<?php echo urlFor("patient/ask_for_prescription.php"); ?>">Ask For Prescription</a><br>
       <a href="<?php echo urlFor("patient/my_prescriptions.php"); ?>">My Prescription</a> <br>
+      <a href="<?php echo urlFor("patient/my_appointments.php"); ?>">My Appointments</a> <br>
       <a href="<?php echo urlFor("patient/book_appointment.php"); ?>">Book Appointment</a>
   </body>
 </html>

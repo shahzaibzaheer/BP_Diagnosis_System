@@ -83,35 +83,39 @@ class Appointment
       return false;
     }
    }
-   static public function findAppointmentByPatientId($patientId){
+   static public function findAppointmentsByPatientId($patientId){
     $queryString  = "SELECT * FROM ".AppointmentTable::TABLE_NAME." ";
     $queryString .= "WHERE ".AppointmentTable::COLUMN_PATIENT_ID." = ?";
     $stmt = Appointment::$db->prepare($queryString);
     $stmt->execute([$patientId]);
-    $appointment = $stmt->fetch(PDO::FETCH_ASSOC);
-    if($appointment){
-      // return apointment object, not associative array
-      return new Appointment($appointment);
+
+    $appointments = [];
+    // we want to return prescription objects
+    while($appointmentAssoc = $stmt->fetch(PDO::FETCH_ASSOC)){
+      $appointments[]= new self($appointmentAssoc);
     }
-    else {
-      // echo "Patient Not found";
+    if(!empty($appointments)){
+      return $appointments;
+    }else{
       return false;
     }
    }
-   static public function findAppointmentByDoctorId($doctorId){
-   $queryString  = "SELECT * FROM ".AppointmentTable::TABLE_NAME." ";
-   $queryString .= "WHERE ".AppointmentTable::COLUMN_DOCTOR_ID." = ?";
-   $stmt = Appointment::$db->prepare($queryString);
-   $stmt->execute([$doctorId]);
-   $appointment = $stmt->fetch(PDO::FETCH_ASSOC);
-   if($appointment){
-     // return apointment object, not associative array
-     return new Appointment($appointment);
-   }
-   else {
-     // echo "Patient Not found";
-     return false;
-   }
+   static public function findAppointmentsByDoctorId($doctorId){
+     $queryString  = "SELECT * FROM ".AppointmentTable::TABLE_NAME." ";
+     $queryString .= "WHERE ".AppointmentTable::COLUMN_DOCTOR_ID." = ?";
+     $stmt = Appointment::$db->prepare($queryString);
+     $stmt->execute([$doctorId]);
+
+     $appointments = [];
+     // we want to return prescription objects
+     while($appointmentAssoc = $stmt->fetch(PDO::FETCH_ASSOC)){
+       $appointments[]= new self($appointmentAssoc);
+     }
+     if(!empty($appointments)){
+       return $appointments;
+     }else{
+       return false;
+     }
    }
 
 
@@ -136,7 +140,7 @@ class Appointment
 
 
 
-  function __construct($args)
+  function __construct($args = [])
   {
       $this->setId($args[AppointmentTable::COLUMN_APPOINTMENT_ID] ?? '');
       $this->setPatient_problem($args[AppointmentTable::COLUMN_PATIENT_PROBLEM] ?? '');
@@ -192,13 +196,19 @@ class Appointment
    }
 
    public function getDate() {
-        return $this->date ;
+     if(empty($this->date)){
+       return " ---- ";
+     }
+    return $this->date ;
    }
    public function setDate($date) {
         $this->date = $date ;
    }
 
    public function getTime() {
+     if(empty($this->time)){
+       return " ---- ";
+     }
         return $this->time ;
    }
    public function setTime($time) {
@@ -256,6 +266,7 @@ class Appointment
 
         try{
           $stmt = Appointment::$db->prepare($queryString);
+          // exit("Status: ".$this->getStatus());
           $stmt->execute([
             AppointmentTable::COLUMN_APPOINTMENT_ID => $this->getId() ,
             AppointmentTable::COLUMN_PATIENT_PROBLEM => $this->getPatient_problem(),
@@ -266,6 +277,7 @@ class Appointment
             AppointmentTable::COLUMN_STATUS => $this->getStatus(),
             AppointmentTable::COLUMN_CREATED_ON => $this->getCreated_on()
           ]);
+
           return true;
         }catch(Exception $e){
           exit($e->getMessage());
