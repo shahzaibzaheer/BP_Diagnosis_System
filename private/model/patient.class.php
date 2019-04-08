@@ -80,6 +80,21 @@ class Patient {
       exit("update the Patient data");
     }
   }
+
+  public function delete(){
+    if(hasPresence($this->getId()))
+    {  // means , patient exit in db and this object is successfull binded with db data
+      // "DELETE FROM `patients` WHERE `patients`.`id` = 49"
+      $queryString =  "DELETE FROM ".PatientTable::TABLE_NAME." WHERE ".PatientTable::COLUMN_ID." = ?";
+      $stmt = Patient::$db->prepare($queryString);
+      $stmt->execute([$this->getId()]);
+      return true;
+    }
+    else {
+      return false;
+    }
+  }
+
   static public function find_patient_by_id($id){
     $queryString  = "SELECT * FROM ".PatientTable::TABLE_NAME." ";
     $queryString .= "WHERE ".PatientTable::COLUMN_ID." = ?";

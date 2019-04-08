@@ -43,7 +43,7 @@
           <td><?php echo $patient->getCity(); ?></td>
           <td><?php echo $patient->getDob(); ?></td>
           <td><?php echo $patient->getCreatedOn(); ?></td>
-          <td> <a href="#">Remove</a> </td>
+          <td> <a href="<?php echo urlFor('admin/delete_patient.php')."?patient_id=".$patient->getId(); ?>">Remove</a> </td>
         </tr>
       <?php endforeach; ?>
     </table>

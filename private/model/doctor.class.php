@@ -158,7 +158,19 @@ class Doctor
      }
     }
 
-
+    public function delete(){
+      if(hasPresence($this->getId()))
+      {  // means , doctor exit in db and this object is successfull binded with db data
+        // "DELETE FROM `patients` WHERE `patients`.`id` = 49"
+        $queryString =  "DELETE FROM ".DoctorTable::TABLE_NAME." WHERE ".DoctorTable::COLUMN_ID." = ?";
+        $stmt = Doctor::$db->prepare($queryString);
+        $stmt->execute([$this->getId()]);
+        return true;
+      }
+      else {
+        return false;
+      }
+    }
 
 
 /******* Getters & Setters

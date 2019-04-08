@@ -1,16 +1,16 @@
 <?php  require_once('../../private/initialize.php');
     require_admin_login();  // this page will access only when admin is logged in
 
-    $patient_id = $_GET["patient_id"] ?? null;
-    if($patient_id===null){
-      exit("no patient id passed");
+    $doctor_id = $_GET["doctor_id"] ?? null;
+    if($doctor_id===null){
+      exit("no doctor id passed");
     }
 
 
 
-    $patient = Patient::find_patient_by_id($patient_id);
-    if($patient===false){
-      exit("No patient Found");
+    $doctor = Doctor::find_doctor_by_id($doctor_id);
+    if($doctor===false){
+      exit("No doctor Found");
     }
 
 
@@ -18,20 +18,20 @@
       $isConfirmed = isset($_POST['confirm']);
       if($isConfirmed){
         // echo "confirm button pressed";
-        $success  = $patient->delete();
+        $success  = $doctor->delete();
         if($success){
-          redirectTo(urlFor("admin/managePatients.php"));
+          redirectTo(urlFor("admin/manageDoctors.php"));
         }else {
           exit("Error occur while performing deletion");
         }
       }
       else {
         // echo "cancel button pressed";
-        redirectTo(urlFor("admin/managePatients.php"));
+        redirectTo(urlFor("admin/manageDoctors.php"));
       }
     }
 
-    // print_array($patients);
+    // print_array($doctors);
     // exit;
 ?>
 
@@ -45,7 +45,7 @@
   </head>
   <body>
     <h1>Are You Sure?</h1>
-    <form action="<?php echo $_SERVER["SCRIPT_NAME"]."?patient_id=".$patient->getId(); ?>" method="post">
+    <form action="<?php echo $_SERVER["SCRIPT_NAME"]."?doctor_id=".$doctor->getId(); ?>" method="post">
         <input type="submit" name="confirm" value="confirm">
         <input type="submit" name="cancel" value="cancel">
 
