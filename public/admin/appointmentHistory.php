@@ -3,7 +3,7 @@
     require_admin_login();  // this page will access only when doctor is logged in
 
     // exit($doctor_id);
-    $appointments = Appointment::find_all_scheduled_appointments();
+    $appointments = Appointment::find_all_appointments();
     if(!$appointments){
       exit("There are appointments");
     }

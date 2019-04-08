@@ -166,7 +166,7 @@ class Appointment
       $this->setDate($args[AppointmentTable::COLUMN_APPOINTMENT_DATE] ?? '');
       $this->setTime($args[AppointmentTable::COLUMN_APPOINTMENT_TIME] ?? '');
       $this->setStatus($args[AppointmentTable::COLUMN_STATUS] ??  Appointment::STATUS_NOT_CONFIRMED_BY_DOCTOR);
-      $this->setCreated_on($args[AppointmentTable::COLUMN_CREATED_ON] ?? '');
+      $this->setCreated_on($args[AppointmentTable::COLUMN_CREATED_ON] ?? null);
   }
 
 
