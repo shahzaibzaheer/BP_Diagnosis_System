@@ -14,7 +14,7 @@ class Admin {
     static private $db;
     private $errors;
 
-    function __construct($args){
+    function __construct($args=[]){
       $this->setId($args[AdminTable::COLUMN_ID] ?? '');
       $this->setUserName($args[AdminTable::COLUMN_USERNAME] ?? '');
       $this->setName($args[AdminTable::COLUMN_NAME] ?? '');
@@ -22,7 +22,11 @@ class Admin {
       $this->setGender($args[AdminTable::COLUMN_GENDER] ?? '');
       $this->setHashedPassword($args[AdminTable::COLUMN_HASHED_PASSWORD] ?? '');
       $this->setCreated_on($args[AdminTable::COLUMN_CREATED_ON] ?? '');
+      $this->setPassword($args['password'] ?? '');
+      $this->setConfirmPassword($args['confirmPassword'] ?? '');
     }
+
+
 
 
 /*** Database Related
@@ -151,6 +155,10 @@ class Admin {
 
 /******* Helper Functions
 ************************************/
+
+  public function getErrors(){
+    return $this->errors;
+  }
 
     private function create(){
       // first validate the data, if validation successfull then save data and return true
