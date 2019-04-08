@@ -29,7 +29,7 @@ class Patient {
       $this->setName($args[PatientTable::COLUMN_NAME] ?? '');
       $this->setUserName($args[PatientTable::COLUMN_USERNAME] ?? '');
       $this->setEmail($args[PatientTable::COLUMN_EMAIL] ?? '');
-      $this->setGender($args[PatientTable::COLUMN_GENDER] ?? 1);
+      $this->setGender($args[PatientTable::COLUMN_GENDER] ?? '');
       $this->setHashedPassword($args[PatientTable::COLUMN_HASHED_PASSWORD] ?? '');
       $this->setPhoneNumber($args[PatientTable::COLUMN_PHONE] ?? '');
       $this->setAddress($args[PatientTable::COLUMN_ADDRESS] ?? '');
@@ -123,7 +123,21 @@ class Patient {
       return false;
     }
   }
-
+  static public function find_all_patients(){
+   $queryString  = "SELECT * FROM ".PatientTable::TABLE_NAME;
+   $stmt = Patient::$db->prepare($queryString);
+   $stmt->execute();
+   $patients = [];
+   // we want to return prescription objects
+   while($patientAssoc = $stmt->fetch(PDO::FETCH_ASSOC)){
+     $patients[]= new self($patientAssoc);
+   }
+   if(!empty($patients)){
+     return $patients;
+   }else{
+     return false;
+   }
+  }
 
 
 

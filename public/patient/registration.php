@@ -55,6 +55,11 @@ if(isPatientLoggedIn()){
         <label for="">Address: </label>
         <input type="text" name="<?php echo PatientTable::COLUMN_ADDRESS ?>" value="<?php echo $patient->getAddress(); ?>" >
       </div>
+      <div>
+        <label for="">Gender: </label>
+        <input type="radio" name="<?php echo PatientTable::COLUMN_GENDER; ?>" value="male" checked> Male
+        <input type="radio" name="<?php echo PatientTable::COLUMN_GENDER; ?>" value="female"> Female
+      </div>
       <div class="">
         <label for="">Date of birth: </label>
         <input type="date" name="<?php echo PatientTable::COLUMN_DATE_OF_BITRH ?>" value="<?php echo $patient->getDOB(); ?>" >
