@@ -31,6 +31,16 @@
     public const   COLUMN_DATE_OF_BITRH = "dob";
     public const   COLUMN_CREATED_ON = "created_on";
   }
+  class AdminTable{
+    public const   TABLE_NAME = "admins";
+    public const   COLUMN_ID = "id";
+    public const   COLUMN_USERNAME = "username";
+    public const   COLUMN_NAME = "name";
+    public const   COLUMN_EMAIL = "email";
+    public const   COLUMN_GENDER = "gender"; // 1 male , 0 female
+    public const   COLUMN_HASHED_PASSWORD = "hashedPassword";
+    public const   COLUMN_CREATED_ON = "created_on";
+  }
   class DoctorTable{
     public const   TABLE_NAME = "doctors";
     public const   COLUMN_ID = "id";

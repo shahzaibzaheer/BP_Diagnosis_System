@@ -18,6 +18,7 @@
     require_once('functions.php');
     require_once('model/patient.class.php');
     require_once('model/doctor.class.php');
+    require_once('model/admin.class.php');
     require_once('model/prescription.class.php');
     require_once('model/replay.class.php');
     require_once('model/appointment.class.php');
@@ -28,6 +29,7 @@
     Doctor::setDatabase($db);
     Replay::setDatabase($db);
     Appointment::setDatabase($db);
+    Admin::setDatabase($db);
 
 
 
