@@ -117,6 +117,23 @@ class Appointment
        return false;
      }
    }
+   static public function find_all_scheduled_appointments(){
+     $queryString  = "SELECT * FROM ".AppointmentTable::TABLE_NAME." ";
+     $queryString .= "WHERE ".AppointmentTable::COLUMN_DOCTOR_ID." IS NOT NULL";
+     $stmt = Appointment::$db->prepare($queryString);
+     $stmt->execute();
+
+     $appointments = [];
+     // we want to return prescription objects
+     while($appointmentAssoc = $stmt->fetch(PDO::FETCH_ASSOC)){
+       $appointments[]= new self($appointmentAssoc);
+     }
+     if(!empty($appointments)){
+       return $appointments;
+     }else{
+       return false;
+     }
+   }
 
 
    public function getPatient(){
@@ -133,7 +150,7 @@ class Appointment
    }
    public function getDoctorName(){
      if(!$this->doctor){
-       return "No Doctor Linked with the post";
+       return "Null";
      }
      return $this->doctor->getName();
    }

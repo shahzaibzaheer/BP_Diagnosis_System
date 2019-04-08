@@ -14,6 +14,7 @@
     <a href="<?php echo urlFor("admin/doLogout.php"); ?>">Logout</a> <br>
     <a href="<?php echo urlFor("admin/managePatients.php"); ?>">Manange Patients</a> <br>
     <a href="<?php echo urlFor("admin/manageDoctors.php"); ?>">Manange Doctors</a> <br>
+    <a href="<?php echo urlFor("admin/appointmentHistory.php"); ?>">Appointment History</a> <br>
 
   </body>
 </html>
