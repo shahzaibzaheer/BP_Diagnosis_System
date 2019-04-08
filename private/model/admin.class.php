@@ -25,6 +25,17 @@ class Admin {
       $this->setPassword($args['password'] ?? '');
       $this->setConfirmPassword($args['confirmPassword'] ?? '');
     }
+    function bind_admin_data($args=[]){
+      $this->setId($args[AdminTable::COLUMN_ID] ?? '');
+      $this->setUserName($args[AdminTable::COLUMN_USERNAME] ?? '');
+      $this->setName($args[AdminTable::COLUMN_NAME] ?? '');
+      $this->setEmail($args[AdminTable::COLUMN_EMAIL] ?? '');
+      $this->setGender($args[AdminTable::COLUMN_GENDER] ?? '');
+      $this->setHashedPassword($args[AdminTable::COLUMN_HASHED_PASSWORD] ?? '');
+      $this->setCreated_on($args[AdminTable::COLUMN_CREATED_ON] ?? '');
+      $this->setPassword($args['password'] ?? '');
+      $this->setConfirmPassword($args['confirmPassword'] ?? '');
+    }
 
 
 
@@ -40,6 +51,7 @@ class Admin {
           throw new \Exception("Please pass valid database in Admin ");
         }
       }
+
 
 
       public function save(){
@@ -81,6 +93,54 @@ class Admin {
           return false;
         }
       }
+
+      public function login(){
+         $errors = $this->validateLoginCredentials();
+         if(!isContainErrors($errors))
+         {
+           // jb success full login ho jao to all pateirn informaiton ko fetch kr k patient ka object bana lo
+           return true; // login successfull
+         }
+         else {
+           $this->errors = $errors;
+           return false;
+         }
+       }
+
+       public function validateLoginCredentials(){
+         $errors = [];
+         if(!isValidEmailFormat($this->getEmail()))
+         {
+           $errors[AdminTable::COLUMN_EMAIL]="Please enter a valid Email address";
+         }
+         if(!hasPresence($this->getPassword())) {
+           $errors['password'] = "Password cannot be blank.";
+         }
+         if(!isset($errors[AdminTable::COLUMN_EMAIL]) && !isset($errors['password']))
+         {
+           // check email & password
+           if(!$this->isEmailAlreadyExists($this->getEmail()))
+           {
+             $errors['invalidCredantials'] = 'Email or Password is incorrect!';
+           }else{
+             // email exits, validate password
+             $admin = Admin::find_admin_by_email($this->getEmail());
+             if($admin)
+             {
+                 $isSuccess = password_verify($this->getPassword(), $admin[AdminTable::COLUMN_HASHED_PASSWORD]);
+                 if(!$isSuccess){
+                     $errors['invalidCredantials'] = 'Email or Password is incorrect!';
+                 }else {
+                   // patient login successfull , bind patient data
+                   $this->bind_admin_data($admin);
+                 }
+             }
+           }
+         }
+         return $errors;
+       }
+
+
 
 
 

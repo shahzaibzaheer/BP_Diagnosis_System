@@ -15,6 +15,12 @@ function require_doctor_login(){
       redirectTo(urlFor('doctor/login.php'));
   }
 }
+function require_admin_login(){
+  if(!isset($_SESSION[SessionContract::SESSION_ADMIN_ID])){
+      // redirect patient for login
+      redirectTo(urlFor('admin/login.php'));
+  }
+}
 function loggedInPatientId(){
   return $_SESSION[SessionContract::SESSION_PATIENT_ID];
 }
@@ -26,6 +32,10 @@ function isPatientLoggedIn(){
 }
 function isDoctorLoggedIn(){
   return isset($_SESSION[SessionContract::SESSION_DOCTOR_ID]);
+}
+
+function isAdminLoggedIn(){
+  return isset($_SESSION[SessionContract::SESSION_ADMIN_ID]);
 }
 function performLogout(){
   if(isset($_SESSION[SessionContract::SESSION_PATIENT_ID])){

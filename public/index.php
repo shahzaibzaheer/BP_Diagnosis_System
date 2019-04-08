@@ -22,6 +22,8 @@
         <a href="<?php echo urlFor('patient/login.php') ?>">Patient Login</a>
         <a href="<?php echo urlFor('patient/registration.php') ?>">Patient Registration</a> <br><br><br>
         <a href="<?php echo urlFor('doctor/login.php') ?>">Doctor Login</a>
-        <a href="<?php echo urlFor('doctor/registration.php') ?>">Doctor Registration</a>
+        <a href="<?php echo urlFor('doctor/registration.php') ?>">Doctor Registration</a><br><br><br>
+        <a href="<?php echo urlFor('admin/registration.php') ?>">Admin Registration</a>
+        <a href="<?php echo urlFor('admin/login.php') ?>">Admin Login</a>
   </body>
 </html>
