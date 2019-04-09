@@ -273,4 +273,10 @@ input[type="date" i] {
     font-size: 1.2em;
     text-transform: uppercase; }
 
+table.table a {
+  color: #9a0000; }
+  table.table a:hover {
+    text-decoration: none;
+    color: #710000; }
+
 /*# sourceMappingURL=main.css.map */

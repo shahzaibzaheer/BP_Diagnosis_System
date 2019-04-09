@@ -8,28 +8,22 @@
     }
     // print_array($prescriptions);
     // just print the data as in table format
+
+    require_once(getSharedFilePath('patient/header.php'));
+
 ?>
 
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title>My Prescriptions</title>
-    <style media="screen">
-      td,th{
-        padding: 8px 16px;
-      }
-    </style>
-  </head>
-  <body>
-    <h1>My Prescriptions</h1>
-    <table>
+    <section class="main_content  mb-4">
+      <h1>My Prescriptions</h1>
+    <table  class="mt-5 table table-responsive" >
       <thead>
         <tr>
           <th>Subject</th>
           <th>Status</th>
           <th>BP Reading</th>
           <th>Created On</th>
+          <th></th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
@@ -45,6 +39,6 @@
         <?php endforeach; ?>
       </tbody>
     </table>
+  </section>
 
-  </body>
-</html>
+<?php     require_once(getSharedFilePath('patient/footer.php')); ?>

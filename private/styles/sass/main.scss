@@ -399,6 +399,13 @@ input[type="date" i] {
 
 
 
+
+
+
+
+
+//************************* Button
+
  .btn.btn-primary{
    background: $primary_color;
    font-size: 1.2em;
@@ -412,3 +419,19 @@ input[type="date" i] {
    }
 
  }
+
+
+
+
+//**************** Table
+table.table{
+  a{
+    // font-size: 4em;
+    color: $primary_color;
+
+    &:hover{
+      text-decoration: none;
+      color: darken($primary_color,8);
+    }
+  }
+}
