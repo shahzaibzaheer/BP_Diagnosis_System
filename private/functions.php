@@ -87,6 +87,27 @@ function performLogout(){
       }
       return WWW_ROOT . $script_path;
   }
+  function getStylePath($stylesheet_name) {
+      // add the leading '/' if not present
+      if($stylesheet_name[0] != '/') {
+        $stylesheet_name = "/" . $stylesheet_name;
+      }
+      return STYLES_PATH . $stylesheet_name;
+  }
+  function getScriptPath($script_name) {
+      // add the leading '/' if not present
+      if($script_name[0] != '/') {
+        $script_name = "/" . $script_name;
+      }
+      return SCRIPTS_PATH . $script_name;
+  }
+  function getSharedFilePath($file_name) {
+      // add the leading '/' if not present
+      if($file_name[0] != '/') {
+        $file_name = "/" . $file_name;
+      }
+      return SHARED_PATH . $file_name;
+  }
 
   function redirectTo($url)  {
     header("Location: ".$url);

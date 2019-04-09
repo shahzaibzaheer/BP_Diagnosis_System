@@ -3,13 +3,18 @@
     define("PRIVATE_PATH", dirname(__FILE__));
     define("PROJECT_PATH", dirname(PRIVATE_PATH));
     define("PUBLIC_PATH", PROJECT_PATH . '/public');
-    // define("SHARED_PATH", PRIVATE_PATH . '/shared');
+    define("SHARED_PATH", PROJECT_PATH . '/private/shared');
 
 
     // $_SERVER['SCRIPT_NAME'] will return, /seoExchange/public/index.php , hum public k bad /index.php ko cut off kr rahy hain
     $public_end = strpos($_SERVER['SCRIPT_NAME'], '/public') + 7;
     $doc_root = substr($_SERVER['SCRIPT_NAME'], 0, $public_end);
-    define("WWW_ROOT", $doc_root);
+    define("WWW_ROOT", $doc_root); // WWW_ROOT is public directory
+
+    $project_end = strpos($_SERVER['SCRIPT_NAME'], '/BP_Diagnosis_System') + 20;
+    $project_root = substr($_SERVER['SCRIPT_NAME'], 0, $project_end);
+    define("STYLES_PATH", $project_root."/private/styles/css");
+    define("SCRIPTS_PATH", $project_root."/private/scripts");
 
 
 

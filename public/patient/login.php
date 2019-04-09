@@ -1,7 +1,7 @@
 <?php  require_once('../../private/initialize.php');
     // session_start();
     if(isPatientLoggedIn()){
-      redirectTo(urlFor('patient/patient_dashboard.php'));
+      redirectTo(urlFor('patient/index.php'));
     }
 
   if(isPostRequest()){
@@ -11,7 +11,7 @@
       // $_SESSION['patient_id'] = exit("patient id: ".$patient->getId());
       $_SESSION[SessionContract::SESSION_PATIENT_ID] = $patient->getId();
       // exit($_SESSION[SessionContract::SESSION_PATIETN_ID]);
-      redirectTo(urlFor('patient/patient_dashboard.php'));
+      redirectTo(urlFor('patient/index.php'));
     }
     else {
       // login filed.

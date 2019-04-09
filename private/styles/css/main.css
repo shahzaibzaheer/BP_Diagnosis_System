@@ -1,0 +1,250 @@
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: table; }
+
+* {
+  margin: 0;
+  padding: 0;
+  font-family: 'Roboto', sans-serif;
+  color: #333333; }
+
+.welcome_bar {
+  display: flex;
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 16px;
+  align-items: center;
+  justify-content: center; }
+  .welcome_bar p {
+    margin-top: 14px; }
+  .welcome_bar #welcome_drop_down_btn {
+    font-size: 1.3em;
+    padding: 10px;
+    box-sizing: border-box;
+    fill: #333333; }
+    .welcome_bar #welcome_drop_down_btn:hover {
+      cursor: pointer; }
+    .welcome_bar #welcome_drop_down_btn.open {
+      transform: rotate(180deg); }
+  .welcome_bar .popOver {
+    display: none;
+    background: #444;
+    position: absolute;
+    right: 12px;
+    top: 40px;
+    z-index: 100; }
+    .welcome_bar .popOver li {
+      list-style: none;
+      padding: 10px; }
+      .welcome_bar .popOver li:hover {
+        background: rgba(255, 255, 255, 0.2); }
+      .welcome_bar .popOver li a {
+        text-decoration: none;
+        color: white; }
+    .welcome_bar .popOver.popOver_open {
+      display: block; }
+
+.content {
+  display: flex; }
+
+.drawer {
+  position: relative;
+  font-weight: normal;
+  height: 100vh;
+  display: block;
+  box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2);
+  flex-basis: 350px; }
+  .drawer.drawer_collapse {
+    flex-basis: 0px; }
+    .drawer.drawer_collapse li {
+      padding-right: 16px; }
+      .drawer.drawer_collapse li a {
+        display: none; }
+  .drawer #drawer_icon {
+    font-size: 1.5em;
+    color: grey;
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 10px;
+    box-sizing: border-box; }
+    .drawer #drawer_icon:hover {
+      cursor: pointer; }
+  .drawer ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    padding-top: 58px; }
+  .drawer li {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 10px;
+    padding-right: 48px;
+    box-sizing: border-box;
+    position: relative; }
+    .drawer li::after {
+      display: inline-block;
+      content: "";
+      height: 1px;
+      width: 100%;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      background: rgba(51, 51, 51, 0.1); }
+    .drawer li a {
+      text-decoration: none;
+      color: #333333;
+      padding-left: 10px; }
+    .drawer li:hover {
+      cursor: pointer;
+      background: rgba(154, 0, 0, 0.2); }
+  .drawer .drawer_item_icon {
+    font-size: 1.4em;
+    text-align: center;
+    width: 24px;
+    height: 24px;
+    color: #9a0000; }
+  .drawer .item_selected {
+    background: rgba(154, 0, 0, 0.1); }
+
+.main_content {
+  width: 100%;
+  padding: 0 30px; }
+  .main_content h1 {
+    font-weight: lighter;
+    text-align: center;
+    margin-left: 24px;
+    margin-top: 64px; }
+
+.patient_dashboard {
+  width: 100%;
+  padding: 16px;
+  display: flex; }
+  .patient_dashboard .cards {
+    align-self: center;
+    flex-basis: 600px;
+    margin: 24px auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center; }
+  .patient_dashboard .card {
+    margin: 4px;
+    width: 180px;
+    height: 150px;
+    display: inline-block;
+    border-radius: 5px;
+    border: 1px solid rgba(51, 51, 51, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 10px; }
+    .patient_dashboard .card:hover {
+      background: rgba(154, 0, 0, 0.2);
+      cursor: pointer; }
+    .patient_dashboard .card .card_icon {
+      color: #9a0000;
+      font-size: 3em;
+      text-align: center;
+      display: flex;
+      justify-content: center;
+      align-items: center; }
+    .patient_dashboard .card a {
+      padding-top: 1.1em;
+      text-decoration: none;
+      font-size: 1.3em;
+      line-height: 1em;
+      font-weight: lighter;
+      color: #333333;
+      text-align: center; }
+
+.ask_for_prescription_form {
+  padding: 0 100px; }
+
+/* ==========================================================================
+   #FORM
+   ========================================================================== */
+input {
+  outline: none;
+  margin: 0;
+  border: none;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+  width: 100%;
+  font-size: 14px;
+  font-family: inherit; }
+
+.input-group {
+  position: relative;
+  margin-bottom: 30px;
+  border-bottom: 2px solid #ccc; }
+
+.input-icon {
+  position: absolute;
+  font-size: 18px;
+  color: #ccc;
+  right: 8px;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -moz-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  -o-transform: translateY(-50%);
+  transform: translateY(-50%);
+  cursor: pointer; }
+
+.input--style-1 {
+  padding: 9px 0;
+  color: #666; }
+
+.input--style-1:pleplaceholder {
+  /* WebKit, Blink, Edge */
+  color: #555; }
+
+/* ==========================================================================
+   #DATE PICKER
+   ========================================================================== */
+td.active {
+  background-color: #2c6ed5; }
+
+input[type="date" i] {
+  padding: 14px; }
+
+.table-condensed td, .table-condensed th {
+  font-size: 14px;
+  font-family: "Roboto", "Arial", "Helvetica Neue", sans-serif;
+  font-weight: 400; }
+
+.daterangepicker td {
+  width: 40px;
+  height: 30px; }
+
+.daterangepicker {
+  border: none;
+  -webkit-box-shadow: 0px 8px 20px 0px rgba(0, 0, 0, 0.15);
+  -moz-box-shadow: 0px 8px 20px 0px rgba(0, 0, 0, 0.15);
+  box-shadow: 0px 8px 20px 0px rgba(0, 0, 0, 0.15);
+  display: none;
+  border: 1px solid #e0e0e0;
+  margin-top: 5px; }
+
+.daterangepicker::after, .daterangepicker::before {
+  display: none; }
+
+.daterangepicker thead tr th {
+  padding: 10px 0; }
+
+.daterangepicker .table-condensed th select {
+  border: 1px solid #ccc;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  font-size: 14px;
+  padding: 5px;
+  outline: none; }
+
+/*# sourceMappingURL=main.css.map */
