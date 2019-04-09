@@ -30,16 +30,6 @@
           <div  class="input-group ml-4">
             <input class="input--style-1" type="number"  placeholder="BP HIGH " name="<?php echo PrescriptionTable::COLUMN_BP_HIGH; ?>" value="">
           </div>
-        </div>
-      <div>
-        <label for="">Headache: </label>
-        <input type="hidden" name="<?php echo PrescriptionTable::COLUMN_HEADACHE; ?>" value="0">
-        <input type="checkbox" name="<?php echo PrescriptionTable::COLUMN_HEADACHE;  ?>" value="1">
-      </div>
-      <div>
-        <label for="">Dizziness: </label>
-        <input type="hidden" name="<?php echo PrescriptionTable::COLUMN_DIZZINESS; ?>" value="0">
-        <input type="checkbox" name="<?php echo PrescriptionTable::COLUMN_DIZZINESS; ?>" value="1">
       </div>
       <div class="input-group">
         <input class="input--style-1" type="text" placeholder="Any Visual Changes" name="<?php echo PrescriptionTable::COLUMN_VISUAL_CHANGES; ?>" value="">
@@ -56,7 +46,20 @@
       <div class="input-group">
         <input class="input--style-1" type="text" placeholder="Other Info" name="<?php echo PrescriptionTable::COLUMN_OTHER_INFO; ?>" value="">
       </div>
-      <input type="submit" name="submit" value="post">
+      <div class="form-checkboxes">
+        <div class="form-checkbox">
+          <label for="">Headache </label>
+          <input  class="form-check-input" type="checkbox" name="<?php echo PrescriptionTable::COLUMN_HEADACHE;  ?>" value="1">
+          <input  class="form-check-input" type="hidden" name="<?php echo PrescriptionTable::COLUMN_HEADACHE; ?>" value="0">
+        </div>
+        <div class="form-checkbox">
+          <label for="">Dizziness </label>
+          <input  class="form-check-input" type="checkbox" name="<?php echo PrescriptionTable::COLUMN_DIZZINESS; ?>" value="1">
+          <input  class="form-check-input" type="hidden" name="<?php echo PrescriptionTable::COLUMN_DIZZINESS; ?>" value="0">
+        </div>
+      </div>
+
+      <input class="btn btn-primary" type="submit" name="submit" value="Send">
     </form>
   </section>
 

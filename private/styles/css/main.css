@@ -112,7 +112,8 @@
 
 .main_content {
   width: 100%;
-  padding: 0 30px; }
+  padding: 0 30px;
+  margin-bottom: 200px; }
   .main_content h1 {
     font-weight: lighter;
     text-align: center;
@@ -164,6 +165,20 @@
 
 .ask_for_prescription_form {
   padding: 0 100px; }
+  .ask_for_prescription_form .form-checkboxes {
+    padding: 0 24px;
+    margin-top: 16px;
+    margin-bottom: 24px; }
+  .ask_for_prescription_form .form-checkbox label {
+    color: rgba(51, 51, 51, 0.8);
+    padding: 0 4px; }
+  .ask_for_prescription_form .form-checkbox {
+    display: flex; }
+  .ask_for_prescription_form .form-check-input {
+    padding: 0 24px;
+    width: 18px;
+    height: 18px;
+    padding: 0; }
 
 /* ==========================================================================
    #FORM
@@ -246,5 +261,16 @@ input[type="date" i] {
   font-size: 14px;
   padding: 5px;
   outline: none; }
+
+.btn.btn-primary {
+  background: #9a0000;
+  font-size: 1.2em;
+  text-transform: uppercase;
+  outline: none;
+  border: 0 solid #000; }
+  .btn.btn-primary:hover {
+    background: #710000;
+    font-size: 1.2em;
+    text-transform: uppercase; }
 
 /*# sourceMappingURL=main.css.map */

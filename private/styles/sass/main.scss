@@ -193,6 +193,7 @@ $gutter_xxxl :  128px;
   // background: rgba(red, 0.1);
   width: 100%;
   padding: 0 30px;
+  margin-bottom: 200px;
   h1{
     font-weight: lighter;
     text-align: center;
@@ -263,6 +264,33 @@ $gutter_xxxl :  128px;
 
 .ask_for_prescription_form{
   padding: 0 100px;
+
+
+  .form-checkboxes{
+    padding: 0 $gutter_l;
+    margin-top: $gutter_s;
+    margin-bottom: $gutter_l;
+    // display: flex;
+
+  }
+  .form-checkbox label{
+    color: rgba($primary_text_color,0.8);
+    padding: 0 $gutter_xxs;
+  }
+
+  .form-checkbox{
+    display: flex;
+  }
+
+  .form-check-input{
+    padding: 0 $gutter_l;
+
+    width: 18px;
+    height: 18px;
+    padding: 0;
+    // margin: 2px 10px;
+    // align-self: center;
+  }
 }
 
 
@@ -368,3 +396,19 @@ input[type="date" i] {
   padding: 5px;
   outline: none;
 }
+
+
+
+ .btn.btn-primary{
+   background: $primary_color;
+   font-size: 1.2em;
+   text-transform: uppercase;
+   outline: none;
+   border: 0 solid #000;
+   &:hover{
+     background: darken($primary_color,8);
+     font-size: 1.2em;
+     text-transform: uppercase;
+   }
+
+ }
