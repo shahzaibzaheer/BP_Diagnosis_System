@@ -27,7 +27,7 @@
 
     <div class="content">
       <!-- drawer_collapse -->
-      <nav class="drawer clearfix">
+      <nav class="drawer drawer_collapse ">
          <i id="drawer_icon" class="fas fa-bars"></i>
          <ul>
          <li onclick="location.href='<?php echo urlFor("patient/index.php"); ?>';" class="item_selected">
