@@ -28,33 +28,39 @@
         exit("Appointment successfully Posted");
       }
     }
-?>
+    require_once(getSharedFilePath('patient/header.php'));
 
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title>Book Appointment</title>
-  </head>
-  <body>
+?>
+  <section class="main_content">
     <h1>Book Appointment</h1>
 
-      <form  action="<?php echo $_SERVER["SCRIPT_NAME"]; ?>" method="post">
-        <div>
-          <label>Select Doctor:</label>
-          <select name="<?php echo AppointmentTable::COLUMN_DOCTOR_ID; ?>">
-            <?php foreach ($doctors as $doctor): ?>
-              <option value="<?php echo $doctor->getId(); ?>">
-                <?php echo "Name: ".$doctor->getName().", Speciality: ".$doctor->getSpecialization().", Fees: ".$doctor->getFees(); ?>
-              </option>
-            <?php endforeach; ?>
-          </select>
-        </div>
-        <div >
-          <label>Your Problem:</label>
-          <input type="text" name="<?php echo AppointmentTable::COLUMN_PATIENT_PROBLEM; ?>" value="" required>
-        </div>
-        <input type="Submit" name="submit" value="Send Request">
-      </form>
-  </body>
-</html>
+    <form  class="mt-5 col col-sm-10 col-md-8 ml-auto mr-auto" action="<?php echo $_SERVER["SCRIPT_NAME"]; ?>" method="post">
+      <div class="form-group">
+        <label class="font-weight-bold">Select Doctor</label>
+        <select class="form-control" name="<?php echo AppointmentTable::COLUMN_DOCTOR_ID; ?>">
+          <?php foreach ($doctors as $doctor): ?>
+            <option  value="<?php echo $doctor->getId(); ?>">
+              <div class="doctor_detail_item">
+                <div class="">
+                  <?php echo $doctor->getName() . " (".$doctor->getSpecialization().")"; ?>
+                </div><br>
+
+              </div>
+            </option>
+          <?php endforeach; ?>
+        </select>
+      </div>
+      <div class="input-group">
+        <input  class="input--style-1" type="text" placeholder="Enter Your Problem" name="<?php echo AppointmentTable::COLUMN_PATIENT_PROBLEM; ?>" value="" required>
+      </div>
+
+
+      <input  class="btn btn-primary" type="Submit" name="submit" value="Send Request">
+    </form>
+  </section>
+
+
+
+
+
+<?php     require_once(getSharedFilePath('patient/footer.php')); ?>
