@@ -8,7 +8,7 @@
       <h1>Patient Dashboard</h1>
       <div class="patient_dashboard">
        <div class="cards">
-             <div href="#" class="card">
+             <div href="#" class="card" onclick="location.href='<?php echo urlFor("patient/profile.php"); ?>';">
                <i class="card_icon fas fa-user"></i>
                <a href="#">My Profile</a>
              </div>

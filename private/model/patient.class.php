@@ -77,7 +77,7 @@ class Patient {
       return $this->create();
     }else {
       // update the data
-      exit("update the Patient data");
+      return $this->update();
     }
   }
 
@@ -363,6 +363,43 @@ class Patient {
 
     }
 
+    private function update(){
+          // first validate the data, if validation successfull then save data and return true
+          // if validation fails, then return errors array
+          $errorsArray = $this->validateUpdation();
+          if(isContainErrors($errorsArray))
+          {
+            return false;
+          }else {
+            // build query string & update the data.
+            // exit("Now All the data is valid, it's time to Save Data to the database");
+            //  UPDATE `patients` SET `id` = NULL, `username` = '', `hashedPassword` = '', `dob` = '' WHERE `patients`.`id` = 1
+            $queryString  =  "UPDATE ".PatientTable::TABLE_NAME;
+            $queryString .=  " SET ".PatientTable::COLUMN_NAME." = :".PatientTable::COLUMN_NAME.", ";
+            $queryString .=  PatientTable::COLUMN_GENDER." = :".PatientTable::COLUMN_GENDER.", ";
+            $queryString .=  PatientTable::COLUMN_PHONE." = :".PatientTable::COLUMN_PHONE.", ";
+            $queryString .=  PatientTable::COLUMN_ADDRESS." = :".PatientTable::COLUMN_ADDRESS.", ";
+            $queryString .=  PatientTable::COLUMN_CITY." = :".PatientTable::COLUMN_CITY." ";
+            $queryString .=  " WHERE ".PatientTable::COLUMN_ID." = ".$this->getId()." ";
+
+            try{
+              $stmt = Patient::$db->prepare($queryString);
+              $stmt->execute([
+                PatientTable::COLUMN_NAME => $this->getName(),
+                PatientTable::COLUMN_GENDER => $this->getGender(),
+                PatientTable::COLUMN_PHONE => $this->getPhoneNumber(),
+                PatientTable::COLUMN_ADDRESS => $this->getAddress(),
+                PatientTable::COLUMN_CITY => $this->getCity()
+              ]);
+              return true;
+            }catch(Exception $e){
+              exit($e->getMessage());
+            }
+
+          }
+
+      }
+
   private function validate(){
      $errors = [];
 
@@ -434,7 +471,30 @@ class Patient {
      $this->errors = $errors;
      return $errors;
    }
+   private function validateUpdation(){
+      $errors = [];
 
+      if(!hasPresence($this->getName())){
+        $errors[PatientTable::COLUMN_NAME]='Patient name can\'t be blank';
+      }elseif (!has_length($this->getName(), array('min' => 2, 'max' => 30))) {
+        $errors[PatientTable::COLUMN_NAME] = "Patient name must be between 2 and 30 characters.";
+      }
+
+
+      if(!hasPresence($this->getPhoneNumber())){$errors[PatientTable::COLUMN_PHONE]= 'Phone Number can\'t be blank';}
+      elseif (!has_length($this->getPhoneNumber(), array('min' => 10))) {
+        $errors[PatientTable::COLUMN_PHONE] = "Please Enter a valid phone number";
+      }
+      if(!hasPresence($this->getAddress())){$errors[PatientTable::COLUMN_ADDRESS]= 'Address can\'t be blank';}
+      elseif (!has_length($this->getAddress(), array('min' => 20))) {
+        $errors[PatientTable::COLUMN_ADDRESS] = "Please enter complete address";
+      }
+
+      if(!hasPresence($this->getCity())){$errors[PatientTable::COLUMN_CITY]= 'City can\'t be blank';}
+
+      $this->errors = $errors;
+      return $errors;
+    }
   public function login(){
      $errors = $this->validateLoginCredentials();
      if(!isContainErrors($errors))
