@@ -33,8 +33,8 @@
             <td><?php echo $appointment->getDoctor()->getFees(); ?></td>
             <td><?php echo $appointment->getDate()."/".$appointment->getTime(); ?></td>
             <td><?php echo $appointment->getStatus(); ?></td>
-            <td> <a href="#">View</a> </td>
-            <td> <a href="<?php echo urlFor('patient/cancel_appointment.php?appointment_id='.$appointment->getId()); ?>">Cancel</a> </td>
+            <!-- <td> <a href="#">View</a> </td> -->
+            <!-- <td> <a href="<?php echo urlFor('patient/cancel_appointment.php?appointment_id='.$appointment->getId()); ?>">Cancel</a> </td> -->
 
           </tr>
         <?php endforeach; ?>

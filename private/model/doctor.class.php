@@ -27,7 +27,7 @@ class Doctor
 
 
 
-    function __construct($args){
+    function __construct($args =[]){
             $this->setId($args[DoctorTable::COLUMN_ID] ?? '');
             $this->setUsername($args[DoctorTable::COLUMN_USERNAME] ?? '');
             $this->setName($args[DoctorTable::COLUMN_NAME] ?? '');
