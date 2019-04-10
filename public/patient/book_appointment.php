@@ -64,7 +64,7 @@
 
           <?php } ?>
       <div class="input-group">
-        <input  class="input--style-1" type="text" placeholder="Enter Your Problem" name="<?php echo AppointmentTable::COLUMN_PATIENT_PROBLEM; ?>" value="" required>
+        <input  class="input--style-1" type="text" placeholder="Enter Your Problem" name="<?php echo AppointmentTable::COLUMN_PATIENT_PROBLEM;  ?>" value="" required  >
       </div>
 
 

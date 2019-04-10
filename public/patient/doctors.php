@@ -12,7 +12,7 @@
       <div class="doctors-container">
         <div class="row d-flex justify-content-around  gutter grid-column-gap-1">
           <?php foreach ($doctors as $doctor): ?>
-            <div  class="card col-8 col-sm-5 col-md-4 text-center  " style="padding:0;">
+            <div  class="card col-8 col-sm-5 col-md-4 text-center  " style="padding:0;"  onclick="location.href='<?php echo urlFor('patient/doctor_detail.php')."?doctor_id=".$doctor->getId(); ?>';">
               <img class="card-img img-fluid" src="../../private/shared/assets/default_img.png" alt="">
               <h5 class="card-title text-uppercase"><?php echo $doctor->getName(); ?></h5>
               <div class="card-subtitle"><?php echo $doctor->getQualification(); ?></div>
