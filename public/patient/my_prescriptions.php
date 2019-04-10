@@ -34,7 +34,7 @@
               <td><?php echo $prescription->getBpLow()." low, ".$prescription->getBpHigh()." high"; ?></td>
               <td><?php echo $prescription->getCreatedOn(); ?></td>
               <td> <a href="<?php echo urlFor("patient/my_prescription_detail.php?prescription_id=".$prescription->getPrescriptionId()) ?>">View</a> </td>
-              <td> <a href="#">Cancel</a> </td>
+              <!-- <td> <a href="#">Cancel</a> </td> -->
             </tr>
         <?php endforeach; ?>
       </tbody>

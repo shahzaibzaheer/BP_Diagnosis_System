@@ -282,7 +282,78 @@ table.table a {
     text-decoration: none;
     color: #710000; }
 
-/****************** General Style
+/****************** Messages
 *************************************************/
+.message_container {
+  position: relative;
+  overflow: hidden; }
+
+.replay-box {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  padding: 0 30px; }
+  .replay-box form {
+    display: flex;
+    align-items: center; }
+    .replay-box form input[type="text"] {
+      flex-grow: 1;
+      padding: 20px; }
+    .replay-box form button[type="submit"] {
+      flex-grow: 0;
+      flex-basis: 100px; }
+      .replay-box form button[type="submit"] i {
+        color: #fff; }
+
+.messages-wrapper {
+  height: 80vh;
+  overflow: auto;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  padding-top: 10px;
+  padding-bottom: 300px;
+  position: relative; }
+
+.message {
+  border-radius: 20px 20px 20px 20px;
+  padding: 15px 20px;
+  margin: 50px 10px;
+  position: relative; }
+
+.message.to {
+  background-color: #666;
+  color: #fff;
+  margin-left: 30%;
+  border-bottom-right-radius: 0px; }
+  .message.to .meta-info {
+    position: absolute;
+    color: rgba(0, 0, 0, 0.7);
+    bottom: -40px;
+    right: 0px; }
+    .message.to .meta-info b {
+      color: rgba(0, 0, 0, 0.6); }
+  .message.to p, .message.to b, .message.to i, .message.to div, .message.to span {
+    color: #fff; }
+  .message.to b {
+    font-weight: 500; }
+
+.message.from {
+  background-color: #E5E4E9;
+  color: #363636;
+  margin-right: 80px;
+  border-bottom-left-radius: 0px; }
+  .message.from .meta-info {
+    position: absolute;
+    color: rgba(0, 0, 0, 0.7);
+    bottom: -40px;
+    left: 0px; }
+    .message.from .meta-info b {
+      color: rgba(0, 0, 0, 0.6); }
+
+.message.to + .message.to,
+.message.from + .message.from {
+  margin-top: -7px; }
 
 /*# sourceMappingURL=main.css.map */
