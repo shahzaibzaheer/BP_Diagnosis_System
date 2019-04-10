@@ -8,7 +8,8 @@
       $prescription = new Prescription($_POST);
       $prescription->setPatientId(loggedInPatientId());
       if($prescription->save()){
-        exit("Prescription Successfully Posted");
+        // exit("Prescription Successfully Posted");
+        redirectTo(urlFor("patient/my_prescriptions.php"));
       }else {
         print_array($prescription->getErrors());
       }

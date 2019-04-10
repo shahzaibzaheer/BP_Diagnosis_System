@@ -28,9 +28,9 @@
                <i class="card_icon fas fa-history"></i>
                <a href="#">Appointment History</a>
              </div>
-             <div class="card">
+             <div class="card" onclick="location.href='<?php echo urlFor("patient/doctors.php"); ?>';">
                <i class="card_icon fas fa-user-md"></i>
-               <a href="#" class="">Doctors</a>
+               <a >Doctors</a>
              </div>
          </div>
       </div>

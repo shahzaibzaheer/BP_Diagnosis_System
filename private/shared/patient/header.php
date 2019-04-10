@@ -19,7 +19,7 @@
       <div class="welcome_bar">
         <p>Welcome <?php echo $patient->getName(); ?> </p><i id="welcome_drop_down_btn" class="fas fa-caret-down"></i>
         <ul class="popOver">
-          <li> <a href="#">My Profile</a> </li>
+          <li> <a href="<?php echo urlFor("patient/profile.php"); ?>">My Profile</a> </li>
           <li> <a href="#">Change Password</a> </li>
           <li> <a href="<?php echo urlFor("patient/doLogout.php"); ?>">Logout</a> </li>
         </ul>
@@ -34,7 +34,7 @@
            <i class="drawer_item_icon fas fa-home"></i>
            <a>Dashbard</a>
          </li>
-         <li onclick="location.href='';">
+         <li  onclick="location.href='<?php echo urlFor("patient/doctors.php"); ?>';">
            <i  class="drawer_item_icon fas fa-user-md"></i>
            <a>Doctors</a>
          </li>
@@ -58,7 +58,7 @@
            <i class="drawer_item_icon fas fa-receipt"></i>
            <a>View Report</a>
          </li>
-         <li onclick="location.href='';">
+         <li onclick="location.href='<?php echo urlFor("patient/profile.php"); ?>';">
            <i class="drawer_item_icon fas fa-user"></i>
            <a>My Profile</a>
          </li>
