@@ -27,6 +27,7 @@
     require_once('model/prescription.class.php');
     require_once('model/replay.class.php');
     require_once('model/appointment.class.php');
+    require_once('model/review.class.php');
 
     $db = dbConnect();
     Patient::setDatabase($db);
@@ -35,6 +36,7 @@
     Replay::setDatabase($db);
     Appointment::setDatabase($db);
     Admin::setDatabase($db);
+    Review::setDatabase($db);
 
 
 

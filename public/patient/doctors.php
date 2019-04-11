@@ -8,7 +8,6 @@
 
   <section class="main_content">
     <h1>Doctors</h1>
-
       <div class="doctors-container">
         <div class="row d-flex justify-content-around  gutter grid-column-gap-1 col-md-12 mx-auto">
           <?php foreach ($doctors as $doctor): ?>

@@ -95,4 +95,14 @@
     public const COLUMN_STATUS ="status";
     public const COLUMN_CREATED_ON ="created_on";
   }
+  class ReviewTable{
+    public const  TABLE_NAME = "reviews";
+    public const COLUMN_ID ="id";
+    public const COLUMN_RATING ="rating";
+    public const COLUMN_PATIENT_ID ="patient_id";
+    public const COLUMN_DOCTOR_ID ="doctor_id";
+    public const COLUMN_SUBJECT ="subject";
+    public const COLUMN_MESSAGE ="message";
+    public const COLUMN_CREATED_ON ="created_on";
+  }
 ?>
