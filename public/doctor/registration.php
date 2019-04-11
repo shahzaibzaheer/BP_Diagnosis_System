@@ -22,75 +22,71 @@
 
 
 
+
+
+
+
+
+
+
+    require_once(getSharedFilePath('main/login_registration_header.php'));
 ?>
 
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title>Doctor Registration</title>
-  </head>
-  <body>
-    <form action="<?php echo $_SERVER['SCRIPT_NAME']; ?>" method="post">
-      <div >
-              <label for="">Name: </label>
-              <input type="text" name="<?php echo DoctorTable::COLUMN_NAME ?>" value="<?php echo $doctor->getName(); ?>" >
-      </div>
-      <div >
-              <label for="">Email: </label>
-              <input type="email" name="<?php echo DoctorTable::COLUMN_EMAIL ?>" value="<?php echo $doctor->getEmail(); ?>" >
-      </div>
-      <div >
-              <label for="">Username: </label>
-              <input type="text" name="<?php echo DoctorTable::COLUMN_USERNAME ?>" value="<?php echo $doctor->getUserName(); ?>" >
-      </div>
-      <div >
-              <label for="">Phone: </label>
-              <input type="text" name="<?php echo DoctorTable::COLUMN_PHONE ?>" value="<?php echo $doctor->getPhone(); ?>" >
-      </div>
-      <div >
-              <label for="">Clinic Address: </label>
-              <input type="text" name="<?php echo DoctorTable::COLUMN_ADDRESS ?>" value="<?php echo $doctor->getAddress(); ?>" >
-      </div>
-      <div >
-              <label for="">City: </label>
-              <input type="text" name="<?php echo DoctorTable::COLUMN_CITY ?>" value="<?php echo $doctor->getCity(); ?>" >
-      </div>
-      <div>
-        <label for="">Gender: </label>
-        <input type="radio" name="<?php echo DoctorTable::COLUMN_GENDER; ?>" value="male" checked> Male
-        <input type="radio" name="<?php echo DoctorTable::COLUMN_GENDER; ?>" value="female"> Female
-      </div>
-      <div class="">
-        <label for="">Date of birth: </label>
-        <input type="date" name="<?php echo DoctorTable::COLUMN_DATE_OF_BITRH ?>" value="<?php echo $doctor->getDob(); ?>" >
-      </div>
-      <div >
-              <label for="">Specialization: </label>
-              <input type="text" name="<?php echo DoctorTable::COLUMN_SPECIALIZATION ?>" value="<?php echo $doctor->getSpecialization(); ?>" >
-      </div>
-      <div >
-              <label for="">Qualification: </label>
-              <input type="text" name="<?php echo DoctorTable::COLUMN_QUALIFICATION ?>" value="<?php echo $doctor->getQualification(); ?>" >
-      </div>
-      <div >
-              <label for="">About: </label>
-              <input type="text" name="<?php echo DoctorTable::COLUMN_ABOUT ?>" value="<?php echo $doctor->getAbout(); ?>" >
-      </div>
-      <div >
-              <label for="">Fees: </label>
-              <input type="number" name="<?php echo DoctorTable::COLUMN_FEES ?>" value="<?php echo $doctor->getFees(); ?>" >
-      </div>
-      <div class="">
-        <label for="">Password: </label>
-        <input type="password" name="password" value="" >
-      </div>
-      <div class="">
-        <label for="">Confirm Password: </label>
-        <input type="password" name="confirmPassword" value="" >
-      </div>
-      <input type="submit" name="submit" value="Register">
-    </form>
+        <div class="login_registration_container mt-5">
+          <div class="login-form col-4 mx-auto">
+              <form action="<?php echo $_SERVER['SCRIPT_NAME']; ?>" method="post">
+                  <h2 class="text-center mb-4">Doctor Registration</h2>
+                  <div class="form-group" >
+                          <input class="form-control" placeholder="Name" type="text" name="<?php echo DoctorTable::COLUMN_NAME ?>" value="<?php echo $doctor->getName(); ?>" >
+                  </div>
+                  <div class="form-group" >
+                          <input class="form-control" placeholder="Email" type="email" name="<?php echo DoctorTable::COLUMN_EMAIL ?>" value="<?php echo $doctor->getEmail(); ?>" >
+                  </div>
+                  <div class="form-group" >
+                          <input class="form-control" placeholder="Username" type="text" name="<?php echo DoctorTable::COLUMN_USERNAME ?>" value="<?php echo $doctor->getUserName(); ?>" >
+                  </div>
+                  <div class="form-group" >
+                          <input class="form-control" placeholder="Phone Number" type="text" name="<?php echo DoctorTable::COLUMN_PHONE ?>" value="<?php echo $doctor->getPhone(); ?>" >
+                  </div>
+                  <div class="form-group" >
+                          <input class="form-control" placeholder="Address" type="text" name="<?php echo DoctorTable::COLUMN_ADDRESS ?>" value="<?php echo $doctor->getAddress(); ?>" >
+                  </div>
+                  <div class="form-group" >
+                          <input class="form-control" placeholder="City" type="text" name="<?php echo DoctorTable::COLUMN_CITY ?>" value="<?php echo $doctor->getCity(); ?>" >
+                  </div>
+                  <div class="form-group">
+                    <select class="form-control" name="<?php echo DoctorTable::COLUMN_GENDER; ?>">
+                      <option value="male">Male</option>
+                      <option value="female">Female</option>
+                    </select>
+                  </div>
+                  <div class="form-group" >
+                    <input class="form-control" type="date" name="<?php echo DoctorTable::COLUMN_DATE_OF_BITRH ?>" value="<?php echo $doctor->getDob(); ?>" >
+                  </div>
+                  <div class="form-group" >
+                          <input class="form-control" placeholder="Specialization" type="text" name="<?php echo DoctorTable::COLUMN_SPECIALIZATION ?>" value="<?php echo $doctor->getSpecialization(); ?>" >
+                  </div>
+                  <div class="form-group" >
+                          <input class="form-control" placeholder="Qualification" type="text" name="<?php echo DoctorTable::COLUMN_QUALIFICATION ?>" value="<?php echo $doctor->getQualification(); ?>" >
+                  </div>
+                  <div class="form-group" >
+                          <input class="form-control" placeholder="About" type="text" name="<?php echo DoctorTable::COLUMN_ABOUT ?>" value="<?php echo $doctor->getAbout(); ?>" >
+                  </div>
+                  <div class="form-group" >
+                          <input class="form-control" placeholder="Fees" type="number" name="<?php echo DoctorTable::COLUMN_FEES ?>" value="<?php echo $doctor->getFees(); ?>" >
+                  </div>
+                  <div class="form-group" >
+                    <input class="form-control" placeholder="Password" type="password" name="password" value="" >
+                  </div>
+                  <div class="form-group" >
+                    <input class="form-control" placeholder="Confirm Password" type="password" name="confirmPassword" value="" >
+                  </div>
+                <a href="#" class=" pull-right">Forgot Password?</a>
+              </form>
+              <p class="text-center">Already Registered ?<a href="<?php echo urlFor('doctor/login.php'); ?>"> Log In</a></p>
+          </div>
+        </div>
 
-  </body>
-</html>
+
+    </body>
+  </html>

@@ -46,7 +46,7 @@
               <i class="main-card-icon fas fa-user-md"></i>
               <div class="card-body">
                 <h4 class="card-title">Doctor</h4>
-                <a href="#">Click Here</a>
+                <a href="<?php echo urlFor('doctor/login.php'); ?>">Click Here</a>
               </div>
             </div>
             <div class="card h-100 col-lg-4 col-sm-5">
@@ -58,8 +58,6 @@
             </div>
           </div>
           <!-- /.row -->
-
-
        </div>
 
 <?php require_once(getSharedFilePath('main/footer.php'));  ?>

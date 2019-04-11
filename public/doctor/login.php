@@ -19,32 +19,35 @@
     }
     else {
       // login filed.
-      exit("Login failed");
+      // exit("Login failed");
       print_array($doctor->getErrors());
     }
 
    }
+   require_once(getSharedFilePath('main/login_registration_header.php'));
 
 ?>
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title>Doctor Login</title>
-  </head>
-  <body>
-    <h1>Doctor Login</h1>
-    <form action="<?php echo $_SERVER['SCRIPT_NAME']; ?>" method="post">
-      <div>
-        <label for="">Email: </label>
-        <input type="email" name="<?php echo DoctorTable::COLUMN_EMAIL ?>" value="" >
-      </div>
-      <div>
-        <label for="">Passwrod: </label>
-        <input type="password" name="password">
-      </div>
-      <input type="submit" name="submit" value="Log in">
-    </form>
 
-  </body>
+
+<div class="login_registration_container mt-5">
+  <div class="login-form col-4 mx-auto">
+      <form action="<?php echo $_SERVER['SCRIPT_NAME']; ?>" method="post">
+          <h2 class="text-center mb-4">Doctor Login</h2>
+          <div class="form-group">
+              <input type="text" name="<?php echo DoctorTable::COLUMN_EMAIL ?>" class="form-control" placeholder="Email" required="required">
+          </div>
+          <div class="form-group">
+              <input type="password" name="password" class="form-control" placeholder="Password" required="required">
+          </div>
+          <div class="form-group">
+              <button type="submit" class="btn btn-primary btn-block">Log in</button>
+          </div>
+          <div class="clearfix">
+              <a href="#" class=" pull-right">Forgot Password?</a>
+          </div>
+      </form>
+      <p class="text-center"><a href="<?php echo urlFor('doctor/registration.php'); ?>">Create an Account</a></p>
+  </div>
+</div>
+</body>
 </html>
