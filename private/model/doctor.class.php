@@ -84,7 +84,8 @@ class Doctor
         return $this->create();
       }else {
         // update the data
-        exit("update the Doctor data");
+        // exit("update the Doctor data");
+        return $this->update();
       }
     }
 
@@ -367,6 +368,85 @@ class Doctor
           }
         }
     }
+
+    private function update(){
+          // first validate the data, if validation successfull then save data and return true
+          // if validation fails, then return errors array
+          $errorsArray = $this->validateUpdation();
+          if(isContainErrors($errorsArray))
+          {
+            return false;
+          }else {
+            // build query string & update the data.
+            // exit("Now All the data is valid, it's time to Save Data to the database");
+            //  UPDATE `patients` SET `id` = NULL, `username` = '', `hashedPassword` = '', `dob` = '' WHERE `patients`.`id` = 1
+            $queryString  =  "UPDATE ".DoctorTable::TABLE_NAME;
+            $queryString .=  " SET ".DoctorTable::COLUMN_NAME." = :".DoctorTable::COLUMN_NAME.", ";
+            $queryString .=  DoctorTable::COLUMN_GENDER." = :".DoctorTable::COLUMN_GENDER.", ";
+            $queryString .=  DoctorTable::COLUMN_PHONE." = :".DoctorTable::COLUMN_PHONE.", ";
+            $queryString .=  DoctorTable::COLUMN_ADDRESS." = :".DoctorTable::COLUMN_ADDRESS.", ";
+            $queryString .=  DoctorTable::COLUMN_SPECIALIZATION." = :".DoctorTable::COLUMN_SPECIALIZATION.", ";
+            $queryString .=  DoctorTable::COLUMN_QUALIFICATION." = :".DoctorTable::COLUMN_QUALIFICATION.", ";
+            $queryString .=  DoctorTable::COLUMN_ABOUT." = :".DoctorTable::COLUMN_ABOUT.", ";
+            $queryString .=  DoctorTable::COLUMN_FEES." = :".DoctorTable::COLUMN_FEES.", ";
+            $queryString .=  DoctorTable::COLUMN_CITY." = :".DoctorTable::COLUMN_CITY." ";
+            $queryString .=  " WHERE ".DoctorTable::COLUMN_ID." = ".$this->getId()." ";
+
+            try{
+              $stmt = Doctor::$db->prepare($queryString);
+              $stmt->execute([
+                DoctorTable::COLUMN_NAME => $this->getName(),
+                DoctorTable::COLUMN_GENDER => $this->getGender(),
+                DoctorTable::COLUMN_PHONE => $this->getPhone(),
+                DoctorTable::COLUMN_ADDRESS => $this->getAddress(),
+                DoctorTable::COLUMN_SPECIALIZATION => $this->getSpecialization(),
+                DoctorTable::COLUMN_QUALIFICATION => $this->getQualification(),
+                DoctorTable::COLUMN_ABOUT => $this->getAbout(),
+                DoctorTable::COLUMN_FEES => $this->getFees(),
+                DoctorTable::COLUMN_CITY => $this->getCity()
+              ]);
+              return true;
+            }catch(Exception $e){
+              exit($e->getMessage());
+            }
+
+          }
+
+      }
+
+
+
+      private function validateUpdation(){
+        $errors = [];
+
+        if(!hasPresence($this->getName())){
+          $errors[DoctorTable::COLUMN_NAME]='Doctor name can\'t be blank';
+        }elseif (!has_length($this->getName(), array('min' => 2, 'max' => 30))) {
+          $errors[DoctorTable::COLUMN_NAME] = "Doctor name must be between 2 and 30 characters.";
+        }
+
+
+        if(!hasPresence($this->getPhone())){$errors[DoctorTable::COLUMN_PHONE]= 'Phone Number can\'t be blank';}
+        elseif (!has_length($this->getPhone(), array('min' => 10))) {
+          $errors[DoctorTable::COLUMN_PHONE] = "Please Enter a valid phone number";
+        }
+        if(!hasPresence($this->getAddress())){$errors[DoctorTable::COLUMN_ADDRESS]= 'Address can\'t be blank';}
+        elseif (!has_length($this->getAddress(), array('min' => 20))) {
+          $errors[DoctorTable::COLUMN_ADDRESS] = "Please enter complete address";
+        }
+
+        if(!hasPresence($this->getCity())){$errors[DoctorTable::COLUMN_CITY]= 'City can\'t be blank';}
+        if(!hasPresence($this->getSpecialization())){$errors[DoctorTable::COLUMN_CITY]= 'Specialization can\'t be blank';}
+        if(!hasPresence($this->getQualification())){$errors[DoctorTable::COLUMN_CITY]= 'Qualification can\'t be blank';}
+        if(!hasPresence($this->getAbout())){$errors[DoctorTable::COLUMN_CITY]= 'About can\'t be blank';}
+        if(!hasPresence($this->getFees())){$errors[DoctorTable::COLUMN_CITY]= 'Fees can\'t be blank';}
+
+        $this->errors = $errors;
+        return $errors;
+      }
+
+
+
     private function validate(){
      $errors = [];
 
