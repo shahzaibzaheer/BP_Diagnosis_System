@@ -31,32 +31,30 @@
       $appointment->setStatus(Appointment::STATUS_CONFIRMED_BY_DOCTOR);
       if($appointment->save()){
         // print_array($appointment); exit;
-        exit("Appointment successfully confirment");
+        // exit("Appointment successfully confirment");
+        redirectTo(urlFor('doctor/my_appointments.php'));
       }else{
         exit("Error, occur while saving appointment");
       }
 
     }
+    require_once(getSharedFilePath('doctor/header.php'));
 
 ?>
+    <section class="main_content">
+      <h1>Confirm Appointment</h1>
+      <form class="w-50 mx-auto mt-5" action="<?php echo $_SERVER["SCRIPT_NAME"]."?appointment_id=".$appointment->getId(); ?>" method="post">
+        <div class="form-group">
+          <label>Appointment Date</label>
+          <input  class="form-control" type="date" name="<?php echo AppointmentTable::COLUMN_APPOINTMENT_DATE; ?>" value="" required>
+        </div>
+        <div  class="form-group">
+          <label>Appointment Time</label>
+          <input  class="form-control" type="time" name="<?php echo AppointmentTable::COLUMN_APPOINTMENT_TIME; ?>" value="" required>
+        </div>
+        <input type="Submit"  class="btn btn-primary" name="submit" value="Confirm Appointment">
+      </form>
+    </section>
 
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title>Confirm Appointment</title>
-  </head>
-  <body>
-    <form action="<?php echo $_SERVER["SCRIPT_NAME"]."?appointment_id=".$appointment->getId(); ?>" method="post">
-      <div>
-        <label>Appointment Date</label>
-        <input type="date" name="<?php echo AppointmentTable::COLUMN_APPOINTMENT_DATE; ?>" value="" required>
-      </div>
-      <div>
-        <label>Appointment Time</label>
-        <input type="time" name="<?php echo AppointmentTable::COLUMN_APPOINTMENT_TIME; ?>" value="" required>
-      </div>
-      <input type="Submit" name="submit" value="Confirm Appointment">
-    </form>
-  </body>
-</html>
+
+<?php     require_once(getSharedFilePath('doctor/footer.php')); ?>
