@@ -81,6 +81,9 @@
                   <div class="form-group" >
                     <input class="form-control" placeholder="Confirm Password" type="password" name="confirmPassword" value="" >
                   </div>
+                  <div class="form-group">
+                      <button type="submit" class="btn btn-primary btn-block">Register</button>
+                  </div>
                 <a href="#" class=" pull-right">Forgot Password?</a>
               </form>
               <p class="text-center">Already Registered ?<a href="<?php echo urlFor('doctor/login.php'); ?>"> Log In</a></p>
