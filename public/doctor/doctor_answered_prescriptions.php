@@ -7,47 +7,31 @@
     exit("No prescription found");
   }
 
+    require_once(getSharedFilePath('doctor/header.php'));
 ?>
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title>My Answerd Prescritions</title>
-    <style media="screen">
-      *{
-        font-family: sans-serif;
-      }
-      th,td{
-        padding: 8px 16px;
-      }
-    </style>
-  </head>
-  <body>
-    <h1>My Answered Patient's Prescriptions</h1>
-    <table>
-        <tr>
-          <th>Patient Name</th>
-          <th>Patient Email</th>
-          <th>Prescription Subject</th>
-          <th>BP Reading</th>
-        </tr>
-        <?php foreach ($prescriptons as $prescription): ?>
+    <section class="main_content mb-4">
+      <h1>My Answered Prescriptions</h1>
+      <table  class="mt-5 table table-responsive">
+        <thead>
           <tr>
-            <td><?php echo $prescription->getPatientName(); ?></td>
-            <td><?php echo $prescription->getPatientEmail(); ?></td>
-            <td><?php echo $prescription->getSubject(); ?></td>
-            <td><?php echo $prescription->getBpLow()." Low, ".$prescription->getBpHigh()." High"; ?></td>
-            <td> <a href="<?php echo urlFor("doctor/prescription_detail.php?prescription_id=").$prescription->getPrescriptionId(); ?>">View</a> </td>
-            <td> <a href="<?php echo urlFor("doctor/prescription_detail.php?prescription_id=").$prescription->getPrescriptionId(); ?>">Replay</a> </td>
+            <th>Patient Name</th>
+            <th>Patient Email</th>
+            <th>Prescription Subject</th>
+            <th>BP Reading</th>
           </tr>
-        <?php endforeach; ?>
-        <!-- <tr>
-          <td>salman</td>
-          <td>salman@gmail.com</td>
-          <td>60 Low , 160 High</td>
-          <td> <a href="#">View</a> </td>
-          <td> <a href="#">Replay</a> </td>
-        </tr> -->
-    </table>
-  </body>
-</html>
+        </thead>
+        <tbody>
+          <?php foreach ($prescriptons as $prescription): ?>
+            <tr>
+              <td><?php echo $prescription->getPatientName(); ?></td>
+              <td><?php echo $prescription->getPatientEmail(); ?></td>
+              <td><?php echo $prescription->getSubject(); ?></td>
+              <td><?php echo $prescription->getBpLow()." Low, ".$prescription->getBpHigh()." High"; ?></td>
+              <td> <a href="<?php echo urlFor("doctor/prescription_detail.php?prescription_id=").$prescription->getPrescriptionId(); ?>">View</a> </td>
+            </tr>
+          <?php endforeach; ?>
+        </tbody>
+      </table>
+    </section>
+
+<?php     require_once(getSharedFilePath('doctor/footer.php')); ?>
