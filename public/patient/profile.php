@@ -16,7 +16,7 @@
 
       if($patient->save()){
         //login successfull
-        redirectTo(urlFor('patient/index.php'));
+        redirectTo(urlFor('patient/profile.php'));
       }else {
         // login failed, get errors array
         $errors = $patient->getErrors();
