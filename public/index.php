@@ -39,7 +39,7 @@
               <i class="main-card-icon fas fa-user-injured"></i>
               <div class="card-body">
                 <h4 class="card-title">Patient</h4>
-                <a href="#">Click Here</a>
+                <a href="<?php echo urlFor('patient/login.php'); ?>">Click Here</a>
               </div>
             </div>
             <div class="card h-100 col-lg-4 col-sm-5">
