@@ -6,7 +6,7 @@
     // exit;
     // session_start();
     if(isDoctorLoggedIn()){
-      redirectTo(urlFor('doctor/doctor_dashboard.php'));
+      redirectTo(urlFor('doctor/index.php'));
     }
 
     if(isPostRequest()){
@@ -15,7 +15,7 @@
       // print_array($doctor);
       // exit;
       $_SESSION[SessionContract::SESSION_DOCTOR_ID] = $doctor->getId();
-      redirectTo(urlFor('doctor/doctor_dashboard.php'));
+      redirectTo(urlFor('doctor/index.php'));
     }
     else {
       // login filed.
