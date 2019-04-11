@@ -84,7 +84,7 @@ class Doctor
         return $this->create();
       }else {
         // update the data
-        exit("update the Patient data");
+        exit("update the Doctor data");
       }
     }
 
