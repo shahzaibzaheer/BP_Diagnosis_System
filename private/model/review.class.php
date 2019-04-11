@@ -88,11 +88,184 @@ class Review
 
 
 
+      // SELECT COUNT(*) as 'total_ratings', SUM(rating) as 'rating_sum' FROM `reviews` WHERE doctor_id = '15';
+      private static function get_total_number_of_ratings($doctor_id){
+        $queryString  = "SELECT COUNT(*) as ".ReviewTable::COLUMN_TOTAL_RATINGS;
+        $queryString .= " FROM ".ReviewTable::TABLE_NAME." WHERE ".ReviewTable::COLUMN_DOCTOR_ID." = ?";
+        $stmt = Review::$db->prepare($queryString);
+        $stmt->execute([$doctor_id]);
+        $review = $stmt->fetch(PDO::FETCH_ASSOC);
+        if($review){
+          return $review[ReviewTable::COLUMN_TOTAL_RATINGS];
+        }
+        else {
+          return false;
+        }
+      }
+      private static function get_sum_of_ratings($doctor_id){
+        $queryString  = "SELECT SUM(rating) as ".ReviewTable::COLUMN_SUM_OF_RATINGS;
+        $queryString .= " FROM ".ReviewTable::TABLE_NAME." WHERE ".ReviewTable::COLUMN_DOCTOR_ID." = ?";
+        $stmt = Review::$db->prepare($queryString);
+        $stmt->execute([$doctor_id]);
+        $review = $stmt->fetch(PDO::FETCH_ASSOC);
+        if($review){
+          return $review[ReviewTable::COLUMN_SUM_OF_RATINGS];
+        }
+        else {
+          return false;
+        }
+      }
+
+      public static function get_average_doctor_rating($doctor_id){
+        return Review::get_sum_of_ratings($doctor_id)/Review::get_total_number_of_ratings($doctor_id);
+      }
+
+
+
+
+
+
+
+
+
+
 
 
   /********** Getters & Setters
   *********************************************/
 
+  public static function getRatingStars($rating = ""){
+
+
+    switch ($rating) {
+      case 1:
+      // by 1 star checked
+      return '<div class="static-rating-container disabled">
+        <fieldset class="rate">
+          <input id="rate1-star5" type="radio" name="rate1" value="5"  />
+          <label   for="rate1-star5" title="">5</label>
+
+          <input id="rate1-star4" type="radio" name="rate1" value="4"/>
+          <label  for="rate1-star4" title="">4</label>
+
+          <input id="rate1-star3" type="radio" name="rate1" value="3" />
+          <label  for="rate1-star3" title="">3</label>
+
+          <input id="rate1-star2" type="radio" name="rate1" value="2"/>
+          <label  for="rate1-star2" title="">2</label>
+
+          <input id="rate1-star1" type="radio" name="rate1" value="1" checked />
+          <label  for="rate1-star1" title="">1</label>
+        </fieldset>
+      </div>';
+
+      case 2:
+      // by 1 star checked
+      return '<div class="static-rating-container disabled">
+        <fieldset class="rate">
+          <input id="rate1-star5" type="radio" name="rate1" value="5"  />
+          <label   for="rate1-star5" title="">5</label>
+
+          <input id="rate1-star4" type="radio" name="rate1" value="4"/>
+          <label  for="rate1-star4" title="">4</label>
+
+          <input id="rate1-star3" type="radio" name="rate1" value="3" />
+          <label  for="rate1-star3" title="">3</label>
+
+          <input id="rate1-star2" type="radio" name="rate1" value="2" checked/>
+          <label  for="rate1-star2" title="">2</label>
+
+          <input id="rate1-star1" type="radio" name="rate1" value="1"  />
+          <label  for="rate1-star1" title="">1</label>
+        </fieldset>
+      </div>';
+
+
+      case 3:
+      // by 1 star checked
+      return '<div class="static-rating-container disabled">
+        <fieldset class="rate">
+          <input id="rate1-star5" type="radio" name="rate1" value="5"  />
+          <label   for="rate1-star5" title="">5</label>
+
+          <input id="rate1-star4" type="radio" name="rate1" value="4"/>
+          <label  for="rate1-star4" title="">4</label>
+
+          <input id="rate1-star3" type="radio" name="rate1" value="3" checked/>
+          <label  for="rate1-star3" title="">3</label>
+
+          <input id="rate1-star2" type="radio" name="rate1" value="2" />
+          <label  for="rate1-star2" title="">2</label>
+
+          <input id="rate1-star1" type="radio" name="rate1" value="1"  />
+          <label  for="rate1-star1" title="">1</label>
+        </fieldset>
+      </div>';
+      case 4:
+      // by 1 star checked
+      return '<div class="static-rating-container disabled">
+        <fieldset class="rate">
+          <input id="rate1-star5" type="radio" name="rate1" value="5"  />
+          <label   for="rate1-star5" title="">5</label>
+
+          <input id="rate1-star4" type="radio" name="rate1" value="4" checked/>
+          <label  for="rate1-star4" title="">4</label>
+
+          <input id="rate1-star3" type="radio" name="rate1" value="3" />
+          <label  for="rate1-star3" title="">3</label>
+
+          <input id="rate1-star2" type="radio" name="rate1" value="2" />
+          <label  for="rate1-star2" title="">2</label>
+
+          <input id="rate1-star1" type="radio" name="rate1" value="1"  />
+          <label  for="rate1-star1" title="">1</label>
+        </fieldset>
+      </div>';
+
+      case 5:
+      // by 1 star checked
+      return '<div class="static-rating-container disabled">
+        <fieldset class="rate">
+          <input id="rate1-star5" type="radio" name="rate1" value="5" checked/>
+          <label   for="rate1-star5" title="">5</label>
+
+          <input id="rate1-star4" type="radio" name="rate1" value="4"/>
+          <label  for="rate1-star4" title="">4</label>
+
+          <input id="rate1-star3" type="radio" name="rate1" value="3" />
+          <label  for="rate1-star3" title="">3</label>
+
+          <input id="rate1-star2" type="radio" name="rate1" value="2" />
+          <label  for="rate1-star2" title="">2</label>
+
+          <input id="rate1-star1" type="radio" name="rate1" value="1"  />
+          <label  for="rate1-star1" title="">1</label>
+        </fieldset>
+      </div>';
+
+      default:
+              // by default return, empty stars
+              return '<div class="static-rating-container disabled">
+                <fieldset class="rate">
+                  <input id="rate1-star5" type="radio" name="rate1" value="5"  />
+                  <label   for="rate1-star5" title="">5</label>
+
+                  <input id="rate1-star4" type="radio" name="rate1" value="4"/>
+                  <label  for="rate1-star4" title="">4</label>
+
+                  <input id="rate1-star3" type="radio" name="rate1" value="3" />
+                  <label  for="rate1-star3" title="">3</label>
+
+                  <input id="rate1-star2" type="radio" name="rate1" value="2"/>
+                  <label  for="rate1-star2" title="">2</label>
+
+                  <input id="rate1-star1" type="radio" name="rate1" value="1" />
+                  <label  for="rate1-star1" title="">1</label>
+                </fieldset>
+              </div>';
+    }
+
+  }
 
   public function getPatient(){
     return $this->patient;
@@ -124,6 +297,8 @@ class Review
        $this->patient_id = $patient_id ;
        $this->patient = Patient::find_patient_by_id($patient_id);
   }
+
+
 
 
   public function getDoctorId() {

@@ -2,23 +2,26 @@
 
 class Doctor
 {
-    public $id; //int
-    public $username; //String
-    public $name; //String
-    public $email; //String
-    public $gender; //boolean
-    public $hashedPassword; //String
+    private $id; //int
+    private $username; //String
+    private $name; //String
+    private $email; //String
+    private $gender; //boolean
+    private $hashedPassword; //String
     private $password;
     private $confirmPassword;
-    public $phone; //String
-    public $address; //String
-    public $city; //String
-    public $dob; //String
-    public $about; //String
-    public $specialization; //String
-    public $qualification; //String
-    public $fees; //int
-    public $created_on; //String
+    private $phone; //String
+    private $address; //String
+    private $city; //String
+    private $dob; //String
+    private $about; //String
+    private $specialization; //String
+    private $qualification; //String
+    private $fees; //int
+    private $created_on; //String
+
+    private $reviews; //String
+
 
 
     static private $db;
@@ -181,6 +184,8 @@ class Doctor
     }
     public function setId($id) {
          $this->id = $id;
+         $this->reviews = Review::find_reviews_by_doctor_id($id);
+
     }
 
     public function getUsername() {

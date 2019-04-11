@@ -1,4 +1,6 @@
 <?php  require_once('../../private/initialize.php');
+
+
     require_patient_login();
     // this page will access only when patient is logged in
     require_once(getSharedFilePath('patient/header.php'));
@@ -17,6 +19,7 @@
               <div class="card-subtitle"><?php echo $doctor->getQualification(); ?></div>
               <div class="card-subtitle"><?php echo $doctor->getSpecialization(); ?></div>
               <div class="card-subtitle">Fees: Rs <?php echo $doctor->getFees(); ?>/-</div>
+              <?php echo Review::getRatingStars((int) Review::get_average_doctor_rating($doctor->getId())); ?>
               <a class="btn btn-primary mt-2" href="<?php echo urlFor('patient/book_appointment.php')."?doctor_id=".$doctor->getId(); ?>">Book Appointment</a>
             </div>
           <?php endforeach; ?>

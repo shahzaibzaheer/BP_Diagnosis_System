@@ -104,5 +104,8 @@
     public const COLUMN_SUBJECT ="subject";
     public const COLUMN_MESSAGE ="message";
     public const COLUMN_CREATED_ON ="created_on";
+
+    public const COLUMN_TOTAL_RATINGS ="total_ratings";
+    public const COLUMN_SUM_OF_RATINGS ="sum_of_ratings";
   }
 ?>

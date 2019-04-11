@@ -50,8 +50,16 @@
           </div>
         </div>
       </div>
+      <section class="doctor-rating-holder">
+        <div class="average-rating-container card col-4">
+          <h4>Average Rating</h4>
+          <h2><?php echo Review::get_average_doctor_rating($doctor->getId()); ?> <span>/ 5 </span></h2>
+          <?php echo Review::getRatingStars((int) Review::get_average_doctor_rating($doctor->getId())); ?>
 
+        </div>
+      </section>
     </section>
+
 
 
 <?php     require_once(getSharedFilePath('patient/footer.php')); ?>

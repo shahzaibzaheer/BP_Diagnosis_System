@@ -1,3 +1,4 @@
+@import url("//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css");
 
 
 //***** Variables
@@ -869,3 +870,115 @@ table.table{
         font-size: 15px;
         font-weight: bold;
     }
+
+
+
+
+
+/******************** Rating
+**********************************************/
+.static-rating-container {
+
+  &.disabled {
+    pointer-events: none;
+    cursor: default;
+  }
+
+  text-align: center;
+
+  .rate {
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+    border: none;
+  }
+
+  input {
+    display: none;
+  }
+
+  label {
+    float: right;
+    font-size: 0;
+    color: #d9d9d9;
+  }
+
+  label:before {
+    content: "\f005";
+    font-family: FontAwesome;
+    font-size: 40px;
+  }
+
+  input:checked ,
+  input:checked ~ label {
+    color: #fcd000;
+    transition: 0.2s;
+  }
+}
+
+.rating-container {
+  text-align: center;
+
+  .rate {
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+    border: none;
+  }
+
+  input {
+    display: none;
+  }
+
+  label {
+    float: right;
+    font-size: 0;
+    color: #d9d9d9;
+  }
+
+  label:before {
+    content: "\f005";
+    font-family: FontAwesome;
+    font-size: 40px;
+  }
+
+  label:hover,
+  label:hover ~ label {
+    color: #fcd000;
+    transition: 0.2s;
+  }
+
+  input:checked ~ label {
+    color: #ccac00;
+  }
+
+  input:checked ~ label:hover,
+  input:checked ~ label:hover ~ label {
+    color: #fcd000;
+    transition: 0.2s;
+  }
+}
+
+
+.doctor-rating-holder{
+  background: pink;
+  display: block;
+  width: 100%;
+  height: 100vh;
+
+  .average-rating-container{
+    text-align: center;
+    h4{
+      font-weight: normal;
+    }
+    h2{
+      font-size: 2.5em;
+      span{
+        font-weight: normal;
+        font-size: 0.7em;
+      }
+    }
+    
+  }
+
+}
