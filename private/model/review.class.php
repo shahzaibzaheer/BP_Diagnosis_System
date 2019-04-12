@@ -15,6 +15,8 @@ class Review
     static private $db;
     private $errors;
 
+    private static $ratingId = 0;
+
     function __construct($args = []){
           $this->setId($args[ReviewTable::COLUMN_ID] ?? '');
           $this->setRating($args[ReviewTable::COLUMN_RATING] ?? '');
@@ -52,20 +54,20 @@ class Review
     }
 
     static public function find_reviews_by_doctor_id($doctor_id){
+      // SELECT * FROM reviews WHERE doctor_id = '15'
         $queryString  = "SELECT * FROM ".ReviewTable::TABLE_NAME." ";
-        $queryString .= "WHERE ".ReviewTable::COLUMN_ID." = ?";
+        $queryString .= "WHERE ".ReviewTable::COLUMN_DOCTOR_ID." = ?";
         $stmt = Review::$db->prepare($queryString);
         $stmt->execute([$doctor_id]);
-        $reviews = [];
-           // we want to return reviews objects
-           while($reviewAssoc = $stmt->fetch(PDO::FETCH_ASSOC)){
-             $reviews[]= new self($reviewAssoc);
-           }
-           if(!empty($reviews)){
-             return $reviews;
-           }else{
-             return false;
-           }
+        // $reviews = [];
+        $reviews  = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        // print_array($reviewsAssoc);exit;
+
+        if(!empty($reviews)){
+          return $reviews;
+        }else{
+          return false;
+        }
       }
 
     static public function find_review_by_patient_id($patient_id){
@@ -135,27 +137,27 @@ class Review
   *********************************************/
 
   public static function getRatingStars($rating = ""){
-
+    Review::$ratingId++;
 
     switch ($rating) {
       case 1:
       // by 1 star checked
       return '<div class="static-rating-container disabled">
         <fieldset class="rate">
-          <input id="rate1-star5" type="radio" name="rate1" value="5"  />
-          <label   for="rate1-star5" title="">5</label>
+          <input id="'.Review::$ratingId.'-star5" type="radio" name="'.Review::$ratingId.'" value="5"  />
+          <label   for="'.Review::$ratingId.'-star5" title="">5</label>
 
-          <input id="rate1-star4" type="radio" name="rate1" value="4"/>
-          <label  for="rate1-star4" title="">4</label>
+          <input id="'.Review::$ratingId.'-star4" type="radio" name="'.Review::$ratingId.'" value="4"/>
+          <label  for="'.Review::$ratingId.'-star4" title="">4</label>
 
-          <input id="rate1-star3" type="radio" name="rate1" value="3" />
-          <label  for="rate1-star3" title="">3</label>
+          <input id="'.Review::$ratingId.'-star3" type="radio" name="'.Review::$ratingId.'" value="3" />
+          <label  for="'.Review::$ratingId.'-star3" title="">3</label>
 
-          <input id="rate1-star2" type="radio" name="rate1" value="2"/>
-          <label  for="rate1-star2" title="">2</label>
+          <input id="'.Review::$ratingId.'-star2" type="radio" name="'.Review::$ratingId.'" value="2"/>
+          <label  for="'.Review::$ratingId.'-star2" title="">2</label>
 
-          <input id="rate1-star1" type="radio" name="rate1" value="1" checked />
-          <label  for="rate1-star1" title="">1</label>
+          <input checked id="'.Review::$ratingId.'-star1" type="radio" name="'.Review::$ratingId.'" value="1"  />
+          <label  for="'.Review::$ratingId.'-star1" title="">1</label>
         </fieldset>
       </div>';
 
@@ -163,20 +165,20 @@ class Review
       // by 1 star checked
       return '<div class="static-rating-container disabled">
         <fieldset class="rate">
-          <input id="rate1-star5" type="radio" name="rate1" value="5"  />
-          <label   for="rate1-star5" title="">5</label>
+          <input id="'.Review::$ratingId.'-star5" type="radio" name="'.Review::$ratingId.'" value="5"  />
+          <label   for="'.Review::$ratingId.'-star5" title="">5</label>
 
-          <input id="rate1-star4" type="radio" name="rate1" value="4"/>
-          <label  for="rate1-star4" title="">4</label>
+          <input id="'.Review::$ratingId.'-star4" type="radio" name="'.Review::$ratingId.'" value="4"/>
+          <label  for="'.Review::$ratingId.'-star4" title="">4</label>
 
-          <input id="rate1-star3" type="radio" name="rate1" value="3" />
-          <label  for="rate1-star3" title="">3</label>
+          <input id="'.Review::$ratingId.'-star3" type="radio" name="'.Review::$ratingId.'" value="3" />
+          <label  for="'.Review::$ratingId.'-star3" title="">3</label>
 
-          <input id="rate1-star2" type="radio" name="rate1" value="2" checked/>
-          <label  for="rate1-star2" title="">2</label>
+          <input id="'.Review::$ratingId.'-star2" type="radio" name="'.Review::$ratingId.'" value="2" checked/>
+          <label  for="'.Review::$ratingId.'-star2" title="">2</label>
 
-          <input id="rate1-star1" type="radio" name="rate1" value="1"  />
-          <label  for="rate1-star1" title="">1</label>
+          <input id="'.Review::$ratingId.'-star1" type="radio" name="'.Review::$ratingId.'" value="1"  />
+          <label  for="'.Review::$ratingId.'-star1" title="">1</label>
         </fieldset>
       </div>';
 
@@ -185,40 +187,40 @@ class Review
       // by 1 star checked
       return '<div class="static-rating-container disabled">
         <fieldset class="rate">
-          <input id="rate1-star5" type="radio" name="rate1" value="5"  />
-          <label   for="rate1-star5" title="">5</label>
+          <input id="'.Review::$ratingId.'-star5" type="radio" name="'.Review::$ratingId.'" value="5"  />
+          <label   for="'.Review::$ratingId.'-star5" title="">5</label>
 
-          <input id="rate1-star4" type="radio" name="rate1" value="4"/>
-          <label  for="rate1-star4" title="">4</label>
+          <input id="'.Review::$ratingId.'-star4" type="radio" name="'.Review::$ratingId.'" value="4"/>
+          <label  for="'.Review::$ratingId.'-star4" title="">4</label>
 
-          <input id="rate1-star3" type="radio" name="rate1" value="3" checked/>
-          <label  for="rate1-star3" title="">3</label>
+          <input id="'.Review::$ratingId.'-star3" type="radio" name="'.Review::$ratingId.'" value="3" checked/>
+          <label  for="'.Review::$ratingId.'-star3" title="">3</label>
 
-          <input id="rate1-star2" type="radio" name="rate1" value="2" />
-          <label  for="rate1-star2" title="">2</label>
+          <input id="'.Review::$ratingId.'-star2" type="radio" name="'.Review::$ratingId.'" value="2" />
+          <label  for="'.Review::$ratingId.'-star2" title="">2</label>
 
-          <input id="rate1-star1" type="radio" name="rate1" value="1"  />
-          <label  for="rate1-star1" title="">1</label>
+          <input id="'.Review::$ratingId.'-star1" type="radio" name="'.Review::$ratingId.'" value="1"  />
+          <label  for="'.Review::$ratingId.'-star1" title="">1</label>
         </fieldset>
       </div>';
       case 4:
       // by 1 star checked
       return '<div class="static-rating-container disabled">
         <fieldset class="rate">
-          <input id="rate1-star5" type="radio" name="rate1" value="5"  />
-          <label   for="rate1-star5" title="">5</label>
+          <input id="'.Review::$ratingId.'-star5" type="radio" name="'.Review::$ratingId.'" value="5"  />
+          <label   for="'.Review::$ratingId.'-star5" title="">5</label>
 
-          <input id="rate1-star4" type="radio" name="rate1" value="4" checked/>
-          <label  for="rate1-star4" title="">4</label>
+          <input checked id="'.Review::$ratingId.'-star4" type="radio" name="'.Review::$ratingId.'" value="4" />
+          <label  for="'.Review::$ratingId.'-star4" title="">4</label>
 
-          <input id="rate1-star3" type="radio" name="rate1" value="3" />
-          <label  for="rate1-star3" title="">3</label>
+          <input id="'.Review::$ratingId.'-star3" type="radio" name="'.Review::$ratingId.'" value="3" />
+          <label  for="'.Review::$ratingId.'-star3" title="">3</label>
 
-          <input id="rate1-star2" type="radio" name="rate1" value="2" />
-          <label  for="rate1-star2" title="">2</label>
+          <input id="'.Review::$ratingId.'-star2" type="radio" name="'.Review::$ratingId.'" value="2" />
+          <label  for="'.Review::$ratingId.'-star2" title="">2</label>
 
-          <input id="rate1-star1" type="radio" name="rate1" value="1"  />
-          <label  for="rate1-star1" title="">1</label>
+          <input id="'.Review::$ratingId.'-star1" type="radio" name="'.Review::$ratingId.'" value="1"  />
+          <label  for="'.Review::$ratingId.'-star1" title="">1</label>
         </fieldset>
       </div>';
 
@@ -226,20 +228,20 @@ class Review
       // by 1 star checked
       return '<div class="static-rating-container disabled">
         <fieldset class="rate">
-          <input id="rate1-star5" type="radio" name="rate1" value="5" checked/>
-          <label   for="rate1-star5" title="">5</label>
+          <input id="'.Review::$ratingId.'-star5" type="radio" name="'.Review::$ratingId.'" value="5" checked/>
+          <label   for="'.Review::$ratingId.'-star5" title="">5</label>
 
-          <input id="rate1-star4" type="radio" name="rate1" value="4"/>
-          <label  for="rate1-star4" title="">4</label>
+          <input id="'.Review::$ratingId.'-star4" type="radio" name="'.Review::$ratingId.'" value="4"/>
+          <label  for="'.Review::$ratingId.'-star4" title="">4</label>
 
-          <input id="rate1-star3" type="radio" name="rate1" value="3" />
-          <label  for="rate1-star3" title="">3</label>
+          <input id="'.Review::$ratingId.'-star3" type="radio" name="'.Review::$ratingId.'" value="3" />
+          <label  for="'.Review::$ratingId.'-star3" title="">3</label>
 
-          <input id="rate1-star2" type="radio" name="rate1" value="2" />
-          <label  for="rate1-star2" title="">2</label>
+          <input id="'.Review::$ratingId.'-star2" type="radio" name="'.Review::$ratingId.'" value="2" />
+          <label  for="'.Review::$ratingId.'-star2" title="">2</label>
 
-          <input id="rate1-star1" type="radio" name="rate1" value="1"  />
-          <label  for="rate1-star1" title="">1</label>
+          <input id="'.Review::$ratingId.'-star1" type="radio" name="'.Review::$ratingId.'" value="1"  />
+          <label  for="'.Review::$ratingId.'-star1" title="">1</label>
         </fieldset>
       </div>';
 
@@ -247,20 +249,20 @@ class Review
               // by default return, empty stars
               return '<div class="static-rating-container disabled">
                 <fieldset class="rate">
-                  <input id="rate1-star5" type="radio" name="rate1" value="5"  />
-                  <label   for="rate1-star5" title="">5</label>
+                  <input id="'.Review::$ratingId.'-star5" type="radio" name="'.Review::$ratingId.'" value="5"  />
+                  <label   for="'.Review::$ratingId.'-star5" title="">5</label>
 
-                  <input id="rate1-star4" type="radio" name="rate1" value="4"/>
-                  <label  for="rate1-star4" title="">4</label>
+                  <input id="'.Review::$ratingId.'-star4" type="radio" name="'.Review::$ratingId.'" value="4"/>
+                  <label  for="'.Review::$ratingId.'-star4" title="">4</label>
 
-                  <input id="rate1-star3" type="radio" name="rate1" value="3" />
-                  <label  for="rate1-star3" title="">3</label>
+                  <input id="'.Review::$ratingId.'-star3" type="radio" name="'.Review::$ratingId.'" value="3" />
+                  <label  for="'.Review::$ratingId.'-star3" title="">3</label>
 
-                  <input id="rate1-star2" type="radio" name="rate1" value="2"/>
-                  <label  for="rate1-star2" title="">2</label>
+                  <input id="'.Review::$ratingId.'-star2" type="radio" name="'.Review::$ratingId.'" value="2"/>
+                  <label  for="'.Review::$ratingId.'-star2" title="">2</label>
 
-                  <input id="rate1-star1" type="radio" name="rate1" value="1" />
-                  <label  for="rate1-star1" title="">1</label>
+                  <input id="'.Review::$ratingId.'-star1" type="radio" name="'.Review::$ratingId.'" value="1" />
+                  <label  for="'.Review::$ratingId.'-star1" title="">1</label>
                 </fieldset>
               </div>';
     }

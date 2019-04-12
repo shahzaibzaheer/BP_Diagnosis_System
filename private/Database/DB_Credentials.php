@@ -9,6 +9,8 @@
         $dsn = "mysql:host=".DB_SERVER.";dbname=".DB_NAME;
         $pdo = new PDO($dsn,DB_USER,DB_PASS);
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        // $pdo->setAttribute(PDO::MYSQL_ATTR_USE_BUFFERED_QUERY, false);
+
         return $pdo;
 
     }catch(Exception $e){

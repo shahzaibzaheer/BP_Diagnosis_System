@@ -1,4 +1,5 @@
 <?php
+
   $patient_id = loggedInPatientId();
   $patient = Patient::find_patient_by_id($patient_id);
  ?>
