@@ -1,7 +1,7 @@
 <?php  require_once('../../private/initialize.php');
     require_patient_login();
     // this page will access only when patient is logged in
-
+    $patient_id = loggedInPatientId();
     $doctor_id =  $_GET['doctor_id'] ?? '';
     $doctor = Doctor::find_doctor_by_id($doctor_id);
     if(!$doctor){
@@ -17,10 +17,35 @@
           $reviews = false;
         }
 
+        $patientReview = Review::find_review_by_patient_id($patient_id);
+        // print_array($patientReview);exit;
+
     if(isPostRequest()){
-      print_array($_POST);
-      exit;
-    }
+
+            if(!$patientReview){
+              $patientReview = new Review($_POST);
+              $patientReview->setPatientId($patient_id);
+              $patientReview->setDoctorId($doctor_id);
+
+            }
+            else {
+              // $rating = $_POST[]
+              $patientReview->setRating($_POST[ReviewTable::COLUMN_RATING] ?? '');
+              $patientReview->setSubject($_POST[ReviewTable::COLUMN_SUBJECT] ?? '');
+              $patientReview->setMessage($_POST[ReviewTable::COLUMN_MESSAGE] ?? '');
+
+            print_array($_POST);
+            exit;
+          }
+          if($patientReview->save()){
+            //login successfull
+            redirectTo(urlFor('patient/doctor_detail.php?doctor_id='.$doctor_id));
+          }else {
+            // login failed, get errors array
+            $errors = $patientReview->getErrors();
+            print_array($errors);
+          }
+  }
 
     require_once(getSharedFilePath('patient/header.php'));
 
@@ -73,33 +98,24 @@
       </div>
 
       <form action="<?php echo $_SERVER['SCRIPT_NAME']."?doctor_id=".$doctor_id; ?>" method="post">
+        <?php
+            if(!$patientReview){
+              echo Review::getRatingStarsForForm();
+            }else {
+              echo Review::getRatingStarsForForm($patientReview->getRating());
+            }
+        ?>
 
-        <div class="rating-container">
-          <fieldset class="rate">
-            <input id="rate1-star5" type="radio" name="rating" value="5" />
-            <label for="rate1-star5" title="Excellent">5</label>
-
-            <input id="rate1-star4" type="radio" name="rating" value="4" checked />
-            <label for="rate1-star4" title="Good">4</label>
-
-            <input id="rate1-star3" type="radio" name="rating" value="3" />
-            <label for="rate1-star3" title="Satisfactory">3</label>
-
-            <input id="rate1-star2" type="radio" name="rating" value="2" />
-            <label for="rate1-star2" title="Bad">2</label>
-
-            <input id="rate1-star1" type="radio" name="rating" value="1" />
-            <label for="rate1-star1" title="Very bad">1</label>
-          </fieldset>
-        </div>
-        <div class="form-group">
-          <input type="text" class="form-control" placeholder="Subject" name="<?php echo ReviewTable::COLUMN_SUBJECT; ?>" value="">
-        </div>
-        <div class="form-group">
-          <textarea class="form-control" placeholder="Message" name="<?php echo ReviewTable::COLUMN_MESSAGE; ?>"></textarea>
-        </div>
-        <input class="btn btn-primary col-3 " type="submit" name="submit" value="Post Review">
+          <div class="form-group">
+            <input type="text" class="form-control" placeholder="Subject" name="<?php echo ReviewTable::COLUMN_SUBJECT; ?>"
+            value="<?php if($patientReview){ echo $patientReview->getSubject(); } ?>">
+          </div>
+          <div class="form-group">
+            <textarea class="form-control" placeholder="Message" name="<?php echo ReviewTable::COLUMN_MESSAGE; ?>"><?php if($patientReview){ echo $patientReview->getMessage(); } ?></textarea>
+          </div>
+          <input class="btn btn-primary col-3 " type="submit" name="submit" value="<?php  echo ($patientReview === false) ?  "Post Review" :  "Update Review"; ?> ">
       </form>
+
 
 
 
@@ -136,4 +152,4 @@
 
 
 
-<?php     require_once(getSharedFilePath('patient/footer.php')); ?>
+<?php   require_once(getSharedFilePath('patient/footer.php')); ?>
