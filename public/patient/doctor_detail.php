@@ -34,8 +34,8 @@
               $patientReview->setSubject($_POST[ReviewTable::COLUMN_SUBJECT] ?? '');
               $patientReview->setMessage($_POST[ReviewTable::COLUMN_MESSAGE] ?? '');
 
-            print_array($_POST);
-            exit;
+            // print_array($_POST);
+            // exit;
           }
           if($patientReview->save()){
             //login successfull
