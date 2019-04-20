@@ -119,7 +119,8 @@ class Review
       }
 
       public static function get_average_doctor_rating($doctor_id){
-        return Review::get_sum_of_ratings($doctor_id)/Review::get_total_number_of_ratings($doctor_id);
+        $avgRating = Review::get_sum_of_ratings($doctor_id)/Review::get_total_number_of_ratings($doctor_id);
+        return number_format($avgRating,1,'.','');
       }
 
 

@@ -7,6 +7,8 @@
     if(!$doctor){
       exit("Error while fecthing doctor");
     }
+
+
     // fetch all the reviews
         $reviews = [];
         $reviewsAssoc = Review::find_reviews_by_doctor_id($doctor_id);
@@ -17,40 +19,10 @@
           $reviews = false;
         }
 
-        $patientReview = Review::find_review_by_patient_id($patient_id);
+        // $patientReview = Review::find_review_by_patient_id($patient_id);
         // print_array($patientReview);exit;
 
-    if(isPostRequest()){
-
-            if(!$patientReview){
-              $patientReview = new Review($_POST);
-              $patientReview->setPatientId($patient_id);
-              $patientReview->setDoctorId($doctor_id);
-
-            }
-            else {
-              // $rating = $_POST[]
-              $patientReview->setRating($_POST[ReviewTable::COLUMN_RATING] ?? '');
-              $patientReview->setSubject($_POST[ReviewTable::COLUMN_SUBJECT] ?? '');
-              $patientReview->setMessage($_POST[ReviewTable::COLUMN_MESSAGE] ?? '');
-
-            // print_array($_POST);
-            // exit;
-          }
-          if($patientReview->save()){
-            //login successfull
-            redirectTo(urlFor('patient/doctor_detail.php?doctor_id='.$doctor_id));
-          }else {
-            // login failed, get errors array
-            $errors = $patientReview->getErrors();
-            print_array($errors);
-          }
-  }
-
-    require_once(getSharedFilePath('patient/header.php'));
-
-
-
+  require_once(getSharedFilePath('admin/header.php'));
 
 
 ?>
@@ -61,9 +33,7 @@
       <div class="d-flex">
         <div class="card">
           <img class="card-img img-fluid" src="https://placehold.it/400x400" alt="">
-          <a class="btn btn-primary mt-2" href="<?php echo urlFor('patient/book_appointment.php')."?doctor_id=".$doctor->getId(); ?>">Book Appointment</a>
-          <!-- Trigger the modal with a button -->
-          <button type="button" class="btn btn-primary mt-2" data-toggle="modal" data-target="#reviewModal">Give Feedback</button>
+          <a class="btn btn-primary mt-2" href="<?php echo urlFor('admin/delete_doctor.php')."?doctor_id=".$doctor->getId(); ?>">Delete Doctor</a>
         </div>
         <div class="">
           <div class="">
@@ -97,24 +67,7 @@
         </div>
       </div>
 
-      <form action="<?php echo $_SERVER['SCRIPT_NAME']."?doctor_id=".$doctor_id; ?>" method="post">
-        <?php
-            if(!$patientReview){
-              echo Review::getRatingStarsForForm();
-            }else {
-              echo Review::getRatingStarsForForm($patientReview->getRating());
-            }
-        ?>
 
-          <div class="form-group">
-            <input type="text" class="form-control" placeholder="Subject" name="<?php echo ReviewTable::COLUMN_SUBJECT; ?>"
-            value="<?php if($patientReview){ echo $patientReview->getSubject(); } ?>">
-          </div>
-          <div class="form-group">
-            <textarea class="form-control" placeholder="Message" name="<?php echo ReviewTable::COLUMN_MESSAGE; ?>"><?php if($patientReview){ echo $patientReview->getMessage(); } ?></textarea>
-          </div>
-          <input class="btn btn-primary col-3 " type="submit" name="submit" value="<?php  echo ($patientReview === false) ?  "Post Review" :  "Update Review"; ?> ">
-      </form>
 
 
 
@@ -122,7 +75,6 @@
 
 
       <section class="doctor-rating-holder">
-
         <div class="row d-flex  justify-content-around">
           <div class="average-rating-container card col-4">
             <h4>Average Rating</h4>
@@ -138,6 +90,7 @@
               <div class="single-review" style="border: 1px solid #000">
 
                 <h4><?php echo $review->getPatient()->getName(); ?></h4>
+                <!-- <a href="<?php echo urlFor('admin/delete_patient.php')."?patient_id=".$review->getPatient()->getId(); ?>">Remove Patient</a> -->
                 <p>Created On: <?php echo $review->getCreatedOn(); ?></p>
                   <?php echo Review::getRatingStars($review->getRating()); ?>
                 <p> <b><?php echo $review->getSubject(); ?></b> </p>

@@ -24,7 +24,7 @@
              <i class="card_icon  fas fa-calendar-check"></i>
              <a >View Appointments</a>
            </div>
-           <div href="#" class="card" onclick="location.href='<?php echo urlFor(""); ?>';">
+           <div href="#" class="card" onclick="location.href='<?php echo urlFor("admin/feedbacks.php"); ?>';">
              <i class="card_icon  fas fa-star-half-alt"></i>
              <a >User's Feedback</a>
            </div>

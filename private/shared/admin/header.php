@@ -51,7 +51,7 @@
            <i class="drawer_item_icon fas fa-calendar-check"></i>
            <a>View Appointments</a>
          </li>
-         <li onclick="location.href='<?php echo urlFor(""); ?>';">
+         <li onclick="location.href='<?php echo urlFor("admin/feedbacks.php"); ?>';">
            <i class="drawer_item_icon fas fa-star-half-alt"></i>
            <a>User's Feedback</a>
          </li>
