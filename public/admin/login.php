@@ -1,7 +1,7 @@
 <?php  require_once('../../private/initialize.php');
     // session_start();
     if(isAdminLoggedIn()){
-      redirectTo(urlFor('admin/admin_dashboard.php'));
+      redirectTo(urlFor('admin/index.php'));
     }
 
   if(isPostRequest()){
@@ -11,7 +11,7 @@
       // $_SESSION['patient_id'] = exit("patient id: ".$admin->getId());
       $_SESSION[SessionContract::SESSION_ADMIN_ID] = $admin->getId();
       // exit($_SESSION[SessionContract::SESSION_PATIETN_ID]);
-      redirectTo(urlFor('admin/admin_dashboard.php'));
+      redirectTo(urlFor('admin/index.php'));
     }
     else {
       // login filed.
@@ -19,27 +19,30 @@
     }
 
   }
+  require_once(getSharedFilePath('main/login_registration_header.php'));
+
 
 ?>
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title>Admin Login</title>
-  </head>
-  <body>
-    <h1>Admin Login</h1>
-    <form action="<?php echo $_SERVER['SCRIPT_NAME']; ?>" method="post">
-      <div>
-        <label for="">Email: </label>
-        <input type="email" name="<?php echo AdminTable::COLUMN_EMAIL ?>" value="" >
-      </div>
-      <div>
-        <label for="">Passwrod: </label>
-        <input type="password" name="password">
-      </div>
-      <input type="submit" name="submit" value="Log in">
-    </form>
 
-  </body>
+<div class="login_registration_container mt-5">
+  <div class="login-form col-4 mx-auto">
+      <form action="<?php echo $_SERVER['SCRIPT_NAME']; ?>" method="post">
+      <h2 class="text-center mb-4">Admin Login</h2>
+      <div class="form-group">
+          <input type="email" name="<?php echo AdminTable::COLUMN_EMAIL ?>" class="form-control" placeholder="Email" required="required">
+      </div>
+      <div class="form-group">
+          <input type="password" name="password" class="form-control" placeholder="Password" required="required">
+      </div>
+      <div class="form-group">
+          <button type="submit" class="btn btn-primary btn-block">Log in</button>
+      </div>
+      <div class="clearfix">
+          <a href="#" class=" pull-right">Forgot Password?</a>
+      </div>
+    </form>
+    <!-- <p class="text-center"><a href="<?php echo urlFor('admin/registration.php'); ?>">Create an Account</a></p> -->
+    </div>
+  </div>
+</body>
 </html>

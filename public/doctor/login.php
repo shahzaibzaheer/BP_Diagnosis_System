@@ -34,7 +34,7 @@
       <form action="<?php echo $_SERVER['SCRIPT_NAME']; ?>" method="post">
           <h2 class="text-center mb-4">Doctor Login</h2>
           <div class="form-group">
-              <input type="text" name="<?php echo DoctorTable::COLUMN_EMAIL ?>" class="form-control" placeholder="Email" required="required">
+              <input type="email" name="<?php echo DoctorTable::COLUMN_EMAIL ?>" class="form-control" placeholder="Email" required="required">
           </div>
           <div class="form-group">
               <input type="password" name="password" class="form-control" placeholder="Password" required="required">

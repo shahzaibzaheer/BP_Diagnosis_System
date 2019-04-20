@@ -27,6 +27,11 @@ function loggedInPatientId(){
 function loggedInDoctorId(){
   return $_SESSION[SessionContract::SESSION_DOCTOR_ID];
 }
+function loggedInAdminId(){
+  return $_SESSION[SessionContract::SESSION_ADMIN_ID];
+}
+
+
 function isPatientLoggedIn(){
   return isset($_SESSION[SessionContract::SESSION_PATIENT_ID]);
 }
@@ -37,6 +42,7 @@ function isDoctorLoggedIn(){
 function isAdminLoggedIn(){
   return isset($_SESSION[SessionContract::SESSION_ADMIN_ID]);
 }
+
 function performLogout(){
   if(isset($_SESSION[SessionContract::SESSION_PATIENT_ID])){
     unset($_SESSION[SessionContract::SESSION_PATIENT_ID]);

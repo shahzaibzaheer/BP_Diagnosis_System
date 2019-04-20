@@ -363,7 +363,7 @@ class Patient {
 
     }
 
-    private function update(){
+  private function update(){
           // first validate the data, if validation successfull then save data and return true
           // if validation fails, then return errors array
           $errorsArray = $this->validateUpdation();

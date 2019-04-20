@@ -61,7 +61,22 @@ class Admin {
           return $this->create();
         }else {
           // update the data
-          exit("update the Admin data");
+          return $this->update();
+        }
+      }
+
+      static public function find_admin_by_id($id){
+        $queryString  = "SELECT * FROM ".AdminTable::TABLE_NAME." ";
+        $queryString .= "WHERE ".AdminTable::COLUMN_ID." = ?";
+        $stmt = Admin::$db->prepare($queryString);
+        $stmt->execute([$id]);
+        $admin = $stmt->fetch(PDO::FETCH_ASSOC);
+        if(isset($admin)){
+            return new self($admin);
+        }
+        else {
+          // echo "Patient Not found"
+          return false;
         }
       }
 
@@ -220,7 +235,7 @@ class Admin {
     return $this->errors;
   }
 
-    private function create(){
+  private function create(){
       // first validate the data, if validation successfull then save data and return true
       // if validation fails, then return errors array
         $errorsArray = $this->validate();
@@ -271,6 +286,46 @@ class Admin {
 
   }
 
+  private function update(){
+        // first validate the data, if validation successfull then save data and return true
+        // if validation fails, then return errors array
+        $errorsArray = $this->validateUpdation();
+        if(isContainErrors($errorsArray))
+        {
+          return false;
+        }else {
+          // build query string & update the data.
+          // exit("Now All the data is valid, it's time to Save Data to the database");
+          //  UPDATE `patients` SET `id` = NULL, `username` = '', `hashedPassword` = '', `dob` = '' WHERE `patients`.`id` = 1
+          $queryString  =  "UPDATE ".AdminTable::TABLE_NAME;
+          $queryString .=  " SET ".AdminTable::COLUMN_NAME." = :".AdminTable::COLUMN_NAME.", ";
+          $queryString .=  AdminTable::COLUMN_GENDER." = :".AdminTable::COLUMN_GENDER." ";
+          $queryString .=  " WHERE ".AdminTable::COLUMN_ID." = ".$this->getId()." ";
+
+          try{
+            $stmt = Admin::$db->prepare($queryString);
+            $stmt->execute([
+              AdminTable::COLUMN_NAME => $this->getName(),
+              AdminTable::COLUMN_GENDER => $this->getGender()
+            ]);
+            return true;
+          }catch(Exception $e){
+            exit($e->getMessage());
+          }
+        }
+    }
+
+  private function validateUpdation(){
+       $errors = [];
+
+       if(!hasPresence($this->getName())){
+         $errors[AdminTable::COLUMN_NAME]='Admin name can\'t be blank';
+       }elseif (!has_length($this->getName(), array('min' => 2, 'max' => 30))) {
+         $errors[AdminTable::COLUMN_NAME] = "Admin name must be between 2 and 30 characters.";
+       }
+       $this->errors = $errors;
+       return $errors;
+     }
 
   private function validate(){
      $errors = [];

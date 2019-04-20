@@ -53,7 +53,7 @@
               <i class="main-card-icon fas fa-users-cog"></i>
               <div class="card-body">
                 <h4 class="card-title">Admin</h4>
-                <a href="#">Click Here</a>
+                <a href="<?php echo urlFor('admin/login.php');  ?>">Click Here</a>
               </div>
             </div>
           </div>
