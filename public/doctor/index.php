@@ -24,7 +24,7 @@
                <i class="card_icon fas fa-comment-medical"></i>
                <a href="#">My Answered Prescriptions</a>
              </div>
-             <div class="card" onclick="location.href='<?php echo urlFor(""); ?>';">
+             <div class="card" onclick="location.href='<?php echo urlFor("doctor/report.php"); ?>';">
                <i class="card_icon fas fa-receipt"></i>
                <a href="#">View Report</a>
              </div>

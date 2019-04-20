@@ -11,8 +11,7 @@
     // exit;
 
 ?>
-<button  class="btn btn-primary" onclick="printDiv('printMe')" name="button" style="position: fixed; right:0; margin-top:80px">Print</button>
-<section id='printMe' class="main_content">
+<section class="main_content">
   <h1>Report</h1>
   <div class="card">
     <h4>Appointments Report</h4>
@@ -55,15 +54,7 @@
   </div>
 
 
-  <script>
-		function printDiv(divName){
-			var printContents = document.getElementById(divName).innerHTML;
-			var originalContents = document.body.innerHTML;
-			document.body.innerHTML = printContents;
-			window.print();
-			document.body.innerHTML = originalContents;
-		}
-	</script>
+
 
 </section>
 

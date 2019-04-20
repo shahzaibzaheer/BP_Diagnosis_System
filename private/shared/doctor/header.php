@@ -27,7 +27,7 @@
 
     <div class="content">
       <!-- drawer_collapse -->
-      <nav class="drawer  ">
+      <nav class="drawer drawer_collapse ">
          <i id="drawer_icon" class="fas fa-bars"></i>
          <ul>
          <li onclick="location.href='<?php echo urlFor("doctor/index.php"); ?>';" class="item_selected">
@@ -46,7 +46,7 @@
            <i class="drawer_item_icon fas fa-calendar-check"></i>
            <a>My Appointments</a>
          </li>
-         <li onclick="location.href='';">
+         <li onclick="location.href='<?php echo urlFor("doctor/report.php"); ?>';">
            <i class="drawer_item_icon fas fa-receipt"></i>
            <a>View Report</a>
          </li>
