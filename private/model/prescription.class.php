@@ -83,6 +83,7 @@ class Prescription
       return false;
     }
   }
+  
   static public function find_prescriptions_by_doctor_id($doctorId){
     $queryString  = "SELECT * FROM ".PrescriptionTable::TABLE_NAME." ";
     $queryString .= "WHERE ".PrescriptionTable::COLUMN_DOCTOR_ID." = ?";

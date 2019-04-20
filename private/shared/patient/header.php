@@ -55,7 +55,7 @@
            <i class="drawer_item_icon fas fa-history"></i>
            <a>Appointment History</a>
          </li>
-         <li onclick="location.href='';">
+         <li onclick="location.href='<?php echo urlFor("patient/report.php"); ?>';">
            <i class="drawer_item_icon fas fa-receipt"></i>
            <a>View Report</a>
          </li>

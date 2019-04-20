@@ -6,6 +6,8 @@ const BODY = document.getElementsByTagName('body')[0];
 
 
 
+
+
 DRAWER_ICON.addEventListener("click", toggleDrawer);
 POPOVER_BTN.addEventListener('click', function(e){
   togglePopOver(e);
@@ -29,3 +31,12 @@ function togglePopOver(e){
   POPOVER.classList.toggle('popOver_open');
   e.stopPropagation();
 }
+
+
+  function printDiv(divName){
+    var printContents = document.getElementById(divName).innerHTML;
+    var originalContents = document.body.innerHTML;
+    document.body.innerHTML = printContents;
+    window.print();
+    document.body.innerHTML = originalContents;
+  }

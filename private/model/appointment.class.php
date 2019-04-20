@@ -83,11 +83,30 @@ class Appointment
       return false;
     }
    }
+
    static public function findAppointmentsByPatientId($patientId){
     $queryString  = "SELECT * FROM ".AppointmentTable::TABLE_NAME." ";
     $queryString .= "WHERE ".AppointmentTable::COLUMN_PATIENT_ID." = ?";
     $stmt = Appointment::$db->prepare($queryString);
     $stmt->execute([$patientId]);
+
+    $appointments = [];
+    // we want to return prescription objects
+    while($appointmentAssoc = $stmt->fetch(PDO::FETCH_ASSOC)){
+      $appointments[]= new self($appointmentAssoc);
+    }
+    if(!empty($appointments)){
+      return $appointments;
+    }else{
+      return false;
+    }
+   }
+   static public function findConfirmedAppointmentsByPatientId($patientId){
+    $queryString  = "SELECT * FROM ".AppointmentTable::TABLE_NAME." ";
+    $queryString .= "WHERE ".AppointmentTable::COLUMN_PATIENT_ID." = ? AND ";
+    $queryString .= AppointmentTable::COLUMN_STATUS." LIKE ?";
+    $stmt = Appointment::$db->prepare($queryString);
+    $stmt->execute([$patientId,Appointment::STATUS_CONFIRMED_BY_DOCTOR]);
 
     $appointments = [];
     // we want to return prescription objects
