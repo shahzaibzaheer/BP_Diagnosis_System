@@ -1,4 +1,5 @@
 <?php  require_once('../private/initialize.php');
+  $page_title =  "Home";
   require_once(getSharedFilePath('main/header.php'));
 ?>
 
@@ -9,13 +10,13 @@
         <div id="carouselControl" class="carousel slide" data-ride="carousel">
          <div class="carousel-inner">
            <div class="carousel-item active">
-             <img class="d-block w-100 " src="https://placehold.it/900x400" alt="First slide">
+             <img class="d-block w-100 " src="<?php echo getAssetsPath('slide1.jpg'); ?>" alt="First slide">
            </div>
            <div class="carousel-item">
-             <img class="d-block w-100" src="https://placehold.it/900x400" alt="Second slide">
+             <img class="d-block w-100" src="<?php echo getAssetsPath('slide2.jpg'); ?>" alt="Second slide">
            </div>
            <div class="carousel-item">
-             <img class="d-block w-100" src="https://placehold.it/900x400" alt="Third slide">
+             <img class="d-block w-100" src="<?php echo getAssetsPath('slide3.jpg'); ?>" alt="Third slide">
            </div>
          </div>
          <a class="carousel-control-prev" href="#carouselControl" role="button" data-slide="prev">

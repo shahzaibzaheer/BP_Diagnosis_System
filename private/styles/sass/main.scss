@@ -3,7 +3,7 @@
 
 //***** Variables
 // Colors
-$primary_color : #9a0000;
+$primary_color : #007bff;
 $primary_text_color: #333333;
 $primary_text_color_light: #ddd;
 $drawer_icon_color : grey;
@@ -11,6 +11,8 @@ $list_item_selected_background : rgba($primary_color,0.1);
 $list_item_Hover_background : rgba($primary_color,0.2);
 $list_item_divider_color : rgba($primary_text_color,0.1);
 $popOver_background: #444;
+
+$secondary-btn-color : #2196f3;
 
 $drawer_item_icon_width_height : 24px;
 $drawer_icon_width_height : 48px;
@@ -981,4 +983,40 @@ table.table{
 
   }
 
+}
+
+
+
+
+
+//styles for main homepage
+
+.main_nav{
+
+
+  .navbar-toggler-icon{
+    color: $primary_color;
+    font-size: 1.5em;
+    // background: red;
+    padding-top: 5px;
+
+  }
+
+  // .nav-item a{
+  //   color: #fff;
+  //   background: $secondary-btn-color;
+  //   margin: 1px;
+  //   border-radius: 2px;
+  // }
+
+}
+
+
+
+#carouselControl{
+  margin: $gutter_l $gutter_l;
+  border-radius: 16px;
+  border-radius: 8px;
+  overflow: hidden;
+  // border: 10px solid #000;
 }

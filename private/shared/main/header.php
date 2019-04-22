@@ -2,7 +2,7 @@
 <html >
   <head>
     <meta charset="utf-8">
-    <title>Home</title>
+    <title><?php echo $page_title; ?></title>
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
     <link rel="stylesheet" href="<?php echo getStylePath("main.css"); ?>">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -13,24 +13,20 @@
   <body>
 
     <!-- Navigation -->
-     <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
+     <nav class="main_nav navbar navbar-expand-lg">
        <div class="container">
          <a class="navbar-brand" href="<?php echo urlFor('index.php'); ?>">Blood Pressure Diagnosis System</a>
-         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-           <span class="navbar-toggler-icon"></span>
+         <button class=" navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+           <i class=" navbar-toggler-icon fas fa-bars" ></i>
          </button>
          <div class="collapse navbar-collapse" id="navbarResponsive">
-           <ul class="navbar-nav ml-auto mr-5">
-             <li class="nav-item">
-               <a class="nav-link active" href="<?php echo urlFor('index.php'); ?>">Home</a>
+           <ul class="navbar-nav ml-auto nav-pills">
+             <li class="nav-item ">
+               <a class="nav-link <?php echo $page_title =="Home" ? 'active': ''; ?>" href="<?php echo urlFor('index.php'); ?>">Home</a>
              </li>
              <li class="nav-item">
-               <a class="nav-link" href="#">About Us</a>
+               <a class="nav-link  <?php echo $page_title =="About Us" ? 'active': ''; ?>" href="<?php echo urlFor('aboutus.php'); ?>">About Us</a>
              </li>
-             <li class="nav-item">
-               <a class="nav-link" href="#">Contact Us</a>
-             </li>
-           </ul>
          </div>
        </div>
      </nav>

@@ -17,6 +17,8 @@
     $project_root = substr($_SERVER['SCRIPT_NAME'], 0, $project_end);
     define("STYLES_PATH", $project_root."/private/styles/css");
     define("SCRIPTS_PATH", $project_root."/private/scripts");
+    define("ASSETS_PATH", $project_root."/private/shared/assets");
+
 
 
 

@@ -114,6 +114,13 @@ function performLogout(){
       }
       return SHARED_PATH . $file_name;
   }
+  function getAssetsPath($file_name) {
+      // add the leading '/' if not present
+      if($file_name[0] != '/') {
+        $file_name = "/" . $file_name;
+      }
+      return ASSETS_PATH . $file_name;
+  }
 
   function redirectTo($url)  {
     header("Location: ".$url);
