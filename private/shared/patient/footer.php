@@ -1,9 +1,8 @@
 
     </div>
     <footer class="footer-distributed">
-      <div class="footer-content">
-        <div class="footer-left">
-
+      <div class="row col-lg-9 mx-auto footer-content">
+        <div class="col-11 col-md-5  mx-auto mb-5 footer-left">
           <div>
             <i class="fa fa-map-marker-alt"></i>
             <p>21 Revolution Street Paris,</br> France</p>
@@ -21,16 +20,15 @@
 
         </div>
 
-        <div class="footer-right">
-
+        <div class="col-11 col-md-5  mx-auto mb-5 footer-right">
           <p class="footer-company-about">
             <span>About the company</span>
             Lorem ipsum dolor sit amet, consectateur adispicing elit. Fusce euismod convallis velit, eu auctor lacus vehicula sit amet.
           </p>
-
         </div>
-
-
+        <div class="copyright col-11 col-sm-8 col-md-6 mx-auto text-center">
+          <p>&copy; Copyright <?php echo date('Y'); ?>, All Rights Reserved </p>
+        </div>
       </div>
 
       </footer>

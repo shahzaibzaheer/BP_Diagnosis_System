@@ -8,6 +8,8 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
     <title>Title</title>
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
     <link rel="stylesheet" href="<?php echo getStylePath("main.css"); ?>">
@@ -17,11 +19,11 @@
   <body>
 
 
-      <div class="welcome_bar">
+      <div class="welcome_bar ">
         <p>Welcome <?php echo $patient->getName(); ?> </p><i id="welcome_drop_down_btn" class="fas fa-caret-down"></i>
         <ul class="popOver">
           <li> <a href="<?php echo urlFor("patient/profile.php"); ?>">My Profile</a> </li>
-          <li> <a href="#">Change Password</a> </li>
+          <li> <a href="<?php echo urlFor("patient/changePassword.php"); ?>">Change Password</a> </li>
           <li> <a href="<?php echo urlFor("patient/doLogout.php"); ?>">Logout</a> </li>
         </ul>
       </div>

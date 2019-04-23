@@ -9,6 +9,7 @@
       $prescription->setPatientId(loggedInPatientId());
       if($prescription->save()){
         // exit("Prescription Successfully Posted");
+        setMessage("Your Prescription Request successfully posted");
         redirectTo(urlFor("patient/my_prescriptions.php"));
       }else {
         print_array($prescription->getErrors());
@@ -18,9 +19,9 @@
     require_once(getSharedFilePath('patient/header.php'));
 
 ?>
-  <section class="main_content">
-    <h1>Ask For Prescription</h1>
-    <form class="ask_for_prescription_form" action="<?php echo $_SERVER['SCRIPT_NAME']; ?>" method="post">
+  <section class="main_content mt-5">
+    <h1 class="mb-4">Ask For Prescription</h1>
+    <form class="ask_for_prescription_form col-11 mx-auto col-sm-8 col-md-6 col-lg-5" action="<?php echo $_SERVER['SCRIPT_NAME']; ?>" method="post">
       <div class="input-group">
         <input class="input--style-1" type="text" placeholder="Subject" name="<?php echo PrescriptionTable::COLUMN_SUBJECT; ?>" value="">
       </div>

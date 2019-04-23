@@ -14,6 +14,7 @@ class Patient {
     private $hashedPassword;
     private $password;
     private $confirmPassword;
+    private $currentPassword;
     private $phoneNumber;
     private $address;
     private $city;
@@ -24,7 +25,7 @@ class Patient {
     private $errors;
 
 
-    function __construct($args){
+    function __construct($args = []){
       $this->setId($args[PatientTable::COLUMN_ID] ?? '');
       $this->setName($args[PatientTable::COLUMN_NAME] ?? '');
       $this->setUserName($args[PatientTable::COLUMN_USERNAME] ?? '');
@@ -37,6 +38,7 @@ class Patient {
       $this->setDOB($args[PatientTable::COLUMN_DATE_OF_BITRH] ?? '');
       $this->setCreatedOn($args[PatientTable::COLUMN_CREATED_ON] ?? '');
       $this->setPassword($args['password'] ?? '');
+      $this->setCurrentPassword($args['currentPassword'] ?? '');
       $this->setConfirmPassword($args['confirmPassword'] ?? '');
     }
     private function bind_patient_data($args){
@@ -52,6 +54,7 @@ class Patient {
       $this->setDOB($args[PatientTable::COLUMN_DATE_OF_BITRH] ?? '');
       $this->setCreatedOn($args[PatientTable::COLUMN_CREATED_ON] ?? '');
       $this->setPassword($args['password'] ?? '');
+      $this->setCurrentPassword($args['currentPassword'] ?? '');
       $this->setConfirmPassword($args['confirmPassword'] ?? '');
     }
 
@@ -154,7 +157,30 @@ class Patient {
    }
   }
 
+  public function updatePassword(){
 
+    $errorsArray = $this->validatePasswordUpdateCredentials();
+    if(isContainErrors($errorsArray))
+    {
+      return false;
+    }else {
+
+      $queryString  =  "UPDATE ".PatientTable::TABLE_NAME;
+      $queryString .=  " SET ".PatientTable::COLUMN_HASHED_PASSWORD." = :".PatientTable::COLUMN_HASHED_PASSWORD." ";
+      $queryString .=  " WHERE ".PatientTable::COLUMN_ID." = ".$this->getId()." ";
+
+      try{
+        $stmt = Patient::$db->prepare($queryString);
+        $stmt->execute([
+          PatientTable::COLUMN_HASHED_PASSWORD => $this->getHashedPassword()
+        ]);
+        return true;
+      }catch(Exception $e){
+        exit($e->getMessage());
+      }
+
+    }
+  }
 
 
 
@@ -167,7 +193,7 @@ class Patient {
 
   /******** Setters
   **************************/
-  private function setId($id)
+  public function setId($id)
   {
     $this->id = $id;
   }
@@ -189,6 +215,10 @@ class Patient {
   public function setPassword($password='')
   {
     $this->password = $password;
+  }
+  public function setCurrentPassword($currentPassword='')
+  {
+    $this->currentPassword = $currentPassword;
   }
   public function setConfirmPassword($confirmPassword='')
   {
@@ -248,6 +278,10 @@ class Patient {
   }
   private function getPassword(){
     return $this->password;
+  }
+  public function getCurrentPassword()
+  {
+    return $this->currentPassword ;
   }
   private function getConfirmedPassword()
   {
@@ -400,6 +434,12 @@ class Patient {
 
       }
 
+
+
+
+
+
+
   private function validate(){
      $errors = [];
 
@@ -471,6 +511,7 @@ class Patient {
      $this->errors = $errors;
      return $errors;
    }
+
    private function validateUpdation(){
       $errors = [];
 
@@ -540,5 +581,58 @@ class Patient {
     }
     return $errors;
   }
+
+  private function validatePasswordUpdateCredentials(){
+    $errors = [];
+
+
+    // password validation
+    if(!hasPresence($this->getPassword())) {
+      $errors['password'] = "Password cannot be blank.";
+    } elseif (!has_length($this->getPassword(), array('min' => 12))) {
+      $errors['password'] = "Password must contain 12 or more characters";
+    } elseif (!preg_match('/[A-Z]/', $this->getPassword())) {
+      $errors['password'] = "Password must contain at least 1 uppercase letter";
+    } elseif (!preg_match('/[a-z]/', $this->getPassword())) {
+      $errors['password'] = "Password must contain at least 1 lowercase letter";
+    } elseif (!preg_match('/[0-9]/', $this->getPassword())) {
+      $errors['password'] = "Password must contain at least 1 number";
+    }
+    // elseif (!preg_match('/[^A-Za-z0-9\s]/', $this->getPassword())) {
+    //   $errors['password'] = "Password must contain at least 1 symbol";
+    // }
+
+    if(!hasPresence($this->getConfirmedPassword())) {
+      $errors['confirmPassword'] = "Confirm password cannot be blank.";
+    } elseif ($this->getPassword() !== $this->getConfirmedPassword()) {
+      $errors['confirmPassword'] = "Password and confirm password not match";
+    }
+
+
+
+
+    // now match current password, with password in database, if not match then output error
+    // email exits, validate password
+    $patient = Patient::find_patient_by_id($this->getId());
+    if($patient)
+    {
+        $isSuccess = password_verify($this->getCurrentPassword(), $patient->getHashedPassword());
+        if(!$isSuccess){
+            $errors['currentPassword'] = 'Please enter the correct current password';
+        }else{
+          // encrypt the password & initailize to store inte database
+          $encryptedPassword = password_hash($this->getPassword(),PASSWORD_BCRYPT);
+          $this->setHashedPassword($encryptedPassword);
+        }
+    }
+    if(!hasPresence($this->getCurrentPassword())) {
+      $errors['currentPassword'] = "Current password cannot be blank.";
+    }
+
+
+    $this->errors = $errors;
+    return $errors;
+  }
+
 }
 ?>

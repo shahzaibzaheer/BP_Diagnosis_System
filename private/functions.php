@@ -9,6 +9,22 @@ function require_patient_login(){
       redirectTo(urlFor('patient/login.php'));
   }
 }
+
+function setMessage($message){
+  $_SESSION['message'] = $message;
+}
+
+function output_message_if_any(){
+  if(isset($_SESSION['message'])){
+    $message = " <div class='alert alert-success alert-dismissible fade show mt-5 col-8 mx-auto' role='alert'>";
+    $message .= " <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>";
+    $message .= $_SESSION['message'] ."</div>";
+    unset($_SESSION['message']);
+    echo $message;
+  }
+}
+
+
 function require_doctor_login(){
   if(!isset($_SESSION[SessionContract::SESSION_DOCTOR_ID])){
       // redirect patient for login
@@ -55,6 +71,12 @@ function performLogout(){
     exit("Some error happen while performing logout");
   }
 }
+
+
+
+
+
+
 
 
 // function isUserLoggedIn(){
@@ -208,6 +230,9 @@ function performLogout(){
         return true;
       }
     }
+
+
+
 
 
 

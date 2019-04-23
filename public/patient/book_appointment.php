@@ -38,24 +38,24 @@
       $appointment->setStatus(Appointment::STATUS_NOT_CONFIRMED_BY_DOCTOR);
       // print_array($appointment);exit;
       if($appointment->save()){
+        setMessage("Your Request for appointment is transfered toward the doctor");
         redirectTo(urlFor('patient/my_appointments.php'));
       }
     }
     require_once(getSharedFilePath('patient/header.php'));
 
 ?>
-  <section class="main_content">
-    <h1>Book Appointment</h1>
+  <section class="main_content mt-5 ">
+    <h1 class="mb-5">Book Appointment</h1>
 
-    <form  class="mt-5 col col-sm-10 col-md-8 ml-auto mr-auto" action="<?php echo $_SERVER["SCRIPT_NAME"]."?".AppointmentTable::COLUMN_DOCTOR_ID."=".$doctor->getId(); ?>" method="post">
-
+    <form  class="col-11 mx-auto col-sm-8 col-md-6" action="<?php echo $_SERVER["SCRIPT_NAME"]."?".AppointmentTable::COLUMN_DOCTOR_ID."=".$doctor->getId(); ?>" method="post">
       <?php if(!$isDoctorSelected){ ?>
         <div class="form-group">
           <button onclick="location.href='<?php echo urlFor("patient/doctors.php"); ?>';" class="btn btn-outline-primary">Select Doctor</button>
         <?php }else{?>
             <!-- display seleted doctor name, with button to change selection  -->
-            <div  class="card text-center" style="padding:0;">
-              <h5 class="card-title text-uppercase"><?php echo $doctor->getName(); ?></h5>
+            <div  class="seleted_doctor card text-center" >
+              <h5 class="card-title text-capitalize p-4"><?php echo $doctor->getName(); ?></h5>
               <div class="card-subtitle"><?php echo $doctor->getQualification(); ?></div>
               <div class="card-subtitle"><?php echo $doctor->getSpecialization(); ?></div>
               <div class="card-subtitle">Fees: Rs <?php echo $doctor->getFees(); ?>/-</div>

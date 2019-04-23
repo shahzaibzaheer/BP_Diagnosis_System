@@ -1,4 +1,6 @@
 <?php  require_once('../../private/initialize.php');
+$errors = [];
+$patient = new Patient();
     // session_start();
     if(isPatientLoggedIn()){
       redirectTo(urlFor('patient/index.php'));
@@ -15,7 +17,8 @@
     }
     else {
       // login filed.
-      print_array($patient->getErrors());
+      $errors = $patient->getErrors();
+      // print_array($errors);
     }
 
   }
@@ -24,14 +27,27 @@
 ?>
 
     <div class="login_registration_container mt-5">
-      <div class="login-form col-4 mx-auto">
+
+      <?php echo output_message_if_any(); ?>
+      <div class="login-form col-8 col-sm-6 col-md-5 col-lg-4 col-xl-3 mx-auto">
           <form action="<?php echo $_SERVER['SCRIPT_NAME']; ?>" method="post">
               <h2 class="text-center mb-4">Patient Login</h2>
-              <div class="form-group">
-                  <input type="text" name="<?php echo PatientTable::COLUMN_EMAIL ?>" class="form-control" placeholder="Email" required="required">
+              <div class="form-group ">
+
+                <p class="text-danger"><?php if(isset($errors['invalidCredantials'])) echo "*".$errors['invalidCredantials']; ?></p>
+                <input type="email" name="<?php echo PatientTable::COLUMN_EMAIL ?>"
+                    class="form-control <?php if(isset($errors['invalidCredantials'])) echo "is-invalid" ?>"
+                    placeholder="Email" required="required"
+                    value="<?php echo $patient->getEmail(); ?>"
+                    onfocus="this.classList.remove('is-invalid');">
+
               </div>
               <div class="form-group">
-                  <input type="password" name="password" class="form-control" placeholder="Password" required="required">
+                  <input type="password" name="password"
+                      class="form-control  <?php if(isset($errors['invalidCredantials'])) echo "is-invalid" ?>"
+                      placeholder="Password" required="required"
+                      onfocus="this.classList.remove('is-invalid');"
+                      >
               </div>
               <div class="form-group">
                   <button type="submit" class="btn btn-primary btn-block">Log in</button>

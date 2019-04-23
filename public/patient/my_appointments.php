@@ -10,9 +10,10 @@
     require_once(getSharedFilePath('patient/header.php'));
 
 ?>
-  <section class="main_content">
-    <h1>My Appointments</h1>
-    <table class="mt-5 table text-center">
+  <section class="main_content mt-5">
+    <?php echo output_message_if_any(); ?>
+    <h1 class="mb-5">My Appointments</h1>
+    <table class="col-11 mx-auto mt-5 table table-responsive">
       <thead>
         <tr>
           <th>Problem</th>

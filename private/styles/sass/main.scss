@@ -1,5 +1,6 @@
 @import url("//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css");
-
+@import url("https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css");
+@import url("https://use.fontawesome.com/releases/v5.7.0/css/all.css");
 
 //***** Variables
 // Colors
@@ -27,6 +28,12 @@ $gutter_xl : 48px;
 $gutter_xxl :  64px;
 $gutter_xxxl :  128px;
 
+
+
+@import 'partials/mainPage';
+
+
+
 .clearfix::after {
   content: "";
   clear: both;
@@ -40,6 +47,18 @@ $gutter_xxxl :  128px;
   font-family: 'Roboto', sans-serif;
   color: $primary_text_color;
 }
+
+
+
+
+
+
+
+
+
+
+
+
 
 .welcome_bar{
   display: flex;
@@ -211,23 +230,24 @@ $gutter_xxxl :  128px;
 
 
 .patient_dashboard{
+  box-sizing: border-box;
   width: 100%;
   padding: $gutter_s;
-  display: flex;
+  // display: flex;
   // margin-top: $gutter_xl;
   .cards{
-    align-self: center;
-    flex-basis: 600px;
-    margin: $gutter_l auto;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
+    // align-self: center;
+    // flex-basis: 600px;
+    // margin: $gutter_l auto;
+    // display: flex;
+    // flex-wrap: wrap;
+    // justify-content: center;
+    // align-items: center;
   }
   .card{
     margin: $gutter_xxs;
-    width: 180px;
-    height: 150px;
+    // width: 180px;
+    height: 200px;
     display: inline-block;
     border-radius: 5px;
     border: 1px solid $list_item_divider_color;
@@ -699,7 +719,7 @@ table.table{
   margin: $gutter_l 0;
   .card-title{
     font-size: 2em;
-    line-height: 0.5em;
+    // line-height: 0.5em;
   }
 }
 .main-card-icon{
@@ -740,101 +760,75 @@ table.table{
 
 /************* Footer
 ****************************************/
+
 .footer-distributed{
 	background-color: #292c2f;
-	box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.12);
 	box-sizing: border-box;
 	width: 100%;
-	// text-align: center;
 	padding: 55px 50px;
-	margin-top: 80px;
-}
-.footer-content{
-  margin: 0 auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+
+  .footer-content{
+    // display: flex;
+    // align-items: center;
+    // justify-content: center;
+    .copyright p{
+      color: rgba(#fff,0.8);
+    }
+    .footer-left{
+
+      div{
+        display: flex;
+        align-items: center;
+      }
+      i{
+      	background-color:  #33383b;
+      	color: #ffffff;
+      	font-size: 1.2em;
+      	width: 38px;
+      	height: 38px;
+      	border-radius: 50%;
+      	text-align: center;
+      	line-height: 42px;
+      	margin: 10px 15px;
+      	vertical-align: middle;
+      }
+      p{
+      	display: inline-block;
+      	color: #ffffff;
+      	vertical-align: middle;
+      	margin:0;
+      }
+      p span{
+      	display:block;
+      	font-weight: normal;
+      	font-size:14px;
+      	line-height:2;
+      }
+      p a{
+      	color:  #5383d3;
+      	text-decoration: none;;
+      }
+    }
+    .footer-right{
+      .footer-company-about{
+      	line-height: 20px;
+      	color:  #92999f;
+      	font-size: 13px;
+      	margin: 0;
+        span{
+        	display: block;
+        	color:  #ffffff;
+        	font-size: 1.2em;
+        	margin-bottom: 20px;
+        }
 
 
-/* Footer left */
-.footer-distributed .footer-left{
-	width: 40%;
+      }
 
-  div{
-    display: flex;
-    align-items: center;
+    }
   }
+
 }
-
-
-
-/* The company logo */
-.footer-distributed h3{
-	color:  #ffffff;
-	font: normal 36px 'Cookie', cursive;
-	margin: 0;
-}
-
-
-.footer-distributed .footer-left i{
-	background-color:  #33383b;
-	color: #ffffff;
-	font-size: 1.2em;
-	width: 38px;
-	height: 38px;
-	border-radius: 50%;
-	text-align: center;
-	line-height: 42px;
-	margin: 10px 15px;
-	vertical-align: middle;
-}
-
-
-.footer-distributed .footer-left p{
-	display: inline-block;
-	color: #ffffff;
-	vertical-align: middle;
-	margin:0;
-}
-
-.footer-distributed .footer-left p span{
-	display:block;
-	font-weight: normal;
-	font-size:14px;
-	line-height:2;
-}
-
-.footer-distributed .footer-left p a{
-	color:  #5383d3;
-	text-decoration: none;;
-}
-
-
-/* Footer Right */
-
-.footer-distributed .footer-right{
-	width: 20%;
-}
-
-.footer-distributed .footer-company-about{
-	line-height: 20px;
-	color:  #92999f;
-	font-size: 13px;
-	margin: 0;
-}
-
-.footer-distributed .footer-company-about span{
-	display: block;
-	color:  #ffffff;
-	font-size: 1.2em;
-	margin-bottom: 20px;
-}
-
-
-
-
-
 
 
 
@@ -1020,3 +1014,71 @@ table.table{
   overflow: hidden;
   // border: 10px solid #000;
 }
+
+
+
+
+
+
+
+.form-group{
+
+
+  p{
+    line-height: 0;
+    // background: pink;
+  }
+}
+
+
+
+
+
+.doctors-container{
+  .btn,.static-rating-container{
+    margin-top: auto;
+  }
+
+
+  .card-title{
+    line-height: 1.2em;
+  }
+}
+
+
+.doctor_detail_container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .card{
+
+    padding: 0;
+  }
+  .btn{
+    margin-top: auto;
+  }
+
+  h6{
+    line-height: 0;
+  }
+}
+
+.doctor_detail{
+  font-weight: lighter;
+  h6{
+    font-size: 1.6em;
+  }
+  p{
+    font-size: 1.4em;
+    margin-bottom: 30px;
+  }
+}
+
+
+//
+// .seleted_doctor{
+//   background: red;
+//   h5{
+//     line-height: 1.2em;
+//   }
+// }

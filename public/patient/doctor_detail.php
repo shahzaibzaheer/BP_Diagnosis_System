@@ -56,16 +56,16 @@
 ?>
 
 
-    <section class="main_content">
-      <h1 class=" "><?php echo $doctor->getName(); ?></h1>
-      <div class="d-flex">
-        <div class="card">
+    <section class="main_content mt-5">
+      <h1 class=" mb-5"><?php echo $doctor->getName(); ?></h1>
+      <div class="row doctor_detail_container">
+        <div class="card col-10  col-sm-4">
           <img class="card-img img-fluid" src="https://placehold.it/400x400" alt="">
-          <a class="btn btn-primary mt-2" href="<?php echo urlFor('patient/book_appointment.php')."?doctor_id=".$doctor->getId(); ?>">Book Appointment</a>
+          <a class="btn btn-primary mt-4" href="<?php echo urlFor('patient/book_appointment.php')."?doctor_id=".$doctor->getId(); ?>">Book Appointment</a>
           <!-- Trigger the modal with a button -->
-          <button type="button" class="btn btn-primary mt-2" data-toggle="modal" data-target="#reviewModal">Give Feedback</button>
+          <button type="button" class="btn btn-primary mt-2" data-toggle="modal" data-target="#feedbackModal"><?php  echo ($patientReview === false) ?  "Give Review" :  "Update Review"; ?></button>
         </div>
-        <div class="">
+        <div class="doctor_detail col-10 col-sm-6 ml-4 mt-5">
           <div class="">
             <h6>About Doctor:</h6>
             <p><?php echo $doctor->getAbout(); ?></p>
@@ -95,61 +95,134 @@
             <p><?php echo $doctor->getAddress(); ?></p>
           </div>
         </div>
-      </div>
 
-      <form action="<?php echo $_SERVER['SCRIPT_NAME']."?doctor_id=".$doctor_id; ?>" method="post">
-        <?php
-            if(!$patientReview){
-              echo Review::getRatingStarsForForm();
-            }else {
-              echo Review::getRatingStarsForForm($patientReview->getRating());
-            }
-        ?>
+        <section class="col-12  h-25 doctor-rating-holder  mt-5 mb-0">
+          <div class="row">
+            <div class="average-rating-container card  col-10 col-sm-6  col-md-4 mx-auto">
+              <h4>Average Rating</h4>
+              <h2><?php echo Review::get_average_doctor_rating($doctor->getId()); ?> <span>/ 5 </span></h2>
+              <?php echo Review::getRatingStars((int) Review::get_average_doctor_rating($doctor->getId())); ?>
+            </div>
+          </div>
+        </section>
+          <div class="col-12  ">
+              <!-- Output all the reviews-->
+              <?php foreach ($reviews as $review): ?>
+                <div class="card review_container p-4">
+                  <div class=" col-12  col-sm-9  col-md-6  d-block text-center d-sm-flex ">
+                    <h2 class="mt-2 mr-4">4.3</h2>
+                    <div >
+                      <?php echo Review::getRatingStars($review->getRating()); ?>
+                    </div>
+                  </div>
 
-          <div class="form-group">
-            <input type="text" class="form-control" placeholder="Subject" name="<?php echo ReviewTable::COLUMN_SUBJECT; ?>"
-            value="<?php if($patientReview){ echo $patientReview->getSubject(); } ?>">
+                  <h4 class="reviewer-name"> <?php echo $review->getPatient()->getName(); ?></h4>
+                  <p class="card-subtitle">Created On: <?php echo $review->getCreatedOn(); ?></p>
+                  <p class="card-subtitle mt-4"> <b>Subject : </b> <?php echo $review->getSubject(); ?> </p>
+                  <p class="card-subtitle mt-2"><b>Message : </b>  <?php echo $review->getMessage(); ?></p>
+                </div>
+
+              <?php endforeach; ?>
           </div>
-          <div class="form-group">
-            <textarea class="form-control" placeholder="Message" name="<?php echo ReviewTable::COLUMN_MESSAGE; ?>"><?php if($patientReview){ echo $patientReview->getMessage(); } ?></textarea>
-          </div>
-          <input class="btn btn-primary col-3 " type="submit" name="submit" value="<?php  echo ($patientReview === false) ?  "Post Review" :  "Update Review"; ?> ">
+        </div>
+
+
+
+
+
+
+
+
+
+
+    </section>
+
+
+    <!-- Modal HTML -->
+    <form action="<?php echo $_SERVER['SCRIPT_NAME']."?doctor_id=".$doctor_id; ?>" method="post">
+        <div id="feedbackModal" class="modal fade">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <!-- <h4 class="modal-title">Confirmation</h4> -->
+                    </div>
+                    <div class="modal-body">
+
+
+
+                        <?php
+                            if(!$patientReview){
+                              echo Review::getRatingStarsForForm();
+                            }else {
+                              echo Review::getRatingStarsForForm($patientReview->getRating());
+                            }
+                        ?>
+
+                          <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Subject" name="<?php echo ReviewTable::COLUMN_SUBJECT; ?>"
+                            value="<?php if($patientReview){ echo $patientReview->getSubject(); } ?>">
+                          </div>
+                          <div class="form-group">
+                            <textarea class="form-control" placeholder="Message" name="<?php echo ReviewTable::COLUMN_MESSAGE; ?>"><?php if($patientReview){ echo $patientReview->getMessage(); } ?></textarea>
+                          </div>
+                          <div class="modal-footer">
+                              <input class="btn btn-primary " type="submit" name="submit" value="<?php  echo ($patientReview === false) ?  "Give Review" :  "Update Review"; ?>">
+                          </div>
+
+
+                    </div>
+                    <!-- <div class="modal-footer"> -->
+                        <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> -->
+                        <!-- <button type="button" name="submit" class="btn btn-primary" data-dismiss="modal"></button> -->
+                    <!-- </div> -->
+                </div>
+            </div>
+        </div>
       </form>
 
 
 
 
-
-
-      <section class="doctor-rating-holder">
-
-        <div class="row d-flex  justify-content-around">
-          <div class="average-rating-container card col-4">
-            <h4>Average Rating</h4>
-            <h2><?php echo Review::get_average_doctor_rating($doctor->getId()); ?> <span>/ 5 </span></h2>
-            <?php echo Review::getRatingStars((int) Review::get_average_doctor_rating($doctor->getId())); ?>
-          </div>
-        </div>
+  </div>
+  <footer class="footer-distributed">
+    <div class="row col-lg-9 mx-auto footer-content">
+      <div class="col-11 col-md-5  mx-auto mb-5 footer-left">
         <div>
-
-
-            <!-- Output all the reviews-->
-            <?php foreach ($reviews as $review): ?>
-              <div class="single-review" style="border: 1px solid #000">
-
-                <h4><?php echo $review->getPatient()->getName(); ?></h4>
-                <p>Created On: <?php echo $review->getCreatedOn(); ?></p>
-                  <?php echo Review::getRatingStars($review->getRating()); ?>
-                <p> <b><?php echo $review->getSubject(); ?></b> </p>
-                <p> <?php echo $review->getMessage(); ?></p>
-              </div>
-
-            <?php endforeach; ?>
-
+          <i class="fa fa-map-marker-alt"></i>
+          <p>21 Revolution Street Paris,</br> France</p>
         </div>
-      </section>
-    </section>
+
+        <div>
+          <i class="fa fa-phone"></i>
+          <p>+1 555 123456</p>
+        </div>
+
+        <div>
+          <i class="fa fa-envelope"></i>
+          <p><a href="mailto:support@company.com">support@company.com</a></p>
+        </div>
+
+      </div>
+
+      <div class="col-11 col-md-5  mx-auto mb-5 footer-right">
+        <p class="footer-company-about">
+          <span>About the company</span>
+          Lorem ipsum dolor sit amet, consectateur adispicing elit. Fusce euismod convallis velit, eu auctor lacus vehicula sit amet.
+        </p>
+      </div>
+      <div class="copyright col-11 col-sm-8 col-md-6 mx-auto text-center">
+        <p>&copy; Copyright <?php echo date('Y'); ?>, All Rights Reserved </p>
+      </div>
+    </div>
+
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  <script type="text/javascript" src="<?php echo getScriptPath('main_script.js'); ?>"></script>
+</body>
+</html>
 
 
-
-<?php   require_once(getSharedFilePath('patient/footer.php')); ?>
+    <!-- <?php   require_once(getSharedFilePath('patient/footer.php')); ?> -->

@@ -11,8 +11,8 @@
     // exit;
 
 ?>
-<section class="main_content">
-  <h1>Report</h1>
+<section class="main_content mt-5">
+  <h1 class="mb-4">Report</h1>
   <div class="card">
     <h4>Appointments Report</h4>
     <?php

@@ -13,15 +13,17 @@
 
 ?>
 
-    <section class="main_content  mb-4">
-      <h1>My Prescriptions</h1>
-    <table  class="mt-5 table table-responsive" >
+    <section class="main_content mt-5 ">
+      <?php echo output_message_if_any(); ?>
+      <h1 class="mb-4 text-center">My Prescriptions</h1>
+    <table  class=" col-11 mx-auto col-sm-8 mt-5 table table-responsive" >
       <thead>
         <tr>
           <th>Subject</th>
           <th>Status</th>
           <th>BP Reading</th>
           <th>Created On</th>
+          <th></th>
           <th></th>
           <th></th>
         </tr>
@@ -33,6 +35,8 @@
               <td><?php echo $prescription->getStatus(); ?></td>
               <td><?php echo $prescription->getBpLow()." low, ".$prescription->getBpHigh()." high"; ?></td>
               <td><?php echo $prescription->getCreatedOn(); ?></td>
+              <td></td>
+              <td></td>
               <td> <a href="<?php echo urlFor("patient/my_prescription_detail.php?prescription_id=".$prescription->getPrescriptionId()) ?>">View</a> </td>
               <!-- <td> <a href="#">Cancel</a> </td> -->
             </tr>

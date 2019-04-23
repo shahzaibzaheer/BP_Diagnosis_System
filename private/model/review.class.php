@@ -119,6 +119,7 @@ class Review
       }
 
       public static function get_average_doctor_rating($doctor_id){
+        if(Review::get_sum_of_ratings($doctor_id) == 0) return "0";
         $avgRating = Review::get_sum_of_ratings($doctor_id)/Review::get_total_number_of_ratings($doctor_id);
         return number_format($avgRating,1,'.','');
       }

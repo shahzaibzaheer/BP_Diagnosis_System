@@ -16,7 +16,7 @@
 
       if($patient->save()){
         //login successfull
-        redirectTo(urlFor('patient/profile.php'));
+        setMessage("Profile Data Updated successfully");
       }else {
         // login failed, get errors array
         $errors = $patient->getErrors();
@@ -29,9 +29,11 @@
 
 
 ?>
-  <section class="main_content">
-    <h1>My Profile</h1>
-    <form class="ask_for_prescription_form" action="<?php echo $_SERVER['SCRIPT_NAME']; ?>" method="post">
+  <section class="main_content mt-5">
+    <?php output_message_if_any(); ?>
+
+    <h1 class="mb-4">My Profile</h1>
+    <form class="ask_for_prescription_form col-11 mx-auto col-sm-8 col-md-6 col-lg-5" action="<?php echo $_SERVER['SCRIPT_NAME']; ?>" method="post">
       <div class="input-group">
         <input class="input--style-1" type="text" placeholder="Name" name="<?php echo PatientTable::COLUMN_NAME; ?>" value="<?php echo $patient->getName(); ?>">
       </div>
