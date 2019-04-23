@@ -18,9 +18,8 @@
   </head>
   <body>
 
-
-      <div class="welcome_bar ">
-        <p>Welcome <?php echo $patient->getName(); ?> </p><i id="welcome_drop_down_btn" class="fas fa-caret-down"></i>
+      <div class="welcome_bar">
+        <p>Welcome <?php echo $patient->getName(); ?> </p><i  id="welcome_drop_down_btn" class="fas fa-caret-down"></i>
         <ul class="popOver">
           <li> <a href="<?php echo urlFor("patient/profile.php"); ?>">My Profile</a> </li>
           <li> <a href="<?php echo urlFor("patient/changePassword.php"); ?>">Change Password</a> </li>

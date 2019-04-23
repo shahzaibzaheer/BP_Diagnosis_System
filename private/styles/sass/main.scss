@@ -59,10 +59,10 @@ $gutter_xxxl :  128px;
 
 
 
-
 .welcome_bar{
   display: flex;
   position: absolute;
+  z-index: 1;
   // flex-direction: column;
   top: 0;
   right: 0;

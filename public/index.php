@@ -18,7 +18,7 @@
 									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris tempus vestibulum mauris quis aliquam. Integer accumsan sodales odio, id tempus velit ullamcorper id. Quisque at erat eu.</p>
 								</div>
 								<div class="button home_button">
-									<a href="<?php echo urlFor('patient/login.php');  ?>">Book an Appointment</a>
+									<a href="<?php  echo urlFor('patient/login.php');  ?>">Book an Appointment</a>
 								</div>
 							</div>
 						</div>
