@@ -7,7 +7,18 @@
   }
   if(isPostRequest()){
 
+
+    // // exit();
+    // $file = new UploadFile(getSharedFilePath("assets"));
+    // if($file->upload()){
+    //   exit("file uploaded successfully"." File name: ".$file->getUploadedFileName());
+    // }else {
+    //   print_array($file->getErrorMessages());
+    // }
+
+
       $doctor = new Doctor($_POST);
+
       // print_array($doctor);
       // exit;
       if($doctor->save()){
@@ -34,8 +45,11 @@
 
         <div class="login_registration_container mt-5">
           <div class="login-form col-4 mx-auto">
-              <form action="<?php echo $_SERVER['SCRIPT_NAME']; ?>" method="post">
+              <form action="<?php echo $_SERVER['SCRIPT_NAME']; ?>" method="post" enctype="multipart/form-data">
                   <h2 class="text-center mb-4">Doctor Registration</h2>
+                  <!-- <div class="form-group" >
+                          <input class="form-control-file"  placeholder="Profile Picture" type="file" name="profile_picture" value="" >
+                  </div> -->
                   <div class="form-group" >
                           <input class="form-control" placeholder="Name" type="text" name="<?php echo DoctorTable::COLUMN_NAME ?>" value="<?php echo $doctor->getName(); ?>" >
                   </div>

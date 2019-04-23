@@ -15,7 +15,7 @@
           <?php foreach ($doctors as $doctor): ?>
             <div  class="card text-center col-10  col-md-5 mx-auto"
                 style="padding:0;"  onclick="location.href='<?php echo urlFor('patient/doctor_detail.php')."?doctor_id=".$doctor->getId(); ?>';">
-              <img class="card-img img-fluid" src="https://placehold.it/400x400" alt="">
+              <!-- <img class="card-img img-fluid" src="https://placehold.it/400x400" alt=""> -->
               <h5 class="card-title text-capitalize mt-5"><?php echo $doctor->getName(); ?></h5>
               <div class="card-subtitle mt-2"><?php echo $doctor->getQualification(); ?></div>
               <div class="card-subtitle "><?php echo $doctor->getSpecialization(); ?></div>

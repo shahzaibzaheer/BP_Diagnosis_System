@@ -59,8 +59,13 @@
     <section class="main_content mt-5">
       <h1 class=" mb-5"><?php echo $doctor->getName(); ?></h1>
       <div class="row doctor_detail_container">
-        <div class="card col-10  col-sm-4">
-          <img class="card-img img-fluid" src="https://placehold.it/400x400" alt="">
+
+        <div class="card col-10  col-sm-4 text-center">
+          <h5 class="card-title text-capitalize mt-5"><?php echo $doctor->getName(); ?></h5>
+          <div class="card-subtitle mt-2"><?php echo $doctor->getQualification(); ?></div>
+          <div class="card-subtitle "><?php echo $doctor->getSpecialization(); ?></div>
+          <div class="card-subtitle ">Fees: Rs <?php echo $doctor->getFees(); ?>/-</div>
+          <?php echo Review::getRatingStars((int) Review::get_average_doctor_rating($doctor->getId())); ?>
           <a class="btn btn-primary mt-4" href="<?php echo urlFor('patient/book_appointment.php')."?doctor_id=".$doctor->getId(); ?>">Book Appointment</a>
           <!-- Trigger the modal with a button -->
           <button type="button" class="btn btn-primary mt-2" data-toggle="modal" data-target="#feedbackModal"><?php  echo ($patientReview === false) ?  "Give Review" :  "Update Review"; ?></button>
