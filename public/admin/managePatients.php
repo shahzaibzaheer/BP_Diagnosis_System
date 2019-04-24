@@ -4,7 +4,7 @@
     if($patients===false){
       exit("No patient Found");
     }
-
+    $page_title = "Manage Patients";
     require_once(getSharedFilePath('admin/header.php'));
 
 ?>

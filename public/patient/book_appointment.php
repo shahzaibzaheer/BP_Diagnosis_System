@@ -42,6 +42,7 @@
         redirectTo(urlFor('patient/my_appointments.php'));
       }
     }
+    $page_title = "Book Appointment";
     require_once(getSharedFilePath('patient/header.php'));
 
 ?>

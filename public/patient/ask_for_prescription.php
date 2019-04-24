@@ -15,7 +15,7 @@
         print_array($prescription->getErrors());
       }
     }
-
+    $page_title = "Ask For Prescription";
     require_once(getSharedFilePath('patient/header.php'));
 
 ?>

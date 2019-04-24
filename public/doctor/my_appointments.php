@@ -9,6 +9,7 @@
       exit("You have no appointments");
     }
     // print_array($appointments);
+    $page_title = "My Appointments";
     require_once(getSharedFilePath('doctor/header.php'));
 
 ?>

@@ -1,6 +1,7 @@
 <?php  require_once('../../private/initialize.php');
     require_patient_login();
     // this page will access only when patient is logged in
+    $page_title = "Change Password";
     require_once(getSharedFilePath('patient/header.php'));
    // exit("...............".$patient->getGender());
     $errors = [];

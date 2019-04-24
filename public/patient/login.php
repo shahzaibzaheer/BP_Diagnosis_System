@@ -22,6 +22,7 @@ $patient = new Patient();
     }
 
   }
+  $page_title =  "Patient Login";
   require_once(getSharedFilePath('main/login_registration_header.php'));
 
 ?>

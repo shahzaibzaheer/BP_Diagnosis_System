@@ -1,6 +1,7 @@
 <?php  require_once('../../private/initialize.php');
     require_patient_login();
     // this page will access only when patient is logged in
+    $page_title = "View Report";
     require_once(getSharedFilePath('patient/header.php'));
     $patientId = loggedInPatientId();
     // grab all patient's appointments

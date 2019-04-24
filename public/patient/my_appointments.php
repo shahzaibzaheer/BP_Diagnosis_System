@@ -6,7 +6,7 @@
     if(!$appointments){
       exit("You have no appointments");
     }
-
+    $page_title = "My Appointments";
     require_once(getSharedFilePath('patient/header.php'));
 
 ?>

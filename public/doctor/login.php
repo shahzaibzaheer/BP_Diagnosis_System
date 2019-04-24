@@ -19,7 +19,8 @@
       // print_array($doctor->getErrors());
     }
 
-   }
+  }
+  $page_title = "Doctor Login";
    require_once(getSharedFilePath('main/login_registration_header.php'));
 
 ?>

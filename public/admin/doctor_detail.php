@@ -23,7 +23,7 @@
 
         // $patientReview = Review::find_review_by_patient_id($patient_id);
         // print_array($patientReview);exit;
-
+  $page_title = "Doctor Detail";
   require_once(getSharedFilePath('admin/header.php'));
 
 

@@ -40,7 +40,7 @@
 
 
 
-
+    $page_title = "Registration";
     require_once(getSharedFilePath('main/login_registration_header.php'));
 ?>
 

@@ -4,7 +4,7 @@
   if(!$prescriptons){
     exit("No prescription found");
   }
-
+  $page_title = "Prescription Requests";
   require_once(getSharedFilePath('doctor/header.php'));
 ?>
 

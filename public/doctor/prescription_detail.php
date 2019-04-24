@@ -46,6 +46,7 @@
     }else {
       exit("User don't pass the id, redirect where it should be");
     }
+    $page_title = "Prescription Detail";
     require_once(getSharedFilePath('doctor/header.php'));
 ?>
 

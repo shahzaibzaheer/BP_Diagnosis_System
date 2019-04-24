@@ -2,6 +2,7 @@
     require_admin_login();
     // this page will access only when patient is logged in
     // in header we are getting $admin
+    $page_title = "Profile";
     require_once(getSharedFilePath('admin/header.php'));
     $errors = [];
 

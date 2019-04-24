@@ -1,6 +1,7 @@
 <?php  require_once('../../private/initialize.php');
     require_doctor_login();
     // this page will access only when doctor is logged in
+    $page_title = "Profile";
     require_once(getSharedFilePath('doctor/header.php'));
     $errors = [];
         if(isPostRequest()){

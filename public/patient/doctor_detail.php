@@ -51,6 +51,7 @@
           }
   }
 
+    $page_title = "Doctor Detail";
     require_once(getSharedFilePath('patient/header.php'));
 
 

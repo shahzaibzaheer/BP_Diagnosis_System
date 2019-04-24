@@ -8,6 +8,7 @@
       exit("There are appointments");
     }
     // print_array($appointments);
+    $page_title = "Appointment History";
     require_once(getSharedFilePath('admin/header.php'));
 
 ?>

@@ -3,6 +3,7 @@
 
     require_patient_login();
     // this page will access only when patient is logged in
+    $page_title = "Doctors";
     require_once(getSharedFilePath('patient/header.php'));
     $doctors = Doctor::find_all_doctors();
     if(!$doctors){ exit("There is no doctor availabel");}

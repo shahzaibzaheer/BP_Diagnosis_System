@@ -19,6 +19,7 @@ $patient = new Patient();
     }
 
   }
+  $page_title =  "Patient Forget Password";
   require_once(getSharedFilePath('main/login_registration_header.php'));
 
 ?>
@@ -54,7 +55,7 @@ $patient = new Patient();
               <div class="form-group">
                   <button type="submit" class="btn btn-primary btn-block">Log in</button>
               </div>
-            
+
           </form>
           <p class="text-center"><a href="<?php echo urlFor('patient/registration.php'); ?>">Create an Account</a></p>
       </div>

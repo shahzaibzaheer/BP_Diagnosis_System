@@ -19,7 +19,7 @@ if(isPatientLoggedIn()){
     }
   }
 
-
+  $page_title =  "Patient Create Account";
   require_once(getSharedFilePath('main/login_registration_header.php'));
 
 ?>

@@ -34,7 +34,7 @@
         exit("Error while fetching the patient data");
       }
   }
-
+    $page_title = "Reset Password";
     require_once(getSharedFilePath('main/login_registration_header.php'));
 
 ?>

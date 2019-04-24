@@ -8,7 +8,7 @@
     }
     // print_array($prescriptions);
     // just print the data as in table format
-
+    $page_title = "My Prescriptions";
     require_once(getSharedFilePath('patient/header.php'));
 
 ?>

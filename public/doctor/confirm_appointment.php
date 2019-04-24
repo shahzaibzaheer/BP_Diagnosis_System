@@ -38,6 +38,7 @@
       }
 
     }
+    $page_title = "Confirm Appointment";
     require_once(getSharedFilePath('doctor/header.php'));
 
 ?>

@@ -4,7 +4,7 @@
     if($doctors===false){
       exit("No doctor Found");
     }
-
+    $page_title = "Manage Doctors";
     require_once(getSharedFilePath('admin/header.php'));
 
 ?>

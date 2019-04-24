@@ -6,7 +6,7 @@
   if(!$prescriptons){
     exit("No prescription found");
   }
-
+    $page_title = "My Answered Prescriptions";
     require_once(getSharedFilePath('doctor/header.php'));
 ?>
     <section class="main_content mb-5">
