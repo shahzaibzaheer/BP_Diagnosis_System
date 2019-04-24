@@ -48,7 +48,7 @@
               <button type="submit" class="btn btn-primary btn-block">Log in</button>
           </div>
           <div class="clearfix">
-              <a href="#" class=" pull-right">Forgot Password?</a>
+              <a href="<?php echo urlFor('doctor/forgetPassword.php'); ?>" class=" pull-right">Forgot Password?</a>
           </div>
       </form>
       <p class="text-center"><a href="<?php echo urlFor('doctor/registration.php'); ?>">Create an Account</a></p>

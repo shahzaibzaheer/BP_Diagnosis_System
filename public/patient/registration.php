@@ -93,7 +93,7 @@ if(isPatientLoggedIn()){
               <div class="form-group">
                   <button type="submit" class="btn btn-primary btn-block">Register</button>
               </div>
-              <a href="#" class=" pull-right">Forgot Password?</a>
+              <a href="<?php echo urlFor('patient/forgetPassword.php'); ?>" class=" pull-right">Forgot Password?</a>
             </form>
             <p class="text-center">Already Registered ?<a href="<?php echo urlFor('patient/login.php'); ?>"> Log In</a></p>
         </div>

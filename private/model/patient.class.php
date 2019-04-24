@@ -120,7 +120,7 @@ class Patient {
     $stmt->execute([$username]);
     $patient = $stmt->fetch(PDO::FETCH_ASSOC);
     if(isset($patient)){
-        return $patient;
+        return new self($patient);
     }
     else {
       // echo "Patient Not found"
@@ -182,6 +182,28 @@ class Patient {
     }
   }
 
+  public function resetPassword(){
+    $errorsArray = $this->validateResetPasswordCredentials();
+    // var_dump($errorsArray); exit;
+    if(isContainErrors($errorsArray))
+    {
+      return false;
+    }else {
+      $queryString  =  "UPDATE ".PatientTable::TABLE_NAME;
+      $queryString .=  " SET ".PatientTable::COLUMN_HASHED_PASSWORD." = :".PatientTable::COLUMN_HASHED_PASSWORD." ";
+      $queryString .=  " WHERE ".PatientTable::COLUMN_ID." = ".$this->getId()." ";
+
+      try{
+        $stmt = Patient::$db->prepare($queryString);
+        $stmt->execute([
+          PatientTable::COLUMN_HASHED_PASSWORD => $this->getHashedPassword()
+        ]);
+        return true;
+      }catch(Exception $e){
+        exit($e->getMessage());
+      }
+    }
+  }
 
 
 
@@ -317,6 +339,59 @@ class Patient {
 
   /******* Helper Functions
   ************************************/
+  public function onForgetPassword(){
+      // valid forgetPasword credentials
+      $this->errors = $this->validateForgetPassCredentials();
+      // var_dump($this->errors); exit;
+      if(isContainErrors($this->errors))
+      {
+        return false;
+      }else {
+        // all the information are passed,  and user is also existes
+        // return ture.
+        return true;
+      }
+  }
+
+
+  private function validateForgetPassCredentials(){
+      // invalidCredentials
+       $errors = [];
+       $forgetPatient = Patient::find_patient_by_username($this->getUserName());
+       if($forgetPatient == false){
+         $errors['invalidCredentials'] = "Invalid Credentials";
+         return $errors;
+       }else{
+         if($forgetPatient->getPhoneNumber() == $this->getPhoneNumber() && $forgetPatient->getDOB() == $this->getDOB()){
+               // patient exits, return empty errors
+               // bind id, for passing to the reset password page
+               $this->setId($forgetPatient->getId());
+               return $errors =  [];
+         }
+         else {
+           $errors['invalidCredentials'] = "Invalid Credentials";
+           return $errors;
+         }
+       }
+  }
+
+/*
+$queryString  = "SELECT * FROM ".PatientTable::TABLE_NAME." ";
+$queryString .= "WHERE ".PatientTable::COLUMN_USERNAME." = ?";
+$stmt = Patient::$db->prepare($queryString);
+$stmt->execute([$username]);
+$patient = $stmt->fetch(PDO::FETCH_ASSOC);
+if(isset($patient)){
+    return $patient;
+}
+else {
+  // echo "Patient Not found"
+  return false;
+}
+*/
+
+
+
   public function isUsernameAlreadyExists($userName){
     $patient = Patient::find_patient_by_username($userName);
 
@@ -580,6 +655,41 @@ class Patient {
       }
     }
     return $errors;
+  }
+
+  private function validateResetPasswordCredentials(){
+        $errors = [];
+        // password validation
+        if(!hasPresence($this->getPassword())) {
+          $errors['password'] = "Password cannot be blank.";
+        } elseif (!has_length($this->getPassword(), array('min' => 12))) {
+          $errors['password'] = "Password must contain 12 or more characters";
+        } elseif (!preg_match('/[A-Z]/', $this->getPassword())) {
+          $errors['password'] = "Password must contain at least 1 uppercase letter";
+        } elseif (!preg_match('/[a-z]/', $this->getPassword())) {
+          $errors['password'] = "Password must contain at least 1 lowercase letter";
+        } elseif (!preg_match('/[0-9]/', $this->getPassword())) {
+          $errors['password'] = "Password must contain at least 1 number";
+        }
+        // elseif (!preg_match('/[^A-Za-z0-9\s]/', $this->getPassword())) {
+        //   $errors['password'] = "Password must contain at least 1 symbol";
+        // }
+
+        if(!hasPresence($this->getConfirmedPassword())) {
+          $errors['confirmPassword'] = "Confirm password cannot be blank.";
+        } elseif ($this->getPassword() !== $this->getConfirmedPassword()) {
+          $errors['confirmPassword'] = "Password and confirm password not match";
+        }
+
+
+        if(!isContainErrors($errors)){
+          $encryptedPassword = password_hash($this->getPassword(),PASSWORD_BCRYPT);
+          $this->setHashedPassword($encryptedPassword);
+        }
+
+        $this->errors = $errors;
+        return $errors;
+
   }
 
   private function validatePasswordUpdateCredentials(){

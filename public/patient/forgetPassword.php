@@ -1,19 +1,16 @@
 <?php  require_once('../../private/initialize.php');
 $errors = [];
 $patient = new Patient();
-    // session_start();
-    if(isPatientLoggedIn()){
-      redirectTo(urlFor('patient/index.php'));
-    }
+
 
   if(isPostRequest()){
     $patient = new Patient($_POST);
-    if($patient->login()){
+    if($patient->onForgetPassword()){
       // exit("Login successfull");
       // $_SESSION['patient_id'] = exit("patient id: ".$patient->getId());
-      $_SESSION[SessionContract::SESSION_PATIENT_ID] = $patient->getId();
-      // exit($_SESSION[SessionContract::SESSION_PATIETN_ID]);
-      redirectTo(urlFor('patient/index.php'));
+      // exit("redirect to reset password, with the patient id");
+      $_SESSION['isPageOpenThroughForgetPassword'] = "1"; // we don't want to open resetPassword page directly
+      redirectTo(urlFor('patient/resetPassword.php?patient_id='.$patient->getId()));
     }
     else {
       // login filed.
@@ -30,32 +27,35 @@ $patient = new Patient();
       <!-- <div class='alert alert-success alert-dismissible fade show mt-5 col-8 mx-auto '  role='alert'>
       <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>
        Lorem Ipsum lorem ipsum pore asdjfl sdfls jaslf j </div> -->
-      <?php echo output_message_if_any(); ?>
       <div class="login-form col-8 col-sm-6 col-md-5 col-lg-4 col-xl-3 mx-auto">
           <form action="<?php echo $_SERVER['SCRIPT_NAME']; ?>" method="post">
-              <h2 class="text-center mb-4">Patient Login</h2>
+              <h2 class="text-center mb-4">Forget Passwrod ?</h2>
               <div class="form-group ">
-
-                <p class="text-danger"><?php if(isset($errors['invalidCredantials'])) echo "*".$errors['invalidCredantials']; ?></p>
-                <input type="email" name="<?php echo PatientTable::COLUMN_EMAIL ?>"
-                    class="form-control <?php if(isset($errors['invalidCredantials'])) echo "is-invalid" ?>"
-                    placeholder="Email" required="required"
-                    value="<?php echo $patient->getEmail(); ?>"
-                    onfocus="this.classList.remove('is-invalid');">
+                <p class="text-danger"><?php if(isset($errors['invalidCredentials'])) echo "*".$errors['invalidCredentials']; ?></p>
+                <input type="text" name="<?php echo PatientTable::COLUMN_USERNAME ?>"
+                    placeholder="Enter Username" required="required"
+                    class="form-control"
+                    value="<?php echo $patient->getUserName(); ?>">
 
               </div>
+              <div class="form-group ">
+                <input type="text" name="<?php echo PatientTable::COLUMN_PHONE ?>"
+                    placeholder="Enter Phone Number" required="required"
+                    class="form-control"
+                    value="<?php echo $patient->getPhoneNumber(); ?>">
+              </div>
+
               <div class="form-group">
-                  <input type="password" name="password"
-                      class="form-control  <?php if(isset($errors['invalidCredantials'])) echo "is-invalid" ?>"
-                      placeholder="Password" required="required"
-                      onfocus="this.classList.remove('is-invalid');"
-                      >
+                <input type="date" name="<?php echo PatientTable::COLUMN_DATE_OF_BITRH ?>"
+                    placeholder="Enter Date of Birth" required="required"
+                    class="form-control"
+                    value="<?php echo $patient->getDOB(); ?>">
               </div>
               <div class="form-group">
                   <button type="submit" class="btn btn-primary btn-block">Log in</button>
               </div>
               <div class="clearfix">
-                  <a href="<?php echo urlFor('patient/forgetPassword.php'); ?>" class=" pull-right">Forgot Password?</a>
+                  <a href="#" class=" pull-right">Forgot Password?</a>
               </div>
           </form>
           <p class="text-center"><a href="<?php echo urlFor('patient/registration.php'); ?>">Create an Account</a></p>
