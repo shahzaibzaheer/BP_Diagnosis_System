@@ -54,9 +54,7 @@ $patient = new Patient();
               <div class="form-group">
                   <button type="submit" class="btn btn-primary btn-block">Log in</button>
               </div>
-              <div class="clearfix">
-                  <a href="#" class=" pull-right">Forgot Password?</a>
-              </div>
+            
           </form>
           <p class="text-center"><a href="<?php echo urlFor('patient/registration.php'); ?>">Create an Account</a></p>
       </div>

@@ -30,8 +30,7 @@
     							<nav class="main_nav ml-auto">
     								<ul>
     									<li><a href="<?php echo urlFor('index.php'); ?>">Home</a></li>
-    									<li><a href="#">About Us</a></li>
-    									<li><a href="#">Contact Us</a></li>
+    									<li><a href="<?php  echo urlFor('/about.php');  ?>">About Us</a></li>
                       <li><a href="<?php echo urlFor('patient/login.php');  ?>">Book Appointment</a></li>
     								</ul>
     							</nav>
@@ -59,8 +58,7 @@
     			<div class="menu menu_mm">
     				<ul class="menu_list menu_mm">
     					<li class="menu_item menu_mm"><a href="<?php echo urlFor('index.php'); ?>">Home</a></li>
-    					<li class="menu_item menu_mm"><a href="#">About us</a></li>
-    					<li class="menu_item menu_mm"><a href="#">Contact Us</a></li>
+    					<li class="menu_item menu_mm"><a href="<?php  echo urlFor('/about.php');  ?>">About us</a></li>
     					<li class="menu_item menu_mm"><a href="<?php echo urlFor('patient/login.php');  ?>">Book Appointment</a></li>
     				</ul>
     			</div>

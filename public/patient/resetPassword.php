@@ -70,7 +70,6 @@
               <button type="submit" class="btn btn-primary btn-block">Log in</button>
           </div>
       </form>
-      <p class="text-center"><a href="<?php echo urlFor('patient/registration.php'); ?>">Create an Account</a></p>
   </div>
 </div>
 </body>
