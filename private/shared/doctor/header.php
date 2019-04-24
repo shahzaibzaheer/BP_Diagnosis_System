@@ -22,7 +22,7 @@
         <p>Welcome <?php echo $doctor->getName(); ?> </p><i id="welcome_drop_down_btn" class="fas fa-caret-down"></i>
         <ul class="popOver">
           <li> <a href="<?php echo urlFor("doctor/profile.php"); ?>">My Profile</a> </li>
-          <li> <a href="#">Change Password</a> </li>
+          <li> <a href="<?php echo urlFor("doctor/changePassword.php"); ?>">Change Password</a> </li>
           <li> <a href="<?php echo urlFor("doctor/doLogout.php"); ?>">Logout</a> </li>
         </ul>
       </div>

@@ -20,7 +20,7 @@
         <p>Welcome <?php echo $admin->getName(); ?> </p><i id="welcome_drop_down_btn" class="fas fa-caret-down"></i>
         <ul class="popOver">
           <li> <a href="<?php echo urlFor("admin/profile.php"); ?>">My Profile</a> </li>
-          <li> <a href="#">Change Password</a> </li>
+          <li> <a href="<?php echo urlFor("admin/changePassword.php"); ?>">Change Password</a> </li>
           <li> <a href="<?php echo urlFor("admin/doLogout.php"); ?>">Logout</a> </li>
         </ul>
       </div>

@@ -9,6 +9,7 @@ class Doctor
     private $gender; //boolean
     private $hashedPassword; //String
     private $password;
+    private $currentPassword;
     private $confirmPassword;
     private $phone; //String
     private $address; //String
@@ -48,6 +49,8 @@ class Doctor
             $this->setQualification($args[DoctorTable::COLUMN_QUALIFICATION] ?? '');
             $this->setFees($args[DoctorTable::COLUMN_FEES] ?? '');
             $this->setCreated_on($args[DoctorTable::COLUMN_CREATED_ON] ?? '');
+            $this->setCurrentPassword($args['currentPassword'] ?? '');
+
 
     }
     private function bind_doctor_data($args){
@@ -66,6 +69,7 @@ class Doctor
             $this->setQualification($args[DoctorTable::COLUMN_QUALIFICATION] ?? '');
             $this->setFees($args[DoctorTable::COLUMN_FEES] ?? '');
             $this->setCreated_on($args[DoctorTable::COLUMN_CREATED_ON] ?? '');
+            $this->setCurrentPassword($args['currentPassword'] ?? '');
 
     }
 
@@ -175,6 +179,98 @@ class Doctor
         return false;
       }
     }
+
+
+
+    public function updatePassword(){
+
+      $errorsArray = $this->validatePasswordUpdateCredentials();
+      if(isContainErrors($errorsArray))
+      {
+        return false;
+      }else {
+
+        $queryString  =  "UPDATE ".DoctorTable::TABLE_NAME;
+        $queryString .=  " SET ".DoctorTable::COLUMN_HASHED_PASSWORD." = :".DoctorTable::COLUMN_HASHED_PASSWORD." ";
+        $queryString .=  " WHERE ".DoctorTable::COLUMN_ID." = ".$this->getId()." ";
+
+        try{
+          $stmt = Doctor::$db->prepare($queryString);
+          $stmt->execute([
+            DoctorTable::COLUMN_HASHED_PASSWORD => $this->getHashedPassword()
+          ]);
+          return true;
+        }catch(Exception $e){
+          exit($e->getMessage());
+        }
+
+      }
+    }
+
+
+
+    private function validatePasswordUpdateCredentials(){
+      $errors = [];
+
+
+      // password validation
+      if(!hasPresence($this->getPassword())) {
+        $errors['password'] = "Password cannot be blank.";
+      } elseif (!has_length($this->getPassword(), array('min' => 12))) {
+        $errors['password'] = "Password must contain 12 or more characters";
+      } elseif (!preg_match('/[A-Z]/', $this->getPassword())) {
+        $errors['password'] = "Password must contain at least 1 uppercase letter";
+      } elseif (!preg_match('/[a-z]/', $this->getPassword())) {
+        $errors['password'] = "Password must contain at least 1 lowercase letter";
+      } elseif (!preg_match('/[0-9]/', $this->getPassword())) {
+        $errors['password'] = "Password must contain at least 1 number";
+      }
+      // elseif (!preg_match('/[^A-Za-z0-9\s]/', $this->getPassword())) {
+      //   $errors['password'] = "Password must contain at least 1 symbol";
+      // }
+
+      if(!hasPresence($this->getConfirmedPassword())) {
+        $errors['confirmPassword'] = "Confirm password cannot be blank.";
+      } elseif ($this->getPassword() !== $this->getConfirmedPassword()) {
+        $errors['confirmPassword'] = "Password and confirm password not match";
+      }
+
+
+
+
+      // now match current password, with password in database, if not match then output error
+      // email exits, validate password
+      $doctor = Doctor::find_doctor_by_id($this->getId());
+      if($doctor)
+      {
+          $isSuccess = password_verify($this->getCurrentPassword(), $doctor->getHashedPassword());
+          if(!$isSuccess){
+              $errors['currentPassword'] = 'Please enter the correct current password';
+          }else{
+            // encrypt the password & initailize to store inte database
+            $encryptedPassword = password_hash($this->getPassword(),PASSWORD_BCRYPT);
+            $this->setHashedPassword($encryptedPassword);
+          }
+      }
+      if(!hasPresence($this->getCurrentPassword())) {
+        $errors['currentPassword'] = "Current password cannot be blank.";
+      }
+
+
+      $this->errors = $errors;
+      return $errors;
+    }
+
+
+
+
+
+
+
+
+
+
+
 
 
 /******* Getters & Setters
@@ -300,7 +396,14 @@ class Doctor
     public function getErrors(){
       return $this->errors;
     }
-
+    public function setCurrentPassword($currentPassword='')
+    {
+      $this->currentPassword = $currentPassword;
+    }
+    public function getCurrentPassword()
+    {
+      return $this->currentPassword ;
+    }
 
 
 /******* Helper Functions

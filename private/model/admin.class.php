@@ -10,6 +10,7 @@ class Admin {
     public $created_on; //String
     private $password;
     private $confirmPassword;
+    private $currentPassword;
 
     static private $db;
     private $errors;
@@ -24,6 +25,8 @@ class Admin {
       $this->setCreated_on($args[AdminTable::COLUMN_CREATED_ON] ?? '');
       $this->setPassword($args['password'] ?? '');
       $this->setConfirmPassword($args['confirmPassword'] ?? '');
+      $this->setCurrentPassword($args['currentPassword'] ?? '');
+
     }
     function bind_admin_data($args=[]){
       $this->setId($args[AdminTable::COLUMN_ID] ?? '');
@@ -35,6 +38,8 @@ class Admin {
       $this->setCreated_on($args[AdminTable::COLUMN_CREATED_ON] ?? '');
       $this->setPassword($args['password'] ?? '');
       $this->setConfirmPassword($args['confirmPassword'] ?? '');
+      $this->setCurrentPassword($args['currentPassword'] ?? '');
+
     }
 
 
@@ -75,7 +80,7 @@ class Admin {
             return new self($admin);
         }
         else {
-          // echo "Patient Not found"
+          // echo "Admin Not found"
           return false;
         }
       }
@@ -90,7 +95,7 @@ class Admin {
             return $admin;
         }
         else {
-          // echo "Patient Not found"
+          // echo "Admin Not found"
           return false;
         }
       }
@@ -104,7 +109,7 @@ class Admin {
             return $admin;
         }
         else {
-          // echo "Patient Not found"
+          // echo "Admin Not found"
           return false;
         }
       }
@@ -226,7 +231,14 @@ class Admin {
     {
       $this->confirmPassword = $confirmPassword;
     }
-
+    public function setCurrentPassword($currentPassword='')
+    {
+      $this->currentPassword = $currentPassword;
+    }
+    public function getCurrentPassword()
+    {
+      return $this->currentPassword ;
+    }
 
 /******* Helper Functions
 ************************************/
@@ -315,6 +327,32 @@ class Admin {
         }
     }
 
+
+    public function updatePassword(){
+
+      $errorsArray = $this->validatePasswordUpdateCredentials();
+      if(isContainErrors($errorsArray))
+      {
+        return false;
+      }else {
+
+        $queryString  =  "UPDATE ".AdminTable::TABLE_NAME;
+        $queryString .=  " SET ".AdminTable::COLUMN_HASHED_PASSWORD." = :".AdminTable::COLUMN_HASHED_PASSWORD." ";
+        $queryString .=  " WHERE ".AdminTable::COLUMN_ID." = ".$this->getId()." ";
+
+        try{
+          $stmt = Admin::$db->prepare($queryString);
+          $stmt->execute([
+            AdminTable::COLUMN_HASHED_PASSWORD => $this->getHashedPassword()
+          ]);
+          return true;
+        }catch(Exception $e){
+          exit($e->getMessage());
+        }
+
+      }
+    }
+
   private function validateUpdation(){
        $errors = [];
 
@@ -384,6 +422,60 @@ class Admin {
      $this->errors = $errors;
      return $errors;
    }
+
+
+   private function validatePasswordUpdateCredentials(){
+     $errors = [];
+
+     // password validation
+     if(!hasPresence($this->getPassword())) {
+       $errors['password'] = "Password cannot be blank.";
+     } elseif (!has_length($this->getPassword(), array('min' => 12))) {
+       $errors['password'] = "Password must contain 12 or more characters";
+     } elseif (!preg_match('/[A-Z]/', $this->getPassword())) {
+       $errors['password'] = "Password must contain at least 1 uppercase letter";
+     } elseif (!preg_match('/[a-z]/', $this->getPassword())) {
+       $errors['password'] = "Password must contain at least 1 lowercase letter";
+     } elseif (!preg_match('/[0-9]/', $this->getPassword())) {
+       $errors['password'] = "Password must contain at least 1 number";
+     }
+     // elseif (!preg_match('/[^A-Za-z0-9\s]/', $this->getPassword())) {
+     //   $errors['password'] = "Password must contain at least 1 symbol";
+     // }
+
+     if(!hasPresence($this->getConfirmedPassword())) {
+       $errors['confirmPassword'] = "Confirm password cannot be blank.";
+     } elseif ($this->getPassword() !== $this->getConfirmedPassword()) {
+       $errors['confirmPassword'] = "Password and confirm password not match";
+     }
+
+
+
+
+     // now match current password, with password in database, if not match then output error
+     // email exits, validate password
+     $admin = Admin::find_admin_by_id($this->getId());
+     if($admin)
+     {
+         $isSuccess = password_verify($this->getCurrentPassword(), $admin->getHashedPassword());
+         if(!$isSuccess){
+             $errors['currentPassword'] = 'Please enter the correct current password';
+         }else{
+           // encrypt the password & initailize to store inte database
+           $encryptedPassword = password_hash($this->getPassword(),PASSWORD_BCRYPT);
+           $this->setHashedPassword($encryptedPassword);
+         }
+     }
+     if(!hasPresence($this->getCurrentPassword())) {
+       $errors['currentPassword'] = "Current password cannot be blank.";
+     }
+
+
+     $this->errors = $errors;
+     return $errors;
+   }
+
+
 
    public function isUsernameAlreadyExists($userName){
      $admin = Admin::find_admin_by_username($userName);
