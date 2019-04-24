@@ -16,6 +16,11 @@ function setMessage($message){
 
 function output_message_if_any(){
   if(isset($_SESSION['message'])){
+    /*<div class='alert alert-success alert-dismissible fade show mt-5 col-8 mx-auto' role='alert'>
+    <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>
+     Lorem Ipsum lorem ipsum pore asdjfl sdfls jaslf j </div> */
+
+
     $message = " <div class='alert alert-success alert-dismissible fade show mt-5 col-8 mx-auto' role='alert'>";
     $message .= " <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>";
     $message .= $_SESSION['message'] ."</div>";

@@ -12,9 +12,9 @@
     require_once(getSharedFilePath('doctor/header.php'));
 
 ?>
-    <section class="main_content  mb-4">
-      <h1>My Appointments</h1>
-      <table  class="mt-5 table table-responsive">
+    <section class="main_content  mb-5">
+      <h1 class="mb-4 text-center">My Appointments</h1>
+      <table  class=" col-12 mx-auto col-sm-11 mt-5 table table-responsive" >
         <thead>
           <tr>
             <th>Problem</th>

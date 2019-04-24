@@ -375,7 +375,7 @@ class Doctor
     }
 
     private function update(){
-          // first validate the data, if validation successfull then save data and return true
+          // first (validate) the data, if validation successfull then save data and return true
           // if validation fails, then return errors array
           $errorsArray = $this->validateUpdation();
           if(isContainErrors($errorsArray))
@@ -521,6 +521,10 @@ class Doctor
      if(!hasPresence($this->getSpecialization())){$errors[DoctorTable::COLUMN_SPECIALIZATION]= 'Specialization can\'t be blank';}
      if(!hasPresence($this->getQualification())){$errors[DoctorTable::COLUMN_QUALIFICATION]= 'Qualification can\'t be blank';}
      if(!hasPresence($this->getFees())){$errors[DoctorTable::COLUMN_FEES]= 'Fees can\'t be blank';}
+     else {
+       if($this->getFees() <= 0){$errors[DoctorTable::COLUMN_FEES]= 'Fees should be greater than Zero';}
+
+     }
 
      $this->errors = $errors;
      return $errors;

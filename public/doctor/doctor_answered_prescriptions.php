@@ -9,9 +9,9 @@
 
     require_once(getSharedFilePath('doctor/header.php'));
 ?>
-    <section class="main_content mb-4">
-      <h1>My Answered Prescriptions</h1>
-      <table  class="mt-5 table table-responsive">
+    <section class="main_content mb-5">
+      <h1 class="mb-4 text-center">My Answered Prescriptions</h1>
+      <table  class=" col-11 mx-auto col-sm-8 mt-5 table table-responsive" >
         <thead>
           <tr>
             <th>Patient Name</th>

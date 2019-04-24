@@ -9,9 +9,9 @@
 
 ?>
 
-<section class="main_content  mb-4 mr-5">
-  <h1>Manage Patients</h1>
-    <table class="mt-5 w-100  table table-responsive">
+<section class="main_content mt-5 ">
+  <h1 class="mb-4 text-center">Manage Patients</h1>
+  <table  class=" col-11 mx-auto col-sm-11 mt-5 table table-responsive" >
       <thead>
         <tr>
           <th>Name</th>

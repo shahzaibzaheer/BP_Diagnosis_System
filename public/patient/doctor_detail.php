@@ -59,7 +59,6 @@
     <section class="main_content mt-5">
       <h1 class=" mb-5"><?php echo $doctor->getName(); ?></h1>
       <div class="row doctor_detail_container">
-
         <div class="card col-10  col-sm-4 text-center">
           <h5 class="card-title text-capitalize mt-5"><?php echo $doctor->getName(); ?></h5>
           <div class="card-subtitle mt-2"><?php echo $doctor->getQualification(); ?></div>
@@ -130,15 +129,6 @@
               <?php endforeach; ?>
           </div>
         </div>
-
-
-
-
-
-
-
-
-
 
     </section>
 

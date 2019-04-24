@@ -27,7 +27,9 @@ $patient = new Patient();
 ?>
 
     <div class="login_registration_container mt-5">
-
+      <!-- <div class='alert alert-success alert-dismissible fade show mt-5 col-8 mx-auto '  role='alert'>
+      <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>
+       Lorem Ipsum lorem ipsum pore asdjfl sdfls jaslf j </div> -->
       <?php echo output_message_if_any(); ?>
       <div class="login-form col-8 col-sm-6 col-md-5 col-lg-4 col-xl-3 mx-auto">
           <form action="<?php echo $_SERVER['SCRIPT_NAME']; ?>" method="post">

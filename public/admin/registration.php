@@ -4,7 +4,7 @@ if(isAdminLoggedIn()){
 }
 
   $admin = new Admin();  // for preventing error , when get request
-
+  $errors = [];
   if(isPostRequest()){
     // print_array($_POST);
     $admin = new Admin($_POST);

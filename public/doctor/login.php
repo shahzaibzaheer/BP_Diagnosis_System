@@ -1,10 +1,5 @@
 <?php require_once('../../private/initialize.php');
-    // $doctor = Doctor::find_doctor_by_email("shahzaib@gmail.com");
-    // $result = password_verify('Shahzaib12345', $doctor->getHashedPassword());
-    // var_dump($result);
-    // print_array($doctor);
-    // exit;
-    // session_start();
+    $errors = [];
     if(isDoctorLoggedIn()){
       redirectTo(urlFor('doctor/index.php'));
     }
@@ -20,7 +15,8 @@
     else {
       // login filed.
       // exit("Login failed");
-      print_array($doctor->getErrors());
+      $errors = $doctor->getErrors();
+      // print_array($doctor->getErrors());
     }
 
    }
@@ -30,14 +26,23 @@
 
 
 <div class="login_registration_container mt-5">
-  <div class="login-form col-4 mx-auto">
+  <?php echo output_message_if_any(); ?>
+
+  <div class="login-form col-8 col-sm-6 col-md-5 col-lg-4 col-xl-3 mx-auto">
       <form action="<?php echo $_SERVER['SCRIPT_NAME']; ?>" method="post">
           <h2 class="text-center mb-4">Doctor Login</h2>
           <div class="form-group">
-              <input type="email" name="<?php echo DoctorTable::COLUMN_EMAIL ?>" class="form-control" placeholder="Email" required="required">
+            <p class="text-danger"><?php if(isset($errors['invalidCredantials'])) echo "*".$errors['invalidCredantials']; ?></p>
+              <input type="email" name="<?php echo DoctorTable::COLUMN_EMAIL ?>"
+              class="form-control <?php if(isset($errors['invalidCredantials'])) echo "is-invalid" ?>"
+              placeholder="Email" required="required"
+              onfocus="this.classList.remove('is-invalid');">
           </div>
           <div class="form-group">
-              <input type="password" name="password" class="form-control" placeholder="Password" required="required">
+              <input type="password" name="password"
+              class="form-control <?php if(isset($errors['invalidCredantials'])) echo "is-invalid" ?>"
+              placeholder="Password" required="required"
+              onfocus="this.classList.remove('is-invalid');">
           </div>
           <div class="form-group">
               <button type="submit" class="btn btn-primary btn-block">Log in</button>
