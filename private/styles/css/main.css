@@ -1739,6 +1739,8 @@ table.table a {
   margin-top: auto; }
 .doctors-container .card-title {
   line-height: 1.2em; }
+.doctors-container .card:hover {
+  cursor: pointer; }
 
 .doctor_detail_container {
   display: flex;

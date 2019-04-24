@@ -10,15 +10,19 @@
     // fetch all the reviews
         $reviews = [];
         $reviewsAssoc = Review::find_reviews_by_doctor_id($doctor_id);
-        foreach ($reviewsAssoc as $reviewAssoc) {
-          $reviews[] = new Review($reviewAssoc);
+        if($reviewsAssoc){
+          foreach ($reviewsAssoc as $reviewAssoc) {
+            $reviews[] = new Review($reviewAssoc);
+          }
         }
         if(empty($reviews)){
           $reviews = false;
         }
 
-        $patientReview = Review::find_review_by_patient_id($patient_id);
+        // $patientReview = Review::find_review_by_patient_id($patient_id);
+        $patientReview = Review::find_review_by_patient_and_doctor_id($patient_id,$doctor_id);
         // print_array($patientReview);exit;
+
 
     if(isPostRequest()){
 
@@ -109,6 +113,7 @@
             </div>
           </div>
         </section>
+        <?php if($reviews != false){ ?>
           <div class="col-12  ">
               <!-- Output all the reviews-->
               <?php foreach ($reviews as $review): ?>
@@ -128,6 +133,7 @@
 
               <?php endforeach; ?>
           </div>
+          <?php } ?>
         </div>
 
     </section>

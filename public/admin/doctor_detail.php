@@ -12,8 +12,10 @@
     // fetch all the reviews
         $reviews = [];
         $reviewsAssoc = Review::find_reviews_by_doctor_id($doctor_id);
-        foreach ($reviewsAssoc as $reviewAssoc) {
-          $reviews[] = new Review($reviewAssoc);
+        if($reviewsAssoc){
+          foreach ($reviewsAssoc as $reviewAssoc) {
+            $reviews[] = new Review($reviewAssoc);
+          }
         }
         if(empty($reviews)){
           $reviews = false;
@@ -79,6 +81,8 @@
         </div>
       </div>
     </section>
+    <?php if($reviews != false){ ?>
+
       <div class="col-12  ">
           <!-- Output all the reviews-->
           <?php foreach ($reviews as $review): ?>
@@ -98,6 +102,7 @@
 
           <?php endforeach; ?>
       </div>
+    <?php } ?>
     </div>
 
 </section>

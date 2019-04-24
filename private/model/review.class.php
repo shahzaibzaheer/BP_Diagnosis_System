@@ -85,6 +85,21 @@ class Review
           return false;
         }
       }
+    static public function find_review_by_patient_and_doctor_id($patient_id,$doctor_id){
+        $queryString  = "SELECT * FROM ".ReviewTable::TABLE_NAME." ";
+        $queryString .= "WHERE ".ReviewTable::COLUMN_PATIENT_ID." = ? AND ".ReviewTable::COLUMN_DOCTOR_ID." = ?";
+        $stmt = Review::$db->prepare($queryString);
+        $stmt->execute([$patient_id,$doctor_id]);
+        $review = $stmt->fetch(PDO::FETCH_ASSOC);
+        if($review){
+          // return review object, not associative array
+          return new self($review);
+        }
+        else {
+          // echo "review Not found";
+          return false;
+        }
+      }
 
 
 

@@ -1051,6 +1051,9 @@ table.table{
   .card-title{
     line-height: 1.2em;
   }
+  .card:hover{
+    cursor: pointer;
+  }
 }
 
 
