@@ -3,12 +3,16 @@ session_start();
 
 /*** authorization related
 *****************************/
+// when one user is logged in then don't let the others to log in,
+
 function require_patient_login(){
-  if(!isset($_SESSION[SessionContract::SESSION_PATIENT_ID])){
-      // redirect patient for login
-      redirectTo(urlFor('patient/login.php'));
+  if(!isPatientLoggedIn()){
+    redirectTo(urlFor('patient/login.php'));
   }
+  logoutAdmin();
+  logoutDoctor();
 }
+
 
 function setMessage($message){
   $_SESSION['message'] = $message;
@@ -31,17 +35,20 @@ function output_message_if_any(){
 
 
 function require_doctor_login(){
-  if(!isset($_SESSION[SessionContract::SESSION_DOCTOR_ID])){
-      // redirect patient for login
-      redirectTo(urlFor('doctor/login.php'));
+  if(!isDoctorLoggedIn()){
+    redirectTo(urlFor('doctor/login.php'));
   }
+  logoutAdmin();
+  logoutPatient();
 }
 function require_admin_login(){
-  if(!isset($_SESSION[SessionContract::SESSION_ADMIN_ID])){
-      // redirect patient for login
-      redirectTo(urlFor('admin/login.php'));
+  if(!isAdminLoggedIn()){
+    redirectTo(urlFor('admin/login.php'));
   }
+  logoutDoctor();
+  logoutPatient();
 }
+
 function loggedInPatientId(){
   return $_SESSION[SessionContract::SESSION_PATIENT_ID];
 }
@@ -65,22 +72,29 @@ function isAdminLoggedIn(){
 }
 
 function performLogout(){
-  if(isset($_SESSION[SessionContract::SESSION_PATIENT_ID])){
-    unset($_SESSION[SessionContract::SESSION_PATIENT_ID]);
-  }elseif(isset($_SESSION[SessionContract::SESSION_DOCTOR_ID])){
-    unset($_SESSION[SessionContract::SESSION_DOCTOR_ID]);
-  }elseif(isset($_SESSION[SessionContract::SESSION_ADMIN_ID])){
-    unset($_SESSION[SessionContract::SESSION_ADMIN_ID]);
-  }
-  else{
-    exit("Some error happen while performing logout");
-  }
+  logoutDoctor();
+  logoutPatient();
+  logoutAdmin();
 }
 
 
 
+function logoutPatient(){
+  if(isset($_SESSION[SessionContract::SESSION_PATIENT_ID])){
+    unset($_SESSION[SessionContract::SESSION_PATIENT_ID]);
+  }
+}
 
-
+function logoutDoctor(){
+  if(isset($_SESSION[SessionContract::SESSION_DOCTOR_ID])){
+    unset($_SESSION[SessionContract::SESSION_DOCTOR_ID]);
+  }
+}
+function logoutAdmin(){
+  if(isset($_SESSION[SessionContract::SESSION_ADMIN_ID])){
+    unset($_SESSION[SessionContract::SESSION_ADMIN_ID]);
+  }
+}
 
 
 
