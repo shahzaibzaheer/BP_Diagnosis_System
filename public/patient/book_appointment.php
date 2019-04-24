@@ -52,7 +52,7 @@
     <form  class="col-11 mx-auto col-sm-8 col-md-6" action="<?php echo $_SERVER["SCRIPT_NAME"]."?".AppointmentTable::COLUMN_DOCTOR_ID."=".$doctor->getId(); ?>" method="post">
       <?php if(!$isDoctorSelected){ ?>
         <div class="form-group">
-          <button onclick="location.href='<?php echo urlFor("patient/doctors.php"); ?>';" class="btn btn-outline-primary">Select Doctor</button>
+          <button onclick="location.href='<?php echo urlFor("patient/doctors.php"); ?>';" class="btn btn-outline-primary mb-5">Select Doctor</button>
         <?php }else{?>
             <!-- display seleted doctor name, with button to change selection  -->
             <div  class="seleted_doctor card text-center" >

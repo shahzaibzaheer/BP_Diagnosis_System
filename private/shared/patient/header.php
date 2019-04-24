@@ -31,38 +31,47 @@
 
     <div class="content">
       <!-- drawer_collapse -->
-      <nav class="drawer drawer_collapse  ">
+      <nav class="drawer   ">
          <i id="drawer_icon" class="fas fa-bars"></i>
          <ul>
-         <li onclick="location.href='<?php echo urlFor("patient/index.php"); ?>';" class="item_selected">
+         <li onclick="location.href='<?php echo urlFor("patient/index.php"); ?>';"
+           class="<?php if($page_title=='Dashboard'){echo "item_selected";}; ?>">
            <i class="drawer_item_icon fas fa-home"></i>
            <a>Dashbard</a>
          </li>
-         <li  onclick="location.href='<?php echo urlFor("patient/doctors.php"); ?>';">
+         <li  onclick="location.href='<?php echo urlFor("patient/doctors.php"); ?>';"
+           class="<?php if($page_title=='Doctors'){echo "item_selected";}; ?>">
            <i  class="drawer_item_icon fas fa-user-md"></i>
            <a>Doctors</a>
          </li>
-         <li onclick="location.href='<?php echo urlFor("patient/ask_for_prescription.php"); ?>';">
+         <li onclick="location.href='<?php echo urlFor("patient/ask_for_prescription.php"); ?>';"
+           class="<?php if($page_title=='Ask For Prescription'){echo "item_selected";}; ?>">
            <i class="drawer_item_icon fas fa-comment-medical"></i>
            <a>Ask For Prescription</a>
          </li>
-         <li onclick="location.href='<?php echo urlFor("patient/my_prescriptions.php"); ?>';">
+         <li onclick="location.href='<?php echo urlFor("patient/my_prescriptions.php"); ?>';"
+           class="<?php if($page_title=='My Prescriptions'){echo "item_selected";}; ?>">
            <i class="drawer_item_icon fas fa-capsules"></i>
            <a>My Prescriptions</a>
          </li>
-         <li  onclick="location.href='<?php echo urlFor("patient/book_appointment.php"); ?>';">
+         <li  onclick="location.href='<?php echo urlFor("patient/book_appointment.php"); ?>';"
+           class="<?php if($page_title=='Book Appointment'){echo "item_selected";}; ?>">
            <i class="drawer_item_icon fas fa-calendar-check"></i>
            <a>Book Appointment</a>
          </li>
-         <li  onclick="location.href='<?php echo urlFor("patient/my_appointments.php"); ?>';">
+         <li  onclick="location.href='<?php echo urlFor("patient/my_appointments.php"); ?>';"
+           class="<?php if($page_title=='My Appointments'){echo "item_selected";}; ?>">
+
            <i class="drawer_item_icon fas fa-history"></i>
            <a>Appointment History</a>
          </li>
-         <li onclick="location.href='<?php echo urlFor("patient/report.php"); ?>';">
+         <li onclick="location.href='<?php echo urlFor("patient/report.php"); ?>';"
+           class="<?php if($page_title=='View Report'){echo "item_selected";}; ?>">
            <i class="drawer_item_icon fas fa-receipt"></i>
            <a>View Report</a>
          </li>
-         <li onclick="location.href='<?php echo urlFor("patient/profile.php"); ?>';">
+         <li onclick="location.href='<?php echo urlFor("patient/profile.php"); ?>';"
+           class="<?php if($page_title=='Profile'){echo "item_selected";}; ?>">
            <i class="drawer_item_icon fas fa-user"></i>
            <a>My Profile</a>
          </li>

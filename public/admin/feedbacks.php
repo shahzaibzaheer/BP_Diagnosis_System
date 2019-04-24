@@ -5,7 +5,7 @@
     $doctors = Doctor::find_all_doctors();
     if(!$doctors){ exit("There is no doctor available");}
 
-    $page_title = "User's Feedbacks";
+    $page_title = "Users Feedbacks";
     require_once(getSharedFilePath('admin/header.php'));
 
 ?>

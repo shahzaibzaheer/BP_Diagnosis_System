@@ -1,7 +1,6 @@
 <?php  require_once('../../private/initialize.php');
-    require_patient_login();
+    require_admin_login();
     // this page will access only when patient is logged in
-    $patient_id = loggedInPatientId();
     $doctor_id =  $_GET['doctor_id'] ?? '';
     $doctor = Doctor::find_doctor_by_id($doctor_id);
     if(!$doctor){

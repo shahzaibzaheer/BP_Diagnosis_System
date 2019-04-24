@@ -30,30 +30,41 @@
 
     <div class="content">
       <!-- drawer_collapse -->
-      <nav class="drawer drawer_collapse ">
+      <nav class="drawer ">
          <i id="drawer_icon" class="fas fa-bars"></i>
          <ul>
-         <li onclick="location.href='<?php echo urlFor("doctor/index.php"); ?>';" class="item_selected">
+         <li onclick="location.href='<?php echo urlFor("doctor/index.php"); ?>';"
+           class="<?php if($page_title=='Dashboard'){echo "item_selected";}; ?>">
+
            <i class="drawer_item_icon fas fa-home"></i>
            <a>Dashbard</a>
          </li>
-         <li onclick="location.href='<?php echo urlFor("doctor/prescription_requests.php"); ?>';">
+         <li onclick="location.href='<?php echo urlFor("doctor/prescription_requests.php"); ?>';"
+           class="<?php if($page_title=='Prescription Requests'){echo "item_selected";}; ?>">
+
            <i class="drawer_item_icon fas fa-capsules"></i>
            <a>Prescription Requests</a>
          </li>
-         <li onclick="location.href='<?php echo urlFor("doctor/doctor_answered_prescriptions.php"); ?>';">
+         <li onclick="location.href='<?php echo urlFor("doctor/doctor_answered_prescriptions.php"); ?>';"
+           class="<?php if($page_title=='My Answered Prescriptions'){echo "item_selected";}; ?>">
+
            <i class="drawer_item_icon fas fa-comment-medical"></i>
            <a>My Answered Prescriptions</a>
          </li>
-         <li  onclick="location.href='<?php echo urlFor("doctor/my_appointments.php"); ?>';">
+         <li  onclick="location.href='<?php echo urlFor("doctor/my_appointments.php"); ?>';"
+           class="<?php if($page_title=='My Appointments'){echo "item_selected";}; ?>">
+
            <i class="drawer_item_icon fas fa-calendar-check"></i>
            <a>My Appointments</a>
          </li>
-         <li onclick="location.href='<?php echo urlFor("doctor/report.php"); ?>';">
+         <li onclick="location.href='<?php echo urlFor("doctor/report.php"); ?>';"
+           class="<?php if($page_title=='View Report'){echo "item_selected";}; ?>">
+
            <i class="drawer_item_icon fas fa-receipt"></i>
            <a>View Report</a>
          </li>
-         <li onclick="location.href='<?php echo urlFor("doctor/profile.php"); ?>';">
+         <li onclick="location.href='<?php echo urlFor("doctor/profile.php"); ?>';"
+           class="<?php if($page_title=='Profile'){echo "item_selected";}; ?>">
            <i class="drawer_item_icon fas fa-user"></i>
            <a>My Profile</a>
          </li>
