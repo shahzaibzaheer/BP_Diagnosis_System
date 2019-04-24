@@ -1231,7 +1231,7 @@ section {
 .main_content {
   width: 100%;
   padding: 0 30px;
-  margin-bottom: 200px; }
+  margin-bottom: 0px; }
   .main_content h1 {
     font-weight: lighter;
     text-align: center;
@@ -1397,22 +1397,26 @@ table.table a {
   position: relative;
   overflow: hidden; }
 
+.messages-wrapper {
+  position: relative; }
+
 .replay-box {
-  position: absolute;
-  bottom: 0;
+  position: fixed;
+  bottom: 50px;
   left: 0;
   right: 0;
-  width: 100%;
   padding: 0 30px; }
   .replay-box form {
     display: flex;
     align-items: center; }
     .replay-box form input[type="text"] {
       flex-grow: 1;
-      padding: 20px; }
+      padding: 30px 20px;
+      background: rgba(0, 0, 0, 0.2); }
     .replay-box form button[type="submit"] {
       flex-grow: 0;
-      flex-basis: 100px; }
+      flex-basis: 100px;
+      padding: 15px; }
       .replay-box form button[type="submit"] i {
         color: #fff; }
 
@@ -1583,7 +1587,8 @@ table.table a {
   background-color: #292c2f;
   box-sizing: border-box;
   width: 100%;
-  padding: 55px 50px; }
+  padding: 55px 50px;
+  margin-top: 200px; }
   .footer-distributed .footer-content .copyright p {
     color: rgba(255, 255, 255, 0.8); }
   .footer-distributed .footer-content .footer-left div {

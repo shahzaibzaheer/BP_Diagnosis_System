@@ -215,7 +215,7 @@ $gutter_xxxl :  128px;
   // background: rgba(red, 0.1);
   width: 100%;
   padding: 0 30px;
-  margin-bottom: 200px;
+  margin-bottom: 0px;
   h1{
     font-weight: lighter;
     text-align: center;
@@ -473,12 +473,16 @@ table.table{
 
 }
 
+.messages-wrapper{
+  position: relative;
+}
+
 .replay-box{
-  position: absolute;
-  bottom: 0;
+  position: fixed;
+  bottom: 50px;
   left: 0;
   right: 0;
-  width: 100%;
+  // width: 100%;
   padding: 0 30px;
   form{
     display: flex;
@@ -486,11 +490,14 @@ table.table{
 
     input[type="text"]{
       flex-grow: 1;
-      padding: 20px
+      padding: 30px 20px;
+      background: rgba(#000,0.2);
     }
     button[type="submit"]{
       flex-grow: 0;
       flex-basis: 100px;
+      padding: 15px;
+
       // padding: 10px
       i{
         color: #fff;
@@ -766,6 +773,7 @@ table.table{
 	box-sizing: border-box;
 	width: 100%;
 	padding: 55px 50px;
+  margin-top: 200px;
 
   .footer-content{
     // display: flex;
