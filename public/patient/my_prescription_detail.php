@@ -81,7 +81,7 @@
               <!-- Visible the replay box to the user -->
               <div class="replay-box col-12 ">
                 <form action="<?php echo $_SERVER['SCRIPT_NAME']."?prescription_id=".$prescription->getPrescriptionId(); ?>" method="post">
-                  <input class="form-control" type="text" name="replayMessage" value="" placeholder="Enter Your Replay">
+                  <input class="form-control" type="text" name="replayMessage" value="" placeholder="Enter Your Replay" required>
                   <button class="btn btn-primary" type="submit"  name="button"> <i class="fas fa-paper-plane"></i> </button>
                 </form>
               </div>

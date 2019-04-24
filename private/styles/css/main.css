@@ -1412,7 +1412,7 @@ table.table a {
     .replay-box form input[type="text"] {
       flex-grow: 1;
       padding: 30px 20px;
-      background: rgba(0, 0, 0, 0.2); }
+      background: #ccc; }
     .replay-box form button[type="submit"] {
       flex-grow: 0;
       flex-basis: 100px;
