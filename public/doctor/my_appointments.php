@@ -14,6 +14,7 @@
 
 ?>
     <section class="main_content  mb-5">
+      <?php echo output_message_if_any(); ?>
       <h1 class="mb-4 text-center">My Appointments</h1>
       <table  class=" col-12 mx-auto col-sm-11 mt-5 table table-responsive" >
         <thead>

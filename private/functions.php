@@ -85,6 +85,7 @@ function logoutPatient(){
   }
 }
 
+
 function logoutDoctor(){
   if(isset($_SESSION[SessionContract::SESSION_DOCTOR_ID])){
     unset($_SESSION[SessionContract::SESSION_DOCTOR_ID]);
@@ -95,23 +96,6 @@ function logoutAdmin(){
     unset($_SESSION[SessionContract::SESSION_ADMIN_ID]);
   }
 }
-
-
-
-// function isUserLoggedIn(){
-//   session_start();
-//   return isset($_SESSION[SessionContract::PATIETN_ID]) ||
-//          isset($_SESSION[SessionContract::DOCTOR_ID]) ||
-//          isset($_SESSION[SessionContract::ADMIN_ID]) ;
-// }
-
-
-/**********//////////
-
-
-
-
-
 
 
 

@@ -11,6 +11,7 @@
 
 
 <section class="main_content mt-5 ">
+  <?php echo output_message_if_any(); ?>
   <h1 class="mb-4 text-center">Manage Doctors</h1>
   <table  class=" col-11 mx-auto col-sm-12 mt-5 table table-responsive" >
       <thead>

@@ -30,7 +30,8 @@
 
     <div class="content">
       <!-- drawer_collapse -->
-      <nav class="drawer ">
+      <nav class="drawer
+      <?php if($page_title=='My Appointments'){echo "drawer_collapse";}; ?>">
          <i id="drawer_icon" class="fas fa-bars"></i>
          <ul>
          <li onclick="location.href='<?php echo urlFor("doctor/index.php"); ?>';"

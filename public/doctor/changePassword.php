@@ -43,7 +43,7 @@
 
       <div class="input-group">
         <p class="text-danger mb-0"><?php if(isset($errors['currentPassword'])) echo "*".$errors['currentPassword']; ?></p>
-        <input class="input--style-1 " type="password" placeholder="Current Password" name="currentPassword"  />
+        <input class="input--style-1  " type="password" placeholder="Current Password" name="currentPassword"  />
       </div>
       <div class="input-group">
         <p class="text-danger mb-0"><?php if(isset($errors['password'])) echo "*".$errors['password']; ?></p>

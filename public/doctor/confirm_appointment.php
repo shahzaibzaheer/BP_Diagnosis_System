@@ -42,9 +42,9 @@
     require_once(getSharedFilePath('doctor/header.php'));
 
 ?>
-    <section class="main_content">
+<section class="main_content mt-5">
       <h1>Confirm Appointment</h1>
-      <form class="w-50 mx-auto mt-5" action="<?php echo $_SERVER["SCRIPT_NAME"]."?appointment_id=".$appointment->getId(); ?>" method="post">
+      <form class="ask_for_prescription_form col-11 mx-auto col-sm-8 col-md-6 col-lg-5 mt-5" action="<?php echo $_SERVER["SCRIPT_NAME"]."?appointment_id=".$appointment->getId(); ?>" method="post">
         <div class="form-group">
           <label>Appointment Date</label>
           <input  class="form-control" type="date" name="<?php echo AppointmentTable::COLUMN_APPOINTMENT_DATE; ?>" value="" required>
