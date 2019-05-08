@@ -40,7 +40,6 @@
                         <td> <a href="<?php echo urlFor('doctor/confirm_appointment.php?appointment_id='.$appointment->getId()); ?>">Confirm</a> </td>
                         <td> <a href="<?php echo urlFor('doctor/cancel_appointment.php?appointment_id='.$appointment->getId()); ?>">Cancel</a> </td>
                    <?php  } ?>
-
             </tr>
           <?php } endforeach; ?>
 
