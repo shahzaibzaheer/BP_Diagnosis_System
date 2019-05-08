@@ -28,18 +28,21 @@
         </thead>
         <tbody>
           <?php foreach ($appointments as $appointment): ?>
-            <?php //                print_array($appointment); ?>
+            <?php if($appointment->getPatient()!=false){ ?>
             <tr>
               <td><?php echo $appointment->getPatient_problem(); ?></td>
               <td><?php echo $appointment->getPatient()->getName(); ?></td>
               <td><?php echo $appointment->getPatient()->getEmail(); ?></td>
               <td><?php echo $appointment->getDate()."/".$appointment->getTime(); ?></td>
               <td><?php echo $appointment->getStatus(); ?></td>
-              <td> <a href="<?php echo urlFor('doctor/confirm_appointment.php?appointment_id='.$appointment->getId()); ?>">Confirm</a> </td>
-              <td> <a href="<?php echo urlFor('doctor/cancel_appointment.php?appointment_id='.$appointment->getId()); ?>">Cancel</a> </td>
+                <?php
+                    if($appointment->getStatus() === Appointment::STATUS_NOT_CONFIRMED_BY_DOCTOR){?>
+                        <td> <a href="<?php echo urlFor('doctor/confirm_appointment.php?appointment_id='.$appointment->getId()); ?>">Confirm</a> </td>
+                        <td> <a href="<?php echo urlFor('doctor/cancel_appointment.php?appointment_id='.$appointment->getId()); ?>">Cancel</a> </td>
+                   <?php  } ?>
 
             </tr>
-          <?php endforeach; ?>
+          <?php } endforeach; ?>
 
         </tbody>
       </table>

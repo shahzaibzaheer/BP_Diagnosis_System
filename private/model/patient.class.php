@@ -127,6 +127,20 @@ class Patient {
       return false;
     }
   }
+    static public function find_patient_by_username_assoc($username){
+        $queryString  = "SELECT * FROM ".PatientTable::TABLE_NAME." ";
+        $queryString .= "WHERE ".PatientTable::COLUMN_USERNAME." = ?";
+        $stmt = Patient::$db->prepare($queryString);
+        $stmt->execute([$username]);
+        $patient = $stmt->fetch(PDO::FETCH_ASSOC);
+        if(isset($patient)){
+            return $patient;
+        }
+        else {
+            // echo "Patient Not found"
+            return false;
+        }
+    }
   static public function find_patient_by_email($email){
     $queryString  = "SELECT * FROM ".PatientTable::TABLE_NAME." ";
     $queryString .= "WHERE ".PatientTable::COLUMN_EMAIL." = ?";
@@ -393,7 +407,7 @@ else {
 
 
   public function isUsernameAlreadyExists($userName){
-    $patient = Patient::find_patient_by_username($userName);
+    $patient = Patient::find_patient_by_username_assoc($userName);
 
     if($patient === false){
       // patient not exists
@@ -529,7 +543,7 @@ else {
      } elseif (!has_length($this->getUserName(), array('min' => 8, 'max' => 40))) {
        $errors[PatientTable::COLUMN_USERNAME] = "Username must be between 8 and 40 characters.";
      } elseif($this->isUsernameAlreadyExists($this->getUserName())){
-       $errors[PatientTable::COLUMN_NAME] = "Username already exist, try another";
+       $errors[PatientTable::COLUMN_USERNAME] = "Username already exist, try another";
      }
 
 

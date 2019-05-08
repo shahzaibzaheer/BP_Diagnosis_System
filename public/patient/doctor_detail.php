@@ -120,7 +120,9 @@
               <?php foreach ($reviews as $review): ?>
                 <div class="card review_container p-4">
                   <div class=" col-12  col-sm-9  col-md-6  d-block text-center d-sm-flex ">
-                    <h2 class="mt-2 mr-4">4.3</h2>
+                    <h2 class="mt-2 mr-4">
+                    <?php  echo $review->getRating().".0"?>
+                    </h2>
                     <div >
                       <?php echo Review::getRatingStars($review->getRating()); ?>
                     </div>
