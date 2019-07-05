@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 20, 2019 at 11:30 AM
+-- Generation Time: Jul 05, 2019 at 10:13 PM
 -- Server version: 10.1.36-MariaDB
 -- PHP Version: 7.2.10
 
@@ -43,9 +43,7 @@ CREATE TABLE `admins` (
 --
 
 INSERT INTO `admins` (`id`, `username`, `name`, `email`, `gender`, `hashedPassword`, `created_on`) VALUES
-(1, 'doctorsalman12345', 'salman', 'salman@gmail.com', '1', '$2y$10$aX2VYnTUebj2WMls5rHhwuGhOpk0v4B8wToG/CIJWIHLf3fO0wMsO', '0000-00-00 00:00:00'),
-(2, 'doctorsalman123456', 'salman', 'salmanDoctor@gmail.com', '1', '$2y$10$gIK7.CDTP/AkJsR4Q0QPYec/GZBlGsudDgYzH0Ydfqrfe7YfpDUiu', '0000-00-00 00:00:00'),
-(3, 'admin12345678', 'Shahzaib Mughal', 'admin@gmail.com', 'male', '$2y$10$NIcDESZ0Anp5jjRVBzAX7.1b5la6hfvtpVd.yD015ZO4tx66PU9DC', '0000-00-00 00:00:00');
+(4, 'Admin123456789', 'Admin', 'admin@gmail.com', 'male', '$2y$10$F/0N15TitjDlABn8Garo4O69Hj0jv3q5biqq0ZTNVv6Od/bRAEXya', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -69,14 +67,10 @@ CREATE TABLE `appointments` (
 --
 
 INSERT INTO `appointments` (`id`, `patient_problem`, `patient_id`, `doctor_id`, `date`, `time`, `status`, `created_on`) VALUES
-(11, 'Lorem ipsum', 47, 15, '2019-04-18', '01:00', 'CONFIRMED BY DOCTOR', '0000-00-00 00:00:00'),
-(12, 'Lorem ipsumm', 47, 15, ' ---- ', ' ---- ', 'NOT CONFIRMED BY DOCTOR', '0000-00-00 00:00:00'),
-(13, 'Lorem ipsummmm', 47, 15, ' ---- ', ' ---- ', 'NOT CONFIRMED BY DOCTOR', '0000-00-00 00:00:00'),
-(14, 'Lorem ipsummmm', 47, 15, '2019-04-16', '01:00', 'CONFIRMED BY DOCTOR', '2019-04-08 19:28:04'),
-(15, 'Lorem ipsummmm', 47, 15, ' ---- ', ' ---- ', 'NOT CONFIRMED BY DOCTOR', '2019-04-08 19:28:15'),
-(16, 'abcdef', 48, 15, ' ---- ', ' ---- ', 'NOT CONFIRMED BY DOCTOR', '2019-04-11 14:18:52'),
-(17, 'dsaf', 47, 15, ' ---- ', ' ---- ', 'NOT CONFIRMED BY DOCTOR', '2019-04-11 14:23:45'),
-(18, 'Wooooooooooooooooooooooooooooo', 47, 15, '2019-04-13', '01:00', 'CONFIRMED BY DOCTOR', '2019-04-11 19:23:03');
+(26, 'Low Blood Pressure Problem', 56, 23, '2019-07-31', '13:00', 'CONFIRMED BY DOCTOR', '2019-07-05 19:56:21'),
+(27, 'H', 56, 23, ' ---- ', ' ---- ', 'CANCELED_BY_DOCTOR', '2019-07-05 19:59:46'),
+(28, 'Low blood pressure problem', 56, 24, ' ---- ', ' ---- ', 'NOT CONFIRMED BY DOCTOR', '2019-07-05 20:00:36'),
+(29, 'Lorem Ipsum', 56, 23, ' ---- ', ' ---- ', 'NOT CONFIRMED BY DOCTOR', '2019-07-05 20:11:07');
 
 -- --------------------------------------------------------
 
@@ -107,7 +101,8 @@ CREATE TABLE `doctors` (
 --
 
 INSERT INTO `doctors` (`id`, `username`, `name`, `email`, `gender`, `hashedPassword`, `phone`, `address`, `city`, `dob`, `about`, `specialization`, `qualification`, `fees`, `created_on`) VALUES
-(15, 'doc@gmail.com', 'Doctor Sulman Chisti', 'doctor@gmail.com', 'male', '$2y$10$W3RGT/MRjjbygyyyKE/5M.xkfNgkfGdQFnn3RHwgT4wqvHhzJHI8m', '03056302013', 'Cheema Colony Street #6 Sialkot Road', 'lahore', '2019-03-07', 'lorem ipsum ipsum lorem lorem ', 'Heart specialisttttttttt', 'MBBS', 4200, '2019-03-29 20:32:02');
+(23, 'Doctor123456789', 'Ijaz', 'doctor@gmail.com', 'male', '$2y$10$WoSZSYYybPOMY8wZfV/3.eimZCM7.TeU7F0BGFSreUSWHQT05uwQO', '03041111111', '4177 Ruckman Road Oklahoma City, OK 73116', 'Oklahoma', '1995-03-16', 'i am experts on the heart and blood vessels. You might see them for heart failure, a heart attack, high blood pressure, or an irregular heartbeat.', 'Heart Specialist', 'MBBS', 1500, '2019-07-05 19:53:29'),
+(24, 'asghar123456789', 'Asghar', 'asghar@gmail.com', 'male', '$2y$10$mjL/V8I/7jl0MSEHT7GZ7efcBYMf/4oOVPEse//TsxZ/d04OvtUdy', '03112222222', '4177 Ruckman Road Oklahoma City, OK 73116', 'Oklahoma', '2015-06-18', 'Lorem ipsum , lorem ipsum ipsum lorem', 'Cardiologist', 'MBBS', 600, '2019-07-05 19:58:46');
 
 -- --------------------------------------------------------
 
@@ -134,9 +129,7 @@ CREATE TABLE `patients` (
 --
 
 INSERT INTO `patients` (`id`, `username`, `name`, `email`, `gender`, `hashedPassword`, `phone`, `address`, `city`, `dob`, `created_on`) VALUES
-(47, 'shahzaib123456789', 'Shahzaib', 'patient@gmail.com', 'male', '$2y$10$hRPUxcdtC724tla8kUpnGem8JFCgF5kW2CtbNWaZTxulHlqQ76pgC', '03050710090', 'Cheema coloney street no 12, near noria rizwia masjid', 'wazirabad', '2019-03-05', '2019-03-29 20:31:15'),
-(48, 'tayyab123456', 'Tayyab', 'tayyab@gmail.com', 'female', '$2y$10$sjUuE1v9ft6SGCVbJ21oDuoFWO1c5yJ/W3Y6AWz8Sj3xckKZdzvBy', '03041612193', 'Lorem ipslum ipsum lorem lorem', 'Wazirabad', '2019-04-26', '2019-04-11 14:16:15'),
-(49, 'test123456', 'test', 'test@gmail.com', 'male', '$2y$10$EKy06WcP0uonF5nXwJSR3eTEPt/1f48dnsgreuaBe/LYujHx7WDGK', '03056302013', 'asdjfl sdkljf klasdjf afj klasdfklasdj ls', 'wazirabad', '2019-04-25', '2019-04-12 16:42:53');
+(56, 'Patient123456789', 'Ahmed ', 'patient@gmail.com', 'male', '$2y$10$lvpohl48h5ROH0jfk9blEuSLnc4ZT4T8BDQFaVTXvjQc8C2MLw/W2', '03051213145', '4177 Ruckman Road Oklahoma City, OK 73116', 'Oklahoma', '1998-01-01', '2019-07-05 19:48:45');
 
 -- --------------------------------------------------------
 
@@ -167,14 +160,8 @@ CREATE TABLE `prescription_table` (
 --
 
 INSERT INTO `prescription_table` (`prescription_id`, `doctor_id`, `patient_id`, `status`, `subject`, `bp_low`, `bp_high`, `headache`, `dizziness`, `visual_changes`, `medication`, `food_detail`, `exercise_detail`, `other_info`, `created_on`) VALUES
-(16, 15, 47, 'NOT Answered', 'lorem ipsum', 60, 150, 1, 1, 'no ', 'no ', 'no ', 'no ', 'no ', '2019-03-29 20:33:00'),
-(17, 15, 47, 'Answered', '2222 redsfsd', 60, 150, 1, 1, 'no asfd', 'no ', 'no ', 'no ', 'no ', '2019-03-29 20:33:24'),
-(18, 15, 47, 'Answered', '33333 redsfsd', 60, 150, 1, 1, 'no asfd', 'no ', 'no ', 'no ', 'no ', '2019-03-29 20:33:29'),
-(19, 15, 47, 'Answered', '44444 redsfsd', 60, 150, 1, 1, 'no asfd', 'no ', 'no ', 'no ', 'no ', '2019-03-29 20:33:33'),
-(20, 15, 47, 'Answered', '555555 redsfsd', 60, 150, 1, 1, 'no asfd', 'no ', 'no ', 'no ', 'no ', '2019-03-29 20:33:37'),
-(21, 15, 47, 'NOT Answered', '6666666  redsfsd', 60, 150, 1, 1, 'no asfd', 'no ', 'no ', 'no ', 'no ', '2019-03-29 20:33:42'),
-(22, 15, 47, 'Answered', 'Sir drd', 234, 423423, 1, 1, 'asfasd', 'asdfasdf', 'sdafasdf', 'asdfasd', 'afdfdasfasd', '2019-03-30 12:20:17'),
-(23, 0, 47, 'NOT Answered', 'Problem', 90, 130, 1, 1, 'pale', 'cetrizine', 'rice, bread', 'walking', '', '2019-04-08 12:46:25');
+(26, 23, 56, 'Answered', 'Low Blood Pressure Problem', 60, 120, 0, 0, 'Pale', 'First time i feel low blood pressure, no modication used before', 'Junk Food', 'No Exercise', '', '2019-07-05 19:55:55'),
+(27, 0, 56, 'NOT Answered', 'Lorem Ipsum', 100, 190, 0, 0, 'no', 'no', 'no', 'no', 'no', '2019-07-05 20:10:45');
 
 -- --------------------------------------------------------
 
@@ -194,58 +181,7 @@ CREATE TABLE `replies` (
 --
 
 INSERT INTO `replies` (`prescription_id`, `is_doctor_reply`, `replay_message`, `timestamp`) VALUES
-(12, 1, 'asdfdasfad', '0000-00-00 00:00:00'),
-(12, 1, 'asdfdasfad', '0000-00-00 00:00:00'),
-(12, 1, 'asdfdasfad', '0000-00-00 00:00:00'),
-(12, 1, 'asdfdasfad', '0000-00-00 00:00:00'),
-(12, 1, 'asdfdasfad', '0000-00-00 00:00:00'),
-(12, 1, 'asdfdasfad', '0000-00-00 00:00:00'),
-(12, 1, 'asdfdasfad', '0000-00-00 00:00:00'),
-(12, 1, 'asdfdasfad', '0000-00-00 00:00:00'),
-(12, 1, 'asdfdasfad', '0000-00-00 00:00:00'),
-(12, 1, 'asdfdasfad', '0000-00-00 00:00:00'),
-(12, 1, 'asdfdasfad', '0000-00-00 00:00:00'),
-(12, 1, 'asdfdasfad', '0000-00-00 00:00:00'),
-(12, 1, 'asdfdasfad', '0000-00-00 00:00:00'),
-(12, 1, 'Hello', '0000-00-00 00:00:00'),
-(12, 1, 'sdafad', '0000-00-00 00:00:00'),
-(12, 1, 'sdafad', '0000-00-00 00:00:00'),
-(12, 1, 'sdafad', '0000-00-00 00:00:00'),
-(12, 1, 'sdafad', '0000-00-00 00:00:00'),
-(12, 1, 'sdafad', '0000-00-00 00:00:00'),
-(12, 1, 'sdafad', '0000-00-00 00:00:00'),
-(12, 1, 'sdafad', '0000-00-00 00:00:00'),
-(12, 1, 'sdafad', '0000-00-00 00:00:00'),
-(12, 1, 'sdafad', '0000-00-00 00:00:00'),
-(12, 1, 'sdafad', '0000-00-00 00:00:00'),
-(12, 1, 'sdafad', '0000-00-00 00:00:00'),
-(12, 1, 'sdafad', '0000-00-00 00:00:00'),
-(12, 1, 'sdafad', '0000-00-00 00:00:00'),
-(12, 1, '232232', '0000-00-00 00:00:00'),
-(12, 1, '232232', '0000-00-00 00:00:00'),
-(13, 1, '4343', '0000-00-00 00:00:00'),
-(12, 1, 'sdafad', '0000-00-00 00:00:00'),
-(12, 1, 'sdafad', '0000-00-00 00:00:00'),
-(16, 1, 'Hello ', '0000-00-00 00:00:00'),
-(21, 1, '43343', '0000-00-00 00:00:00'),
-(18, 1, 'Haloooooo', '0000-00-00 00:00:00'),
-(18, 0, 'Hello from patient', '0000-00-00 00:00:00'),
-(18, 0, 'Hello from patient', '0000-00-00 00:00:00'),
-(18, 0, 'Hello from patient', '0000-00-00 00:00:00'),
-(18, 0, 'Hello from patient', '0000-00-00 00:00:00'),
-(18, 1, 'Haloooo From doctor', '0000-00-00 00:00:00'),
-(18, 0, 'Haloo from patient', '0000-00-00 00:00:00'),
-(22, 1, 'HalllllllllOOOOOOOOO', '0000-00-00 00:00:00'),
-(22, 0, '', '0000-00-00 00:00:00'),
-(17, 1, 'aaaa', '0000-00-00 00:00:00'),
-(19, 1, '423423243asdfasd ', '0000-00-00 00:00:00'),
-(20, 1, '', '0000-00-00 00:00:00'),
-(20, 1, 'asdfdas', '0000-00-00 00:00:00'),
-(20, 1, 'dsesdafsd', '0000-00-00 00:00:00'),
-(20, 1, 'dsesdafsdasdfsd', '0000-00-00 00:00:00'),
-(20, 1, '243asfd', '0000-00-00 00:00:00'),
-(20, 1, 'sdfadsfsasd', '0000-00-00 00:00:00'),
-(20, 1, 'Hallllllllllllllllllllllllooooooooooooooooooooooooooooo', '0000-00-00 00:00:00');
+(26, 1, 'I understand your problem, Here\'s my number #0300-1234567 contact me', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -268,9 +204,7 @@ CREATE TABLE `reviews` (
 --
 
 INSERT INTO `reviews` (`id`, `rating`, `doctor_id`, `patient_id`, `subject`, `message`, `created_on`) VALUES
-(1, 5, 15, 47, 'Happyyyyyyyyyyyyyyytttttt', 'heheehhehehehhhehehehhe', '2019-04-11 21:19:33'),
-(3, 3, 15, 48, 'Lorem Ipsum', 'sdafasdfas', '2019-04-11 21:19:33'),
-(6, 5, 15, 49, '43543q', 'sdafdasfsda', '0000-00-00 00:00:00');
+(8, 4, 23, 56, 'Greate Doctor', 'Very Great doctor, listen carefully and fast response time', '0000-00-00 00:00:00');
 
 --
 -- Indexes for dumped tables
@@ -322,37 +256,37 @@ ALTER TABLE `reviews`
 -- AUTO_INCREMENT for table `admins`
 --
 ALTER TABLE `admins`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `appointments`
 --
 ALTER TABLE `appointments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT for table `doctors`
 --
 ALTER TABLE `doctors`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `patients`
 --
 ALTER TABLE `patients`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
 
 --
 -- AUTO_INCREMENT for table `prescription_table`
 --
 ALTER TABLE `prescription_table`
-  MODIFY `prescription_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `prescription_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT for table `reviews`
 --
 ALTER TABLE `reviews`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
