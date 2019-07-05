@@ -36,13 +36,14 @@ $patient = new Patient();
           <form action="<?php echo $_SERVER['SCRIPT_NAME']; ?>" method="post">
               <h2 class="text-center mb-4">Patient Login</h2>
               <div class="form-group ">
-
+                  <span>Email:    <strong>patient@gmail.com</strong></span> <br>
+                  <span>Password: <strong>Patient123456789</strong></span>
                 <p class="text-danger"><?php if(isset($errors['invalidCredantials'])) echo "*".$errors['invalidCredantials']; ?></p>
                 <input type="email" name="<?php echo PatientTable::COLUMN_EMAIL ?>"
                     class="form-control <?php if(isset($errors['invalidCredantials'])) echo "is-invalid" ?>"
                     placeholder="Email" required="required"
-                    value="<?php echo $patient->getEmail(); ?>"
-                    onfocus="this.classList.remove('is-invalid');">
+                    onfocus="this.classList.remove('is-invalid');"
+                    value="patient@gmail.com">
 
               </div>
               <div class="form-group">
@@ -50,6 +51,7 @@ $patient = new Patient();
                       class="form-control  <?php if(isset($errors['invalidCredantials'])) echo "is-invalid" ?>"
                       placeholder="Password" required="required"
                       onfocus="this.classList.remove('is-invalid');"
+                         value="Patient123456789"
                       >
               </div>
               <div class="form-group">

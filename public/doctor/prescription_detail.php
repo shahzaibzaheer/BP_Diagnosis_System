@@ -89,10 +89,10 @@
            <?php } ?>
 
         <?php endforeach; ?>
-        </div>
 
 
       <?php } ?>
+    </div>
       <!-- Visible the replay box to the user -->
       <div class="replay-box col-12 ">
         <form action="<?php echo $_SERVER['SCRIPT_NAME']."?prescription_id=".$prescription->getPrescriptionId(); ?>" method="post">

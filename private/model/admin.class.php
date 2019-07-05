@@ -153,6 +153,7 @@ class Admin {
                  }else {
                    // patient login successfull , bind patient data
                    $this->bind_admin_data($admin);
+
                  }
              }
            }
@@ -257,6 +258,17 @@ class Admin {
         }else {
           // build query string & save data.
           // exit("Now All the data is valid, it's time to Save Data to the database");
+
+
+
+            $queryString  =  "INSERT INTO ".AdminTable::TABLE_NAME;
+            $queryString .=  " (";
+            $queryString .= AdminTable::COLUMN_ID.",";
+            $queryString .= AdminTable::COLUMN_USERNAME.",";
+            $queryString .= AdminTable::COLUMN_CREATED_ON;
+            $queryString .=  " ) VALUES (";
+
+
 
           $queryString  =  "INSERT INTO ".AdminTable::TABLE_NAME;
           $queryString .=  " (";

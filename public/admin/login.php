@@ -35,17 +35,21 @@
       <form action="<?php echo $_SERVER['SCRIPT_NAME']; ?>" method="post">
       <h2 class="text-center mb-4">Admin Login</h2>
       <div class="form-group">
-        <p class="text-danger"><?php if(isset($errors['invalidCredantials'])) echo "*".$errors['invalidCredantials']; ?></p>
+          <span>Email:    <strong>admin@gmail.com</strong></span> <br>
+          <span>Password: <strong>Admin123456789</strong></span>
+          <p class="text-danger"><?php if(isset($errors['invalidCredantials'])) echo "*".$errors['invalidCredantials']; ?></p>
           <input type="email" name="<?php echo AdminTable::COLUMN_EMAIL ?>"
           class="form-control <?php if(isset($errors['invalidCredantials'])) echo "is-invalid" ?>"
           placeholder="Email" required="required"
-          onfocus="this.classList.remove('is-invalid');">
+          onfocus="this.classList.remove('is-invalid');"
+          value="admin@gmail.com">
       </div>
       <div class="form-group">
           <input type="password" name="password"
           class="form-control <?php if(isset($errors['invalidCredantials'])) echo "is-invalid" ?>"
            placeholder="Password" required="required"
-           onfocus="this.classList.remove('is-invalid');">
+           onfocus="this.classList.remove('is-invalid');"
+           value="Admin123456789">
       </div>
       <div class="form-group">
           <button type="submit" class="btn btn-primary btn-block">Log in</button>
