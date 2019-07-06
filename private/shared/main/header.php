@@ -1,6 +1,8 @@
+
 <!DOCTYPE html>
 <html >
   <head>
+
     <?php if(!isset($page_title)){$page_title = "";}?>
     <title><?php echo $page_title; ?></title>
     <meta charset="utf-8">

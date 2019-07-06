@@ -3,7 +3,6 @@
   $patient_id = loggedInPatientId();
   $patient = Patient::find_patient_by_id($patient_id);
  ?>
-<!-- Patient Dashboard -->
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
